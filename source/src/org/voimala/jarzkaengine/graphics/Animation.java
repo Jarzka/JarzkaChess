@@ -3,6 +3,8 @@ package org.voimala.jarzkaengine.graphics;
 import java.util.ArrayList;
 
 import org.voimala.jarzkachess.programbody.ChessProgram;
+import org.voimala.jarzkaengine.programbody.GameProgram;
+import org.voimala.jarzkaengine.windows.mainwindow.ExtendedCanvas;
 
 public class Animation {
     private ArrayList<Sprite> sprites = new ArrayList<Sprite>();
@@ -31,17 +33,17 @@ public class Animation {
         return (int) frameCurrent;
     }
 
-    public final void animate() {
-        nextFrame();
+    public final void animate(final double timeDelta) {
+        nextFrame(timeDelta);
         checkLastFrame();
     }
     
-    private void nextFrame() {
+    private void nextFrame(final double timeDelta) {
         if (direction == AnimationDirection.ANIMATION_DIRECTION_FORWARD) {
-            frameCurrent += speed * ChessProgram.getInstance().getTimeDelta();
+            frameCurrent += speed * timeDelta;
             
         } else {
-            frameCurrent -= speed * ChessProgram.getInstance().getTimeDelta();
+            frameCurrent -= speed * timeDelta;
         }
     }
 

@@ -8,17 +8,23 @@ import org.voimala.jarzkachess.gamelogic.players.Player;
 import org.voimala.jarzkachess.gamelogic.players.PlayerStateIdle;
 import org.voimala.jarzkachess.gamelogic.players.PlayerStateName;
 import org.voimala.jarzkachess.gamelogic.players.ai.AIPlayerLocal;
+import org.voimala.jarzkaengine.scenes.Scene;
 
 /**
  * Represents a single playable game session.
  * A single game session consists of players and gameboard.
  */
 public class GameSession {
+    private Scene ownerScene = null;
     private Gameboard gameboard = new Gameboard(this);
     private ArrayList<Player> players = new ArrayList<Player>();
     private TurnManager turnManager = new TurnManager();
     private GameSessionState stateCurrent = new GameSessionStatePlay(this);
     private int winner = 0; /** The player number who won this game session. */
+    
+    public GameSession(final Scene ownerScene) {
+        this.ownerScene = ownerScene;
+    }
     
     public final void resetPiecesToInitialPosition() {
         gameboard.resetGameboard();
@@ -91,5 +97,9 @@ public class GameSession {
         for (Player player : players) {
             player.changeState(new PlayerStateIdle(player));
         }
+    }
+    
+    public Scene getOwnerScene() {
+        return ownerScene;
     }
 }

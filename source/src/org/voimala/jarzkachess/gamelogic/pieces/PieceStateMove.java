@@ -23,7 +23,9 @@ public class PieceStateMove extends PieceState {
     }
 
     private void move() {
-        moveProgressPercentage += speed * ChessProgram.getInstance().getTimeDelta();
+        double timeDelta = getOwnerPiece().getOwnerTile().getOwnerGameboard().getOwnerGameSession()
+                .getOwnerScene().getOwnerCanvas().getTimeDelta();
+        moveProgressPercentage += speed * timeDelta;
     }
 
     private void checkTargetCellReached() {

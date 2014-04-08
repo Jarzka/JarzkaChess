@@ -28,7 +28,7 @@ public class Knight extends Piece implements Cloneable {
 
     @Override
     public final void loadSprite() {
-        if (getOwnerPlayer() == 1) {
+        if (getOwnerPlayerNumber() == 1) {
             setSprite(ChessSpriteContainer.getInstance().getSprite("knight_white"));
         } else {
             setSprite(ChessSpriteContainer.getInstance().getSprite("knight_black"));
@@ -100,7 +100,7 @@ public class Knight extends Piece implements Cloneable {
         }
         
         Piece piece = getOwnerTile().getAdjacentTile(rowFromSource, columnFromSource).getPiece();
-        if (piece.getOwnerPlayer() == getOwnerPlayer()) {
+        if (piece.getOwnerPlayerNumber() == getOwnerPlayerNumber()) {
             return moves;
         }
         

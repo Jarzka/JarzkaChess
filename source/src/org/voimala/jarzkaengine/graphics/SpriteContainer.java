@@ -1,7 +1,3 @@
-/*
- * This code has been written with the help of Kevin Glass' excellent Space Invanders tutorial.
- */
-
 package org.voimala.jarzkaengine.graphics;
 
 import java.awt.GraphicsConfiguration;
@@ -17,10 +13,8 @@ import javax.imageio.ImageIO;
 import org.voimala.jarzkaengine.exceptions.SpriteNotFoundException;
 
 /** 
- * A container for all sprites. The game programmer should inherit this class and possibly
- * make it a singleton class.
- * 
- * Note: all sprite files used in the game should have an unique name.
+ * A container for all sprites.
+ * All sprite files used in the game should have an unique name.
  */
 public abstract class SpriteContainer {
     private HashMap<String, Sprite> sprites = new HashMap<String, Sprite>();
@@ -90,7 +84,6 @@ public abstract class SpriteContainer {
      * For example "Graphics\Animations\Icons\loading_icon\"
      * @throws IOException 
      */
-    
     public final void loadAnimationSprites(final String name, final String path) throws IOException {
             // Load all files starting from name_0.png.
             int i = 0;

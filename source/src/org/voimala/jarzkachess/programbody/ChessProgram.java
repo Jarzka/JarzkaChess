@@ -1,5 +1,6 @@
 package org.voimala.jarzkachess.programbody;
 
+import java.awt.BorderLayout;
 import java.io.IOException;
 
 import javax.swing.JMenu;
@@ -17,11 +18,10 @@ import org.voimala.jarzkachess.listeners.menulisteners.ChessMenuView50Listener;
 import org.voimala.jarzkachess.listeners.menulisteners.ChessMenuView75Listener;
 import org.voimala.jarzkachess.scenes.SceneGameplay;
 import org.voimala.jarzkaengine.exceptions.SpriteNotFoundException;
-import org.voimala.jarzkaengine.listeners.EngineWindowListener;
-import org.voimala.jarzkaengine.programbody.CanvasProgram;
+import org.voimala.jarzkaengine.programbody.GameProgram;
 
 /** This singleton represents the core body of the entire application. */
-public class ChessProgram extends CanvasProgram {
+public class ChessProgram extends GameProgram {
     protected static ChessProgram instanceOfThis = null;
     
     // Top menus
@@ -55,37 +55,38 @@ public class ChessProgram extends CanvasProgram {
         
         return instanceOfThis;
     }
-
+    
+    @Override
+    protected void initializeMainWindow() {
+        super.initializeMainWindow();
+        setGraphicsSize75();
+        getMainWindow().setSize(tileSizeInPixels * 8, tileSizeInPixels * 8);
+    }
+    
     public final void setGraphicsSize75() {
         setGameplayGraphicsSize(0.75);
         /* TODO For some reason tileSizeInPixels * 9 gives a wrong result and
          * thats why " - 45 " is a temporary fix for that. */
-        getWindow().setSize(tileSizeInPixels * 8, tileSizeInPixels * 9 - 45);
+        getMainWindow().setSize(tileSizeInPixels * 8, tileSizeInPixels * 9 - 45);
     }
     
     public final void setGraphicsSize50() {
         setGameplayGraphicsSize(0.5);
         /* TODO For some reason tileSizeInPixels * 9 gives a wrong result and
          * thats why " - 14 " is a temporary fix for that. */
-        getWindow().setSize(tileSizeInPixels * 8, tileSizeInPixels * 9 - 14);
+        getMainWindow().setSize(tileSizeInPixels * 8, tileSizeInPixels * 9 - 14);
     }
     
     public final void setGraphicsSize100() {
         setGameplayGraphicsSize(1);
-        getWindow().setSize(tileSizeInPixels * 8, tileSizeInPixels * 8);
-    }
-
-    protected void initialize() throws IOException {
-        super.initialize();
-        jFrameMain.setVisible(true);
-        setGraphicsSize75();
-        sceneCurrent = new SceneGameplay();
+        getMainWindow().setSize(tileSizeInPixels * 8, tileSizeInPixels * 8);
     }
     
-    protected void loadListeners() {
-        super.loadListeners();
-        this.addMouseListener(ChessMouseListener.getInstance());
-        this.addMouseMotionListener(ChessMouseMotionListener.getInstance());
+    @Override
+    protected void initializeListeners() {
+        super.initializeListeners();
+        getMainCanvas().addMouseListener(ChessMouseListener.getInstance());
+        getMainCanvas().addMouseMotionListener(ChessMouseMotionListener.getInstance());
         
         jMenuItemNew.addActionListener(ChessMenuGameNewListener.getInstance());
         jMenuItemQuit.addActionListener(ChessMenuGameQuitListener.getInstance());
@@ -95,25 +96,22 @@ public class ChessProgram extends CanvasProgram {
     }
     
     /** Adds all graphic files to the SpriteContainer as Sprite objects. */
+    @Override
     protected void loadGraphicFiles() throws IOException {
         ChessSpriteContainer container = ChessSpriteContainer.getInstance();
         container.loadAllSprites();
     }
     
     /** Adds all animation files to the AnimationContainer as Animation objects. */
+    @Override
     protected void loadAnimations() throws SpriteNotFoundException {
         ChessAnimationContainer container = ChessAnimationContainer.getInstance();
         container.loadAllAnimations(ChessSpriteContainer.getInstance());
     }
-    
-    protected void initializeWindow() {
-        super.initializeWindow();
-        jFrameMain.setSize(tileSizeInPixels * 8, tileSizeInPixels * 8);
-        initializeMenuBar();
-    }
-
-    private void initializeMenuBar() {
-        jFrameMain.setJMenuBar(menuBar);
+   
+    @Override
+    protected void initializeMenuBar() {
+        super.initializeMenuBar();
         
         // Construct top menus
         menuBar.add(jMenuGame);
@@ -128,6 +126,17 @@ public class ChessProgram extends CanvasProgram {
         jMenuView.add(jMenuItem100Percent);
         jMenuView.add(jMenuItem75Percent);
         jMenuView.add(jMenuItem50Percent);
+        
+        getMainWindow().setJMenuBar(menuBar);
+        /* Turns out that menu bar does not show up if the main window is set to
+         * visible before the menu bar is added to it. */
+        getMainWindow().setVisible(true);
+    }
+    
+    @Override
+    protected void initializeScenes() {
+        super.initializeScenes();
+        getMainCanvas().setScene(new SceneGameplay(getMainCanvas()));
     }
 
     public final double getGameplayGraphicsSize() {

@@ -96,7 +96,7 @@ public class Bishop extends Piece implements Cloneable {
             
             Piece foundPiece = getOwnerTile().getOwnerGameboard().getTileAtPosition(possibleTarget).getPiece();
             if (foundPiece != null) {
-                if (foundPiece.getOwnerPlayer() != getOwnerPlayer()) {
+                if (foundPiece.getOwnerPlayerNumber() != getOwnerPlayerNumber()) {
                     moves.add(new HalfMove(
                             new Cell(getRow(), getColumn()),
                             possibleTarget));
@@ -116,7 +116,7 @@ public class Bishop extends Piece implements Cloneable {
 
     @Override
     public final void loadSprite() {
-        if (getOwnerPlayer() == 1) {
+        if (getOwnerPlayerNumber() == 1) {
             setSprite(ChessSpriteContainer.getInstance().getSprite("bishop_white"));
         } else {
             setSprite(ChessSpriteContainer.getInstance().getSprite("bishop_black"));

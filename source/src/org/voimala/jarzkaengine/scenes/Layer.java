@@ -6,19 +6,15 @@ package org.voimala.jarzkaengine.scenes;
 public abstract class Layer {
     Scene ownerScene = null;
     
-    public Layer(Scene owner) {
+    public Layer(final Scene owner) {
         ownerScene = owner;
-    }
-    
-    public Layer() {
-        
     }
     
     public final Scene getOwnerScene() {
         return ownerScene;
     }
     
-    public final void setOwnerScene(Scene owner) {
+    public final void setOwnerScene(final Scene owner) {
         ownerScene = owner;
     }
     

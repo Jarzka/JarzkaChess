@@ -13,15 +13,17 @@ public abstract class GameplayObject implements Cloneable {
     private ArrayList<Animation> animations = new ArrayList<>();
     private Animation animationCurrent = null;
     private Layer ownerLayer = null;
+    private Scene ownerScene = null;
     private PositionPoint globalPosition = new PositionPoint(0, 0, 0);
     private PositionPoint anchorPosition = new PositionPoint(0, 0, 0);
     private double angle = 0;
     
-    public GameplayObject(final Layer ownerLayer) {
-        this.ownerLayer = ownerLayer;
+    public GameplayObject() {
+        
     }
     
-    public GameplayObject() {
+    public GameplayObject(final Scene ownerScene) {
+        this.ownerScene = ownerScene;
     }
     
     /** The cloned object will have the same parent layer as the source. */

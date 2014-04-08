@@ -21,7 +21,7 @@ import org.voimala.jarzkaengine.gamelogic.GameplayObject;
 public abstract class Piece extends GameplayObject implements Cloneable {
     private PieceState stateCurrent = new PieceStateIdle(this);
     private Tile ownerTile = null;
-     private int ownerPlayer = 0; /** Should always be 1 or 2. */
+    private int ownerPlayer = 0; /** Should always be 1 or 2. */
      /** The target cell where this piece is moving. May be null if the piece is idling. */
     private Cell target = null;
     /** Selected means that the player wants to move this piece. Only one piece should be selected at a time. */
@@ -59,7 +59,7 @@ public abstract class Piece extends GameplayObject implements Cloneable {
             
             // Check if the king is in check.
             try {
-            if (gameboardClone.findKing(getOwnerPlayer()).isInCheck()) {
+            if (gameboardClone.findKing(getOwnerPlayerNumber()).isInCheck()) {
                 moves.remove(i);
                 i--; // Without this the loop would skip the next element!
             }
@@ -121,7 +121,7 @@ public abstract class Piece extends GameplayObject implements Cloneable {
         getOwnerGameboard().movePieceImmediately(new HalfMove(new Cell(getRow(), getColumn()), target));
     }
     
-    public final int getOwnerPlayer() {
+    public final int getOwnerPlayerNumber() {
         return ownerPlayer;
     }
     
@@ -179,7 +179,7 @@ public abstract class Piece extends GameplayObject implements Cloneable {
                     getTileAtPosition(move.getTarget()).getPiece();
             
             if (pieceInTargetTile != null) {
-                if (pieceInTargetTile.getOwnerPlayer() != getOwnerPlayer()) {
+                if (pieceInTargetTile.getOwnerPlayerNumber() != getOwnerPlayerNumber()) {
                     piecesThatCanBeKilled.add(pieceInTargetTile);
                 }
             }
@@ -232,7 +232,7 @@ public abstract class Piece extends GameplayObject implements Cloneable {
     protected final int findOpponentPlayerNumber() {
         int enemyPlayerNumber = 0;
         
-        if (getOwnerPlayer() == 1) {
+        if (getOwnerPlayerNumber() == 1) {
             enemyPlayerNumber = 2;
         } else {
             enemyPlayerNumber = 1;

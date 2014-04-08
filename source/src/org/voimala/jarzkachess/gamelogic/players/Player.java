@@ -5,6 +5,7 @@ import org.voimala.jarzkachess.gamelogic.Cell;
 import org.voimala.jarzkachess.gamelogic.Gameboard;
 import org.voimala.jarzkachess.gamelogic.HalfMove;
 import org.voimala.jarzkachess.gamelogic.pieces.Piece;
+import org.voimala.jarzkaengine.scenes.Scene;
 
 public abstract class Player {
     private int number = 0; /** 1 = White, 2 = Black. */

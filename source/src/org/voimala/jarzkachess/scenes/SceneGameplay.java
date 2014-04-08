@@ -23,17 +23,17 @@ import org.voimala.jarzkaengine.exceptions.SpriteNotFoundException;
 import org.voimala.jarzkaengine.graphics.Sprite;
 import org.voimala.jarzkaengine.inputdevices.Mouse;
 import org.voimala.jarzkaengine.inputdevices.MouseButtonState;
-import org.voimala.jarzkaengine.programbody.CanvasProgram;
 import org.voimala.jarzkaengine.scenes.Scene;
 import org.voimala.jarzkaengine.utility.PositionPoint;
+import org.voimala.jarzkaengine.windows.mainwindow.ExtendedCanvas;
 
 public class SceneGameplay extends Scene {
-    private GameSession gameSession = new GameSession();
+    private GameSession gameSession = new GameSession(this);
     private Logger logger = Logger.getLogger(this.getClass().getName());
     private String lastGameboardHash = ""; // TODO For testing purposes only
     
-    public SceneGameplay() {
-        super(ChessProgram.getInstance());
+    public SceneGameplay(final ExtendedCanvas ownerCanvas) {
+        super(ownerCanvas);
         HumanPlayerLocal player1 = new HumanPlayerLocal(1, gameSession.getGameboard());
         //HumanPlayerLocal player2 = new HumanPlayerLocal(2, gameSession.getGameboard());
         AIPlayerLocal player2 = new AIPlayerLocal(2, gameSession.getGameboard());
@@ -81,7 +81,7 @@ public class SceneGameplay extends Scene {
         
         for (Tile tile : gameSession.getGameboard().getTiles()) {
             try {
-                tile.getSprite().draw(ChessProgram.getInstance().getBufferStrategy().getDrawGraphics(), new PositionPoint(
+                tile.getSprite().draw(ownerCanvas.getBufferStrategy().getDrawGraphics(), new PositionPoint(
                         (gameSession.getGameboard().getPositionX() + (tile.getColumn() - 1) * TILE_SIZE_PIXELS),
                         gameSession.getGameboard().getPositionY() +  (tile.getRow() - 1) * TILE_SIZE_PIXELS),
                         TILE_SIZE_PIXELS,
@@ -107,7 +107,7 @@ public class SceneGameplay extends Scene {
             Sprite sprite = ChessSpriteContainer.getInstance().getSprite("selected_pawn");
             
             for (Piece protector : tile.getPiece().findProtectors()) {
-                sprite.draw(ChessProgram.getInstance().getBufferStrategy().getDrawGraphics(), new PositionPoint(
+                sprite.draw(ownerCanvas.getBufferStrategy().getDrawGraphics(), new PositionPoint(
                         gameSession.getGameboard().getPositionX() + (protector.getColumn() - 1) * TILE_SIZE_PIXELS,
                         gameSession.getGameboard().getPositionY() + (protector.getRow() - 1) * TILE_SIZE_PIXELS),
                         TILE_SIZE_PIXELS,
@@ -127,7 +127,7 @@ public class SceneGameplay extends Scene {
             if (piece.isSelected()) {
                     try {
                         Sprite sprite = ChessSpriteContainer.getInstance().getSprite("selected_pawn");
-                        sprite.draw(ChessProgram.getInstance().getBufferStrategy().getDrawGraphics(), new PositionPoint(
+                        sprite.draw(ownerCanvas.getBufferStrategy().getDrawGraphics(), new PositionPoint(
                                 gameSession.getGameboard().getPositionX() + (piece.getColumn() - 1) * TILE_SIZE_PIXELS,
                                 gameSession.getGameboard().getPositionY() + (piece.getRow() - 1) * TILE_SIZE_PIXELS),
                                 TILE_SIZE_PIXELS,
@@ -166,11 +166,11 @@ public class SceneGameplay extends Scene {
                     double targetY = gameSession.getGameboard().getPositionY()
                             + (piece.getTargetRow() - 1) * TILE_SIZE_PIXELS;
                     double positionY = sourceY + ((targetY - sourceY) * (piece.getMovementProgress() / 100));
-                    piece.getSprite().draw(ChessProgram.getInstance().getBufferStrategy().getDrawGraphics(),
+                    piece.getSprite().draw(ownerCanvas.getBufferStrategy().getDrawGraphics(),
                             new PositionPoint((int) positionX, (int) positionY), TILE_SIZE_PIXELS, TILE_SIZE_PIXELS);
                 } else {
                     // The piece is not moving, draw it on the corresponding tile
-                    piece.getSprite().draw(ChessProgram.getInstance().getBufferStrategy().getDrawGraphics(), new PositionPoint(
+                    piece.getSprite().draw(ownerCanvas.getBufferStrategy().getDrawGraphics(), new PositionPoint(
                             gameSession.getGameboard().getPositionX() + (piece.getColumn() - 1) * TILE_SIZE_PIXELS,
                             gameSession.getGameboard().getPositionY() + (piece.getRow() - 1) * TILE_SIZE_PIXELS),
                             TILE_SIZE_PIXELS,
@@ -187,9 +187,9 @@ public class SceneGameplay extends Scene {
         for (Player player : gameSession.getPlayers()) {
             if (!player.isHuman() && player.getStateName() == PlayerStateName.PLAYER_STATE_PLAY) { 
                 Sprite sprite = ChessAnimationContainer.getInstance().getAnimation("loading_icon").getCurrentSprite();
-                sprite.draw(ChessProgram.getInstance().getBufferStrategy().getDrawGraphics(), new PositionPoint(
-                        ChessProgram.getInstance().getWidth() / 2 - sprite.getWidth() / 2,
-                        ChessProgram.getInstance().getHeight() / 2 - sprite.getHeight() / 2));
+                sprite.draw(ownerCanvas.getBufferStrategy().getDrawGraphics(), new PositionPoint(
+                        ownerCanvas.getWidth() / 2 - sprite.getWidth() / 2,
+                        ownerCanvas.getHeight() / 2 - sprite.getHeight() / 2));
                 break;
             }
         }
@@ -210,26 +210,25 @@ public class SceneGameplay extends Scene {
         
         // Find the text's color
         if (gameSession.getWinner() == 0) {
-            ChessProgram.getInstance().setForeground(Color.RED);
+            ownerCanvas.setForeground(Color.RED);
         } else if (gameSession.getWinner() == 1) {
-            ChessProgram.getInstance().setForeground(Color.WHITE);
+            ownerCanvas.setForeground(Color.WHITE);
         } else if (gameSession.getWinner() == 2) {
-            ChessProgram.getInstance().setForeground(Color.BLACK);
+            ownerCanvas.setForeground(Color.BLACK);
         }
         
         // Find the text's dimensions
-        double textWidth = ChessProgram.getInstance().getBufferStrategy().getDrawGraphics()
-                .getFontMetrics().getStringBounds(text, ChessProgram.getInstance().getBufferStrategy().getDrawGraphics()).getWidth();
-        double textHeight  = ChessProgram.getInstance().getBufferStrategy().getDrawGraphics()
-                .getFontMetrics().getStringBounds(text, ChessProgram.getInstance().getBufferStrategy().getDrawGraphics()).getHeight();  
+        double textWidth = ownerCanvas.getBufferStrategy().getDrawGraphics()
+                .getFontMetrics().getStringBounds(text, ownerCanvas.getBufferStrategy().getDrawGraphics()).getWidth();
+        double textHeight  = ownerCanvas.getBufferStrategy().getDrawGraphics()
+                .getFontMetrics().getStringBounds(text, ownerCanvas.getBufferStrategy().getDrawGraphics()).getHeight();  
         
         // Draw the text
-        ChessProgram.getInstance().getBufferStrategy().getDrawGraphics()
-        .drawString(text,
-                (int) (ChessProgram.getInstance().getWidth() / 2 - textWidth / 2),
-                (int) (ChessProgram.getInstance().getHeight() / 2 - textHeight / 2));
+        ownerCanvas.getBufferStrategy().getDrawGraphics().drawString(text,
+                (int) (ownerCanvas.getWidth() / 2 - textWidth / 2),
+                (int) (ownerCanvas.getHeight() / 2 - textHeight / 2));
         
-        ChessProgram.getInstance().setDefaultFont();
+        ownerCanvas.setDefaultFont();
         
         return true;
     }

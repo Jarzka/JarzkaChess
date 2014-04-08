@@ -31,9 +31,9 @@ public class Pawn extends Piece implements Cloneable {
         ArrayList<HalfMove> moves = new ArrayList<HalfMove>();
         
         // Get possible moves for white/black
-        if (getOwnerPlayer() == 1) {
+        if (getOwnerPlayerNumber() == 1) {
             moves.addAll(findPossibleRegularMovesForWhite());
-        } else if (getOwnerPlayer() == 2) {
+        } else if (getOwnerPlayerNumber() == 2) {
             moves.addAll(findPossibleRegularMovesForBlack());
         }
         
@@ -45,9 +45,9 @@ public class Pawn extends Piece implements Cloneable {
         ArrayList<HalfMove> moves = new ArrayList<HalfMove>();
         
         // Get possible moves for white/black
-        if (getOwnerPlayer() == 1) {
+        if (getOwnerPlayerNumber() == 1) {
             moves.addAll(findPossibleAttackMovesForWhite());
-        } else if (getOwnerPlayer() == 2) {
+        } else if (getOwnerPlayerNumber() == 2) {
             moves.addAll(findPossibleAttackMovesForBlack());
         }
         
@@ -163,7 +163,7 @@ public class Pawn extends Piece implements Cloneable {
             return moves;
         }
         
-        if (getOwnerTile().getAdjacentTile(-1, -1).getPiece().getOwnerPlayer() != getOwnerPlayer()) {
+        if (getOwnerTile().getAdjacentTile(-1, -1).getPiece().getOwnerPlayerNumber() != getOwnerPlayerNumber()) {
             moves.add(new HalfMove(
                     new Cell(getOwnerTile().getRow(), getOwnerTile().getColumn()),
                     new Cell(getOwnerTile().getRow() - 1, getOwnerTile().getColumn() - 1)));
@@ -183,7 +183,7 @@ public class Pawn extends Piece implements Cloneable {
             return moves;
         }
         
-        if (getOwnerTile().getAdjacentTile(-1, 1).getPiece().getOwnerPlayer() != getOwnerPlayer()) {
+        if (getOwnerTile().getAdjacentTile(-1, 1).getPiece().getOwnerPlayerNumber() != getOwnerPlayerNumber()) {
             moves.add(new HalfMove(
                     new Cell(getOwnerTile().getRow(), getOwnerTile().getColumn()),
                     new Cell(getOwnerTile().getRow() - 1, getOwnerTile().getColumn() + 1)));
@@ -203,7 +203,7 @@ public class Pawn extends Piece implements Cloneable {
             return moves;
         }
         
-        if (getOwnerTile().getAdjacentTile(1, -1).getPiece().getOwnerPlayer() != getOwnerPlayer()) {
+        if (getOwnerTile().getAdjacentTile(1, -1).getPiece().getOwnerPlayerNumber() != getOwnerPlayerNumber()) {
             moves.add(new HalfMove(
                     new Cell(getOwnerTile().getRow(), getOwnerTile().getColumn()),
                     new Cell(getOwnerTile().getRow() + 1, getOwnerTile().getColumn() - 1)));
@@ -223,7 +223,7 @@ public class Pawn extends Piece implements Cloneable {
             return moves;
         }
         
-        if (getOwnerTile().getAdjacentTile(1, 1).getPiece().getOwnerPlayer() != getOwnerPlayer()) {
+        if (getOwnerTile().getAdjacentTile(1, 1).getPiece().getOwnerPlayerNumber() != getOwnerPlayerNumber()) {
             moves.add(new HalfMove(
                     new Cell(getOwnerTile().getRow(), getOwnerTile().getColumn()),
                     new Cell(getOwnerTile().getRow() + 1, getOwnerTile().getColumn() + 1)));
@@ -234,7 +234,7 @@ public class Pawn extends Piece implements Cloneable {
 
     @Override
     public final void loadSprite() {
-        if (getOwnerPlayer() == 1) {
+        if (getOwnerPlayerNumber() == 1) {
             setSprite(ChessSpriteContainer.getInstance().getSprite("pawn_white"));
         } else {
             setSprite(ChessSpriteContainer.getInstance().getSprite("pawn_black"));

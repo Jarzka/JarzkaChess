@@ -31,7 +31,9 @@ public class PlayerStatePlayAI extends PlayerStatePlay {
     }
 
     private void handleLoadingIcon() {
-        ChessAnimationContainer.getInstance().getAnimation("loading_icon").animate();
+        double timeDelta = getOwnerPlayer().getGameboard().getOwnerGameSession()
+                .getOwnerScene().getOwnerCanvas().getTimeDelta();
+        ChessAnimationContainer.getInstance().getAnimation("loading_icon").animate(timeDelta);
     }
 
     private void handleAiThread() {

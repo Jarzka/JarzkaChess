@@ -21,7 +21,7 @@ import org.voimala.jarzkachess.gamelogic.players.Player;
  *
  * Loop:
  * Find all the nodes that have no children. Pick the one that has the best route position points
- * for the current player. Analyse own and opponent's possible moves for the picked node.
+ * for the current player. Analyze own and opponent's possible moves for the picked node.
  */
 
 public class AIThread extends Thread {
@@ -61,14 +61,14 @@ public class AIThread extends Thread {
 
     private final void analyseTurnNumber() {
         if (turnNumber < 10) {
-            treeDevelopmentTimeMaxInMs = 2000;
+            treeDevelopmentTimeMaxInMs = 1000;
         } else {
-            treeDevelopmentTimeMaxInMs = 4000;
+            treeDevelopmentTimeMaxInMs = 2000;
         }
     }
 
     private void setupLogger() {
-        //logger.setLevel(Level.OFF);
+        logger.setLevel(Level.OFF);
     }
     
     private void printFirstMovesOfTree() {
@@ -152,7 +152,7 @@ public class AIThread extends Thread {
         
         logger.info("Answer found from the three of" + " " + tree.getNumberOfNodes() + " " + "nodes" + ".");
         if (logger.isLoggable(Level.ALL)) {
-            //printFirstMovesOfTree(); // TODO For testing purposes only
+            //printFirstMovesOfTree(); // For testing purposes only
         }
         
         this.answer.setSet(true);

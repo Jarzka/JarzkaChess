@@ -1,6 +1,7 @@
 package org.voimala.jarzkaengine.utility;
 
 public class PositionPoint implements Cloneable {
+    
     private int x = 0;
     private int y = 0;
     private int z = 0;
@@ -13,10 +14,10 @@ public class PositionPoint implements Cloneable {
     public PositionPoint(final int x, final int y, final int z) {
         setX(x);
         setY(y);
-        this.setZ(z);
+        setZ(z);
     }
     
-    public PositionPoint clone() throws CloneNotSupportedException {
+    public final PositionPoint clone() throws CloneNotSupportedException {
         return (PositionPoint) super.clone();
     }
     
@@ -43,4 +44,5 @@ public class PositionPoint implements Cloneable {
     public final void setZ(final int z) {
         this.z = z;
     }
+    
 }

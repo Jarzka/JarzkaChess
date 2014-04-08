@@ -4,12 +4,12 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 /** This singleton is the main WindowListener of the Program. */
-public class EngineWindowListener implements WindowListener {
-    private static EngineWindowListener instanceOfThis = null;
+public class MainWindowListener implements WindowListener {
+    private static MainWindowListener instanceOfThis = null;
     
-    public static final EngineWindowListener getInstance() {
+    public static final MainWindowListener getInstance() {
         if (instanceOfThis == null) {
-            instanceOfThis = new EngineWindowListener();
+            instanceOfThis = new MainWindowListener();
         }
         
         return instanceOfThis;

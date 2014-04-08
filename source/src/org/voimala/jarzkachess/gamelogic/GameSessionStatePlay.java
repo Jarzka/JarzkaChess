@@ -45,7 +45,7 @@ public class GameSessionStatePlay extends GameSessionState {
                     King king = (King) piece;
                     if (king.isInCheckMate()) {
                         getOwnerGameSession().changeState(new GameSessionStateEnd(getOwnerGameSession()));
-                        if (king.getOwnerPlayer() == 1) {
+                        if (king.getOwnerPlayerNumber() == 1) {
                             getOwnerGameSession().setWinner(2);
                         } else {
                             getOwnerGameSession().setWinner(1);

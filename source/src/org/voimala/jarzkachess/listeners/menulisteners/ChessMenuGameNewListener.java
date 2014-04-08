@@ -19,8 +19,8 @@ public class ChessMenuGameNewListener implements ActionListener {
     
     @Override
     public final void actionPerformed(ActionEvent e) {
-        if (ChessProgram.getInstance().getScene().getName() == "GAMEPLAY") {
-            SceneGameplay scene = (SceneGameplay)ChessProgram.getInstance().getScene();
+        if (ChessProgram.getInstance().getMainCanvas().getScene().getName() == "GAMEPLAY") {
+            SceneGameplay scene = (SceneGameplay)ChessProgram.getInstance().getMainCanvas().getScene();
             scene.getGameSession().reset();
         }
     }

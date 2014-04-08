@@ -42,7 +42,7 @@ public class PawnTest {
         Pawn pawnClone = pawnSource.clone();
         
         // Check that the clone has the same attributes as the source
-        assertEquals(pawnSource.getOwnerPlayer(), pawnClone.getOwnerPlayer());
+        assertEquals(pawnSource.getOwnerPlayerNumber(), pawnClone.getOwnerPlayerNumber());
         assertEquals(pawnSource.getOwnerLayer(), pawnClone.getOwnerLayer());
         
         // Check that the clone's owner tile is the same as the source's owner tile.
