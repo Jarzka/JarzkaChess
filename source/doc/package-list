@@ -1,0 +1,11 @@
+org.voimala.jarzkachess.exceptions
+org.voimala.jarzkachess.gamelogic
+org.voimala.jarzkachess.gamelogic.pieces
+org.voimala.jarzkachess.graphics
+org.voimala.jarzkachess.inputdevices
+org.voimala.jarzkachess.players
+org.voimala.jarzkachess.program
+org.voimala.jarzkachess.statesmachines.piecestate
+org.voimala.jarzkachess.statesmachines.programstate
+org.voimala.jarzkachess.tests.moves
+org.voimala.jarzkachess.tests.smoketests
