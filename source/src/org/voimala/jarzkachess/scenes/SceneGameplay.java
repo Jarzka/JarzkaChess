@@ -22,6 +22,7 @@ import org.voimala.jarzkaengine.windows.mainwindow.ExtendedCanvas;
 
 import java.awt.*;
 import java.text.NumberFormat;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SceneGameplay extends Scene {
@@ -43,7 +44,7 @@ public class SceneGameplay extends Scene {
     }
     
     private void setupLogger() {
-        //logger.setLevel(Level.OFF);
+        logger.setLevel(Level.OFF);
     }
 
     private void logEvaluationPoints() {
