@@ -1,15 +1,10 @@
 package org.voimala.jarzkaengine.windows.mainwindow;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-
 import org.voimala.jarzkaengine.listeners.MainWindowListener;
 import org.voimala.jarzkaengine.programbody.Program;
+
+import javax.swing.*;
+import java.awt.*;
 
 public class MainWindow extends JFrame {
     protected Program ownerProgram = null;
