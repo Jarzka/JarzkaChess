@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.voimala.jarzkachess.exceptions.ChessException;
-import org.voimala.jarzkachess.exceptions.TileNotFoundException;
 import org.voimala.jarzkachess.gamelogic.Cell;
 import org.voimala.jarzkachess.gamelogic.HalfMove;
 import org.voimala.jarzkachess.graphics.ChessSpriteContainer;
@@ -22,8 +21,8 @@ public class Rook extends Piece implements Cloneable {
     }
 
     protected final List<HalfMove> findPossibleRegularMoves() {
-        ArrayList<HalfMove> moves = new ArrayList<HalfMove>();
-        
+        ArrayList<HalfMove> moves = new ArrayList<>();
+
         moves.addAll(findPossibleRegularMoves(Direction.DIRECTION_UP));
         moves.addAll(findPossibleRegularMoves(Direction.DIRECTION_RIGHT));
         moves.addAll(findPossibleRegularMoves(Direction.DIRECTION_DOWN));
@@ -33,7 +32,7 @@ public class Rook extends Piece implements Cloneable {
     }
     
     protected final List<HalfMove> findPossibleAttackMoves() {
-        ArrayList<HalfMove> moves = new ArrayList<HalfMove>();
+        ArrayList<HalfMove> moves = new ArrayList<>();
         
         moves.addAll(findPossibleAttackMoves(Direction.DIRECTION_UP));
         moves.addAll(findPossibleAttackMoves(Direction.DIRECTION_RIGHT));
@@ -52,7 +51,7 @@ public class Rook extends Piece implements Cloneable {
         }
         
         // Loop until we get null or find a piece that is blocking our way
-        ArrayList<HalfMove> moves = new ArrayList<HalfMove>();
+        ArrayList<HalfMove> moves = new ArrayList<>();
         
         for (int i = 1; i <= 7; i++) {
             Cell possibleTarget = nextCellFromSource(direction, i);
@@ -81,7 +80,7 @@ public class Rook extends Piece implements Cloneable {
         }
         
         // Loop until we get null or find a piece
-        ArrayList<HalfMove> moves = new ArrayList<HalfMove>();
+        ArrayList<HalfMove> moves = new ArrayList<>();
         
         for (int i = 1; i <= 7; i++) {
             Cell possibleTarget = nextCellFromSource(direction, i);
@@ -107,11 +106,11 @@ public class Rook extends Piece implements Cloneable {
     @Override
     protected final List<HalfMove> findPossibleSpecialMoves() {
         // This piece does not have any special moves
-        return new ArrayList<HalfMove>();
+        return new ArrayList<>();
     }
 
     @Override
-    public final Rook clone() {
+    public final Rook clone() throws CloneNotSupportedException {
         return (Rook) super.clone();
     }
 

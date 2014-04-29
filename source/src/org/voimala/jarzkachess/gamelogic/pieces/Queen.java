@@ -1,6 +1,5 @@
 package org.voimala.jarzkachess.gamelogic.pieces;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +20,7 @@ public class Queen extends Piece implements Cloneable {
     }
 
     @Override
-    public final Queen clone() {
+    public final Queen clone() throws CloneNotSupportedException {
         return (Queen) super.clone();
     }
 
@@ -40,7 +39,7 @@ public class Queen extends Piece implements Cloneable {
     }
 
     protected final List<HalfMove> findPossibleRegularMoves() {
-        ArrayList<HalfMove> moves = new ArrayList<HalfMove>();
+        ArrayList<HalfMove> moves = new ArrayList<>();
         
         moves.addAll(findPossibleRegularMoves(Direction.DIRECTION_UP));
         moves.addAll(findPossibleRegularMoves(Direction.DIRECTION_RIGHT));
@@ -55,7 +54,7 @@ public class Queen extends Piece implements Cloneable {
     }
     
     protected final List<HalfMove> findPossibleAttackMoves() {
-        ArrayList<HalfMove> moves = new ArrayList<HalfMove>();
+        ArrayList<HalfMove> moves = new ArrayList<>();
         
         moves.addAll(findPossibleAttackMoves(Direction.DIRECTION_UP));
         moves.addAll(findPossibleAttackMoves(Direction.DIRECTION_RIGHT));
@@ -71,7 +70,7 @@ public class Queen extends Piece implements Cloneable {
     
     private List<HalfMove> findPossibleRegularMoves(final Direction direction) {
         // Loop until we get null or find a piece that is blocking our way
-        ArrayList<HalfMove> moves = new ArrayList<HalfMove>();
+        ArrayList<HalfMove> moves = new ArrayList<>();
         
         for (int i = 1; i <= 7; i++) {
             Cell possibleTarget = nextCellFromSource(direction, i);
@@ -93,7 +92,7 @@ public class Queen extends Piece implements Cloneable {
     
     private List<HalfMove> findPossibleAttackMoves(final Direction direction) {
         // Loop until we get null or find a piece
-        ArrayList<HalfMove> moves = new ArrayList<HalfMove>();
+        ArrayList<HalfMove> moves = new ArrayList<>();
         
         int i = 1;
         while (true) {
@@ -122,7 +121,7 @@ public class Queen extends Piece implements Cloneable {
     @Override
     protected final List<HalfMove> findPossibleSpecialMoves() {
         // This piece does not have any special moves
-        return new ArrayList<HalfMove>();
+        return new ArrayList<>();
     }
 
     @Override

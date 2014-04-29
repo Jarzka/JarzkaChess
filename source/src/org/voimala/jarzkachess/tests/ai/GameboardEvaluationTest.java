@@ -1,18 +1,20 @@
 package org.voimala.jarzkachess.tests.ai;
 
-import static org.junit.Assert.*;
-
-import java.io.IOException;
-import java.text.NumberFormat;
-import java.util.logging.Logger;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.voimala.jarzkachess.gamelogic.Cell;
 import org.voimala.jarzkachess.gamelogic.Gameboard;
 import org.voimala.jarzkachess.gamelogic.HalfMove;
-import org.voimala.jarzkachess.gamelogic.pieces.*;
-import org.voimala.jarzkachess.graphics.ChessSpriteContainer;
+import org.voimala.jarzkachess.gamelogic.pieces.Bishop;
+import org.voimala.jarzkachess.gamelogic.pieces.Knight;
+import org.voimala.jarzkachess.gamelogic.pieces.Pawn;
+import org.voimala.jarzkachess.gamelogic.pieces.Queen;
+
+import java.io.IOException;
+import java.text.NumberFormat;
+import java.util.logging.Logger;
+
+import static org.junit.Assert.assertTrue;
 
 public class GameboardEvaluationTest {
     private Logger logger = Logger.getLogger(this.getClass().getName());

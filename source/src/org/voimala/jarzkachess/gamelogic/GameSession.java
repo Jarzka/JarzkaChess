@@ -1,14 +1,10 @@
 package org.voimala.jarzkachess.gamelogic;
 
-import java.util.ArrayList;
-
-import org.voimala.jarzkachess.gamelogic.pieces.Piece;
-import org.voimala.jarzkachess.gamelogic.players.HumanPlayerLocal;
 import org.voimala.jarzkachess.gamelogic.players.Player;
 import org.voimala.jarzkachess.gamelogic.players.PlayerStateIdle;
-import org.voimala.jarzkachess.gamelogic.players.PlayerStateName;
-import org.voimala.jarzkachess.gamelogic.players.ai.AIPlayerLocal;
 import org.voimala.jarzkaengine.scenes.Scene;
+
+import java.util.ArrayList;
 
 /**
  * Represents a single playable game session.
@@ -17,7 +13,7 @@ import org.voimala.jarzkaengine.scenes.Scene;
 public class GameSession {
     private Scene ownerScene = null;
     private Gameboard gameboard = new Gameboard(this);
-    private ArrayList<Player> players = new ArrayList<Player>();
+    private ArrayList<Player> players = new ArrayList<>();
     private TurnManager turnManager = new TurnManager();
     private GameSessionState stateCurrent = new GameSessionStatePlay(this);
     private int winner = 0; /** The player number who won this game session. */
@@ -87,13 +83,13 @@ public class GameSession {
     }
 
     /** Resets the turn manager to the first turn. */
-    private final void resetTurnManager() {
+    private void resetTurnManager() {
         turnManager.setCurrentTurn(1);
         
     }
 
     /** Resets all players to the idle state. */
-    private final void resetPlayers() {
+    private void resetPlayers() {
         for (Player player : players) {
             player.changeState(new PlayerStateIdle(player));
         }

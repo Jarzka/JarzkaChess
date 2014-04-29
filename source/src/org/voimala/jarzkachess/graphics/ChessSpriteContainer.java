@@ -3,7 +3,6 @@ package org.voimala.jarzkachess.graphics;
 import java.io.File;
 import java.io.IOException;
 
-import org.voimala.jarzkaengine.graphics.AnimationContainer;
 import org.voimala.jarzkaengine.graphics.SpriteContainer;
 
 public class ChessSpriteContainer extends SpriteContainer {

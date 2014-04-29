@@ -9,7 +9,7 @@ import org.voimala.jarzkachess.scenes.SceneGameplay;
 public class ChessMenuGameNewListener implements ActionListener {
     private static ChessMenuGameNewListener instanceOfThis = null;
     
-    public static final ChessMenuGameNewListener getInstance() {
+    public static ChessMenuGameNewListener getInstance() {
         if (instanceOfThis == null) {
             instanceOfThis = new ChessMenuGameNewListener();
         }
@@ -19,7 +19,7 @@ public class ChessMenuGameNewListener implements ActionListener {
     
     @Override
     public final void actionPerformed(ActionEvent e) {
-        if (ChessProgram.getInstance().getMainCanvas().getScene().getName() == "GAMEPLAY") {
+        if (ChessProgram.getInstance().getMainCanvas().getScene().getName().equals("GAMEPLAY")) {
             SceneGameplay scene = (SceneGameplay)ChessProgram.getInstance().getMainCanvas().getScene();
             scene.getGameSession().reset();
         }

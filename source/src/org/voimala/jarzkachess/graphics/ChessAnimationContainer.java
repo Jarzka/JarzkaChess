@@ -9,7 +9,7 @@ import org.voimala.jarzkaengine.graphics.SpriteContainer;
 public class ChessAnimationContainer extends AnimationContainer {
     private static ChessAnimationContainer instanceOfThis = null;
     
-    public static final ChessAnimationContainer getInstance() {
+    public static ChessAnimationContainer getInstance() {
         if (instanceOfThis == null) {
             instanceOfThis = new ChessAnimationContainer();
         }

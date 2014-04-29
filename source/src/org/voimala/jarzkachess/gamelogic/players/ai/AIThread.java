@@ -59,7 +59,7 @@ public class AIThread extends Thread {
         setupLogger();
     }
 
-    private final void analyseTurnNumber() {
+    private void analyseTurnNumber() {
         if (turnNumber < 10) {
             treeDevelopmentTimeMaxInMs = 1000;
         } else {
@@ -151,9 +151,11 @@ public class AIThread extends Thread {
         this.answer.setPlayerNumber(2);
         
         logger.info("Answer found from the three of" + " " + tree.getNumberOfNodes() + " " + "nodes" + ".");
+
+        /* For testing purposes only
         if (logger.isLoggable(Level.ALL)) {
-            //printFirstMovesOfTree(); // For testing purposes only
-        }
+            printFirstMovesOfTree();
+        } */
         
         this.answer.setSet(true);
     }
@@ -216,8 +218,7 @@ public class AIThread extends Thread {
             
             // Find the opponent's best counter-move and add it to the tree
             if (!opponentMoves.isEmpty()) {
-                TreeNode opponentBestMove = opponentMoves.get(0);
-                opponentBestMove = findNodeThatHasBestPositionPointsForPlayer(opponentMoves, opponentNumber);
+                TreeNode opponentBestMove = findNodeThatHasBestPositionPointsForPlayer(opponentMoves, opponentNumber);
                 ownMove.addChild(opponentBestMove);
             }
             
@@ -240,7 +241,7 @@ public class AIThread extends Thread {
             logger.info("Trying to find the possible moves for the player " + playerNumber);
         }
         
-        ArrayList<TreeNode> newNodes = new ArrayList<TreeNode>();
+        ArrayList<TreeNode> newNodes = new ArrayList<>();
         
         // Find every piece owned by this player
         for (Piece piece : parentNode.getGameboard().findPiecesOwnedByPlayer(playerNumber)) { 
@@ -263,35 +264,19 @@ public class AIThread extends Thread {
         return newNodes;
     }
 
-    private final boolean isNode1ConsiderablyBetterThanNode2ForPlayer(TreeNode node1, TreeNode node2, final int playerNumber) {
+    private boolean isNode1ConsiderablyBetterThanNode2ForPlayer(TreeNode node1, TreeNode node2, final int playerNumber) {
         if (playerNumber == 1) {
-            if (node1.getPositionPoints() > node2.getPositionPoints() + 10) {
-                return true;
-            } else {
-                return false;
-            }
+            return node1.getPositionPoints() > node2.getPositionPoints() + 10;
         } else {
-            if (node1.getPositionPoints() < node2.getPositionPoints() - 10) {
-                return true;
-            } else {
-                return false;
-            }
+            return node1.getPositionPoints() < node2.getPositionPoints() - 10;
         }
     }
 
-    private final boolean isNode1ConsiderablyWorseThanNode2ForPlayer(TreeNode node1, TreeNode node2, final int playerNumber) {
+    private boolean isNode1ConsiderablyWorseThanNode2ForPlayer(TreeNode node1, TreeNode node2, final int playerNumber) {
         if (playerNumber == 1) {
-            if (node1.getPositionPoints() + 4 < node2.getPositionPoints()) {
-                return true;
-            } else {
-                return false;
-            }
+            return node1.getPositionPoints() + 4 < node2.getPositionPoints();
         } else {
-            if (node1.getPositionPoints() - 4 > node2.getPositionPoints()) {
-                return true;
-            } else {
-                return false;
-            }
+            return node1.getPositionPoints() - 4 > node2.getPositionPoints();
         }
     }
     
@@ -338,7 +323,7 @@ public class AIThread extends Thread {
     }
     
     /** Find the best routenode in the tree and add it as a new child. */
-    private final void developTree() {
+    private void developTree() {
         while (System.currentTimeMillis() < timestampAIBegin + treeDevelopmentTimeMaxInMs) {
             treeDevelopmentTimes++;
             

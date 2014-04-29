@@ -1,25 +1,19 @@
 package org.voimala.jarzkachess.tests.ai;
 
-import static org.junit.Assert.*;
-
-import java.io.IOException;
-import java.text.NumberFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.voimala.jarzkachess.gamelogic.Cell;
-import org.voimala.jarzkachess.gamelogic.GameSession;
 import org.voimala.jarzkachess.gamelogic.Gameboard;
 import org.voimala.jarzkachess.gamelogic.HalfMove;
 import org.voimala.jarzkachess.gamelogic.pieces.*;
-import org.voimala.jarzkachess.gamelogic.players.HumanPlayerLocal;
-import org.voimala.jarzkachess.gamelogic.players.ai.AIPlayerLocal;
 import org.voimala.jarzkachess.gamelogic.players.ai.AIThread;
-import org.voimala.jarzkachess.gamelogic.players.ai.PlayerStatePlayAI;
-import org.voimala.jarzkachess.graphics.ChessAnimationContainer;
-import org.voimala.jarzkachess.graphics.ChessSpriteContainer;
+
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class AIMoveTest {
     private Logger logger = Logger.getLogger(this.getClass().getName());

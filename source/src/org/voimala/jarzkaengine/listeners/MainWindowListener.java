@@ -7,7 +7,7 @@ import java.awt.event.WindowListener;
 public class MainWindowListener implements WindowListener {
     private static MainWindowListener instanceOfThis = null;
     
-    public static final MainWindowListener getInstance() {
+    public static MainWindowListener getInstance() {
         if (instanceOfThis == null) {
             instanceOfThis = new MainWindowListener();
         }

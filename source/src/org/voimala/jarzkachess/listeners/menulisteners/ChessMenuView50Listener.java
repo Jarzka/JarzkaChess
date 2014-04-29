@@ -8,7 +8,7 @@ import org.voimala.jarzkachess.programbody.ChessProgram;
 public class ChessMenuView50Listener implements ActionListener {
     private static ChessMenuView50Listener instanceOfThis = null;
     
-    public static final ChessMenuView50Listener getInstance() {
+    public static ChessMenuView50Listener getInstance() {
         if (instanceOfThis == null) {
             instanceOfThis = new ChessMenuView50Listener();
         }

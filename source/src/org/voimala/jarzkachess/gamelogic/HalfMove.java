@@ -42,7 +42,7 @@ public class HalfMove {
     }
 
     public final HashMap<Cell, Cell> getMoveAsHashMap() {
-        HashMap<Cell, Cell> move = new HashMap<Cell, Cell>();
+        HashMap<Cell, Cell> move = new HashMap<>();
         move.put(source, target);
         return move;
     }

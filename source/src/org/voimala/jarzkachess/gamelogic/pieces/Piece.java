@@ -43,7 +43,7 @@ public abstract class Piece extends GameplayObject implements Cloneable {
     }
 
     /** When the Piece is cloned, it has the same ownerTile as the source. */
-    public Piece clone() {
+    public Piece clone() throws CloneNotSupportedException {
         return (Piece) super.clone();
     }
     
@@ -171,7 +171,7 @@ public abstract class Piece extends GameplayObject implements Cloneable {
      * */
     public final List<Piece> findPiecesThatCanBeKilledByThisPiece(final boolean includeCheck) {
         List<HalfMove> attackMoves = findPossibleMoves(includeCheck);
-        ArrayList<Piece> piecesThatCanBeKilled = new ArrayList<Piece>();
+        ArrayList<Piece> piecesThatCanBeKilled = new ArrayList<>();
         
         // Lets see if there exists enemy pieces in the target cells
         for (HalfMove move : attackMoves) {
@@ -196,17 +196,16 @@ public abstract class Piece extends GameplayObject implements Cloneable {
     public final List<Piece> findPiecesThatCanKillThisPiece(final boolean includeCheck) {
         int opponentPlayerNumber = findOpponentPlayerNumber();
         
-        ArrayList<Piece> piecesThatCanKillThisPiece = new ArrayList<Piece>();
+        ArrayList<Piece> piecesThatCanKillThisPiece = new ArrayList<>();
         
         // Find all enemy pieces
         for (Piece enemyPiece : getOwnerTile().getOwnerGameboard().findPiecesOwnedByPlayer(opponentPlayerNumber)) {
             // Check if one of the attack move's target pieces is this piece
-            findPiecesThatCanBeKilled:
             for (Piece pieceThatCanBeKilled : enemyPiece.findPiecesThatCanBeKilledByThisPiece(includeCheck)) {
                 if (pieceThatCanBeKilled == this) {
                     piecesThatCanKillThisPiece.add(enemyPiece);
                     // The enemy piece can kill this piece. We got it, no reason to continue this loop.
-                    break findPiecesThatCanBeKilled;
+                    break;
                 }
             }
         }
@@ -244,7 +243,7 @@ public abstract class Piece extends GameplayObject implements Cloneable {
     public abstract PieceName getName();
 
     public final List<HalfMove> findPossibleMoves(final boolean includeCheck) {
-        ArrayList<HalfMove> moves = new ArrayList<HalfMove>();
+        ArrayList<HalfMove> moves = new ArrayList<>();
         moves.addAll(findPossibleRegularMoves());
         moves.addAll(findPossibleAttackMoves());
         // moves.addAll(findPossibleSpecialMoves());

@@ -1,7 +1,6 @@
 package org.voimala.jarzkachess.gamelogic.pieces;
 
 import org.voimala.jarzkachess.gamelogic.Cell;
-import org.voimala.jarzkachess.programbody.ChessProgram;
 
 public class PieceStateMove extends PieceState {
     private double moveProgressPercentage = 0;

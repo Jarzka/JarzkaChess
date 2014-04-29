@@ -54,11 +54,16 @@ public class Tile extends GameplayObject implements Cloneable {
      * The piece (if any) is also cloned with the tile.
      */
     public final Tile clone() {
-        Tile clone = (Tile) super.clone();
-        
-        // DEEP COPY
-        if (getPiece() != null) { clone.setPiece(this.getPiece().clone()); }
-        if (getPosition() != null) { clone.setPosition(this.getPosition().clone()); }
+        Tile clone = null;
+        try {
+            clone = (Tile) super.clone();
+
+            // Deep copy
+            if (getPiece() != null) { clone.setPiece(this.getPiece().clone()); }
+            if (getPosition() != null) { clone.setPosition(this.getPosition().clone()); }
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
         
         return clone;
     }
@@ -133,11 +138,8 @@ public class Tile extends GameplayObject implements Cloneable {
     }
     
     public final boolean hasPiece() {
-        if (piece != null) {
-            return true;
-        }
-        
-        return false;
+        return piece != null;
+
     }
 
     public final Gameboard getOwnerGameboard() {

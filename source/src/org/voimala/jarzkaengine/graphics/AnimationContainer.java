@@ -14,14 +14,17 @@ import org.voimala.jarzkaengine.exceptions.SpriteNotFoundException;
  * For example name_23.png
  */
 public abstract class AnimationContainer {
-    private HashMap<String, Animation> animations = new HashMap<String, Animation>();
+    private HashMap<String, Animation> animations = new HashMap<>();
     
     /**
      * @param name The animation's first image file name excluding the ending _XXXXX.png.
-     * @throws IOException 
      */
-    public final void makeAnimationFromSprites(SpriteContainer spriteContainer, final String name, final AnimationType type, final double speed) throws SpriteNotFoundException {
-        ArrayList<Sprite> sprites = new ArrayList<Sprite>();
+    public final void makeAnimationFromSprites(SpriteContainer spriteContainer,
+                                               final String name,
+                                               final AnimationType type,
+                                               final double speed)
+            throws SpriteNotFoundException {
+        ArrayList<Sprite> sprites = new ArrayList<>();
         
         int i = 0;
         while (true) {

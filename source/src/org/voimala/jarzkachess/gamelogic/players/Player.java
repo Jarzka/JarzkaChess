@@ -3,9 +3,7 @@ package org.voimala.jarzkachess.gamelogic.players;
 import org.voimala.jarzkachess.exceptions.ChessException;
 import org.voimala.jarzkachess.gamelogic.Cell;
 import org.voimala.jarzkachess.gamelogic.Gameboard;
-import org.voimala.jarzkachess.gamelogic.HalfMove;
 import org.voimala.jarzkachess.gamelogic.pieces.Piece;
-import org.voimala.jarzkaengine.scenes.Scene;
 
 public abstract class Player {
     private int number = 0; /** 1 = White, 2 = Black. */
@@ -38,7 +36,7 @@ public abstract class Player {
     }
     
     /** Returns the opponent's player number. */ 
-    public static final int findOpponentForPlayer(final int playerNumber) {
+    public static int findOpponentForPlayer(final int playerNumber) {
         if (playerNumber == 1) { return 2; }
         return 1;
     }

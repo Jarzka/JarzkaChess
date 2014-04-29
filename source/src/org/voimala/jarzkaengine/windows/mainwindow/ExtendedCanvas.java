@@ -1,15 +1,11 @@
 package org.voimala.jarzkaengine.windows.mainwindow;
 
-import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.util.ArrayList;
-
-import javax.swing.JFrame;
-
 import org.voimala.jarzkaengine.programbody.Program;
 import org.voimala.jarzkaengine.scenes.Scene;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * This is mostly the same as Java's Canvas class but it adds fps and timedelta calculation functionality.

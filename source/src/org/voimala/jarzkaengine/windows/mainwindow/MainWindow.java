@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainWindow extends JFrame {
+
     protected Program ownerProgram = null;
     protected ExtendedCanvas mainCanvas = null;
     

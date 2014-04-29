@@ -1,24 +1,16 @@
 package org.voimala.jarzkachess.programbody;
 
-import java.awt.BorderLayout;
-import java.io.IOException;
-
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-
 import org.voimala.jarzkachess.graphics.ChessAnimationContainer;
 import org.voimala.jarzkachess.graphics.ChessSpriteContainer;
 import org.voimala.jarzkachess.listeners.ChessMouseListener;
 import org.voimala.jarzkachess.listeners.ChessMouseMotionListener;
-import org.voimala.jarzkachess.listeners.menulisteners.ChessMenuGameNewListener;
-import org.voimala.jarzkachess.listeners.menulisteners.ChessMenuGameQuitListener;
-import org.voimala.jarzkachess.listeners.menulisteners.ChessMenuView100Listener;
-import org.voimala.jarzkachess.listeners.menulisteners.ChessMenuView50Listener;
-import org.voimala.jarzkachess.listeners.menulisteners.ChessMenuView75Listener;
+import org.voimala.jarzkachess.listeners.menulisteners.*;
 import org.voimala.jarzkachess.scenes.SceneGameplay;
 import org.voimala.jarzkaengine.exceptions.SpriteNotFoundException;
 import org.voimala.jarzkaengine.programbody.GameProgram;
+
+import javax.swing.*;
+import java.io.IOException;
 
 /** This singleton represents the core body of the entire application. */
 public class ChessProgram extends GameProgram {
@@ -48,7 +40,7 @@ public class ChessProgram extends GameProgram {
         super("JarzkaChess");
     }
     
-    public static final ChessProgram getInstance() {
+    public static ChessProgram getInstance() {
         if (instanceOfThis == null) {
             instanceOfThis = new ChessProgram();
         }

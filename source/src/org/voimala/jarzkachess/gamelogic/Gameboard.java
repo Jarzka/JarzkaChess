@@ -35,7 +35,7 @@ import org.voimala.jarzkachess.gamelogic.pieces.Rook;
 public class Gameboard implements Cloneable {
     private ArrayList<Tile> tiles = null;
     private GameSession ownerGameSession = null;
-    private final int boardSize = 8; /** Number of rows and tiles. */
+    private int boardSize = 8; /** Number of rows and tiles. */
     private int countPerformedMoves = 0;
     private Logger logger = Logger.getLogger(this.getClass().getName());
     
@@ -62,7 +62,7 @@ public class Gameboard implements Cloneable {
 
     /** The clones has the same gamesession owner as the source. */
     public final Gameboard clone() {
-        Gameboard clone = null;
+        Gameboard clone;
         try {
             clone = (Gameboard) super.clone();
         } catch (CloneNotSupportedException e) {
@@ -89,8 +89,14 @@ public class Gameboard implements Cloneable {
                 // Find the same tile in the clone
                 Tile tileClone = clone.getTileAtPosition(tileSource.getPosition().clone());
                 // Make a deep copy of the piece
-                Piece pieceClone = tileSource.getPiece().clone();
-                tileClone.setPiece(pieceClone);  
+                Piece pieceClone = null;
+                try {
+                    pieceClone = tileSource.getPiece().clone();
+                } catch (CloneNotSupportedException e) {
+                    e.printStackTrace();
+                }
+
+                tileClone.setPiece(pieceClone);
             }
         }
     }
@@ -117,8 +123,8 @@ public class Gameboard implements Cloneable {
     
     /** Initializes the tiles list and adds tiles to it. */
     private void initializeTiles() {
-        tiles = new ArrayList<Tile>();
-        
+        tiles = new ArrayList<>();
+
         TileColor tileColor = TileColor.TILE_COLOR_WHITE;
         for (int i = 1; i <= boardSize; i++) {
             if (tileColor == TileColor.TILE_COLOR_WHITE) {
@@ -245,17 +251,14 @@ public class Gameboard implements Cloneable {
 }
 
     /** If the piece's type is pawn and it has reached the final row,
-     * asks the pawn to promote. */
-    private final boolean checkFinalRowForPawns(Piece piece) {
+     * promote it. */
+    private boolean checkFinalRowForPawns(Piece piece) {
         if (piece.getName() != PieceName.PIECE_NAME_PAWN) {
-            return true;
+            return false;
         }
-        
-        Pawn pawn = null;
-        if (piece.getName() == PieceName.PIECE_NAME_PAWN) {
-            pawn = (Pawn) piece;
-        }
-        
+
+        Pawn pawn = (Pawn) piece;
+
         if ((pawn.getOwnerPlayerNumber() == 1 && pawn.getOwnerTile().getPosition().getRow() == 1)
                 || (pawn.getOwnerPlayerNumber() == 2 && pawn.getOwnerTile().getPosition().getRow() == 8)) {
             pawn.promote();
@@ -342,7 +345,7 @@ public class Gameboard implements Cloneable {
         return points;
     }
     
-    private final double evaluateVeryAdvancedPawns() {
+    private double evaluateVeryAdvancedPawns() {
         double points = 0;
         double finalRowMinusOnePoints = 4;
         double finalRowMinusTwoPoints = 2;
@@ -384,7 +387,7 @@ public class Gameboard implements Cloneable {
         return points;       
     }
 
-    private final double evaluateDoubledPawnsForPlayer(final int playerNumber) {
+    private double evaluateDoubledPawnsForPlayer(final int playerNumber) {
         double points = 0;
         double doubledPawnsPenalty = -0.5;
         
@@ -442,7 +445,7 @@ public class Gameboard implements Cloneable {
     /** Give a bonus if the player has two bishops. */
     public final double evaluateBishopPair() {
         double points = 0;
-        int numberOfBishops = 0;
+        int numberOfBishops;
         int multipleBishopsPoints = 2;
     
     
@@ -463,7 +466,7 @@ public class Gameboard implements Cloneable {
         return points;
     }
 
-    private final double evaluateOpeningGame() {
+    private double evaluateOpeningGame() {
         double points = 0;
         
         if (getCurrentGamePhase() == GamePhase.GAME_PHASE_OPENING) {
@@ -518,10 +521,10 @@ public class Gameboard implements Cloneable {
         
         for (Piece piece : getPieces()) {
             for (Piece pieceThatCanBeKilled : piece.findPiecesThatCanBeKilledByThisPiece(true)) {
-                double attackPoints = 0;
+                double attackPoints;
                 
                 // Is the attacker under attack
-                double attackValue = 0;
+                double attackValue;
                 if (piece.findPiecesThatCanKillThisPiece(true).size() == 0) {
                     attackValue = safeAttackValuePoints;
                 } else {
@@ -654,7 +657,7 @@ public class Gameboard implements Cloneable {
         double kingProtectionPoint = 0.1;
         
         // Find the king
-        Cell kingLocation = null;
+        Cell kingLocation;
         try {
             kingLocation = findKing(playerNumber).getPosition();
         } catch (KingNotFoundException e) {
@@ -697,7 +700,7 @@ public class Gameboard implements Cloneable {
     }
 
     public final ArrayList<Piece> getPieces() {
-        ArrayList<Piece> pieces = new ArrayList<Piece>();
+        ArrayList<Piece> pieces = new ArrayList<>();
 
         for (Tile tile : getTiles()) {
             if (tile.getPiece() != null) {
@@ -709,7 +712,7 @@ public class Gameboard implements Cloneable {
     }
     
     private ArrayList<Piece> findPiecesByType(PieceName pieceName) {
-        ArrayList<Piece> pieces = new ArrayList<Piece>();
+        ArrayList<Piece> pieces = new ArrayList<>();
 
         for (Tile tile : getTiles()) {
             if (tile.getPiece() != null) {
@@ -723,7 +726,7 @@ public class Gameboard implements Cloneable {
     }
     
     private ArrayList<Piece> findPiecesByTypeAndOwnerPlayer(final PieceName pieceName, final int playerNumber) {
-        ArrayList<Piece> pieces = new ArrayList<Piece>();
+        ArrayList<Piece> pieces = new ArrayList<>();
 
         for (Tile tile : getTiles()) {
             if (tile.getPiece() != null) {
@@ -738,7 +741,7 @@ public class Gameboard implements Cloneable {
     }
     
     public final ArrayList<Piece> findPiecesOwnedByPlayer(final int playerNumber) {
-        ArrayList<Piece> pieces = new ArrayList<Piece>();
+        ArrayList<Piece> pieces = new ArrayList<>();
 
         for (Piece piece : getPieces()) {
             if (piece.getOwnerPlayerNumber() == playerNumber) {
@@ -852,7 +855,7 @@ public class Gameboard implements Cloneable {
 
     /** Returns the pieces between the cells, but not the pieces which are located in the given cells). */
     public final List<Piece> findPiecesBetweenCellsInRow(Cell cell1, Cell cell2) {
-        if (cell1.getRow() != cell1.getRow()) {
+        if (cell1.getRow() != cell2.getRow()) {
             throw new ChessException("Cells should be located in the same row.");
         }
         
@@ -863,7 +866,7 @@ public class Gameboard implements Cloneable {
             cell2 = cell1Temp;
         }
         
-        ArrayList<Piece> pieces = new ArrayList<Piece>();
+        ArrayList<Piece> pieces = new ArrayList<>();
         
         int row = cell1.getRow();
         
@@ -878,7 +881,7 @@ public class Gameboard implements Cloneable {
     
     /** Returns the tiles between the cells, but not the tiles which are located in the given cells). */
     public final List<Tile> findTilesBetweenCellsInRow(Cell cell1, Cell cell2) {
-        if (cell1.getRow() != cell1.getRow()) {
+        if (cell1.getRow() != cell2.getRow()) {
             throw new ChessException("Cells should be located in the same row.");
         }
         
@@ -889,7 +892,7 @@ public class Gameboard implements Cloneable {
             cell2 = cell1Temp;
         }
         
-        ArrayList<Tile> tiles = new ArrayList<Tile>();
+        ArrayList<Tile> tiles = new ArrayList<>();
         
         int row = cell1.getRow();
         

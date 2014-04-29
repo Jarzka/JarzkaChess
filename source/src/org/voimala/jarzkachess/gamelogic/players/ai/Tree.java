@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 public class Tree {
     private Logger logger = Logger.getLogger(this.getClass().getName());
-    private ArrayList<TreeNode> nodes = new ArrayList<TreeNode>();
+    private ArrayList<TreeNode> nodes = new ArrayList<>();
     
     public Tree() {
         setupLogger();

@@ -17,7 +17,7 @@ import org.voimala.jarzkaengine.exceptions.SpriteNotFoundException;
  * All sprite files used in the game should have an unique name.
  */
 public abstract class SpriteContainer {
-    private HashMap<String, Sprite> sprites = new HashMap<String, Sprite>();
+    private HashMap<String, Sprite> sprites = new HashMap<>();
     
     /**
      * @param name The image file name excluding the extension
@@ -51,12 +51,11 @@ public abstract class SpriteContainer {
      * For example "Graphics\Gameboard\pawn_white.png"
      */
     public final Sprite loadSpriteFromFile(final String name, final String path) throws IOException {
-        BufferedImage sourceImage = null;
-        String pathFull = path;
+        BufferedImage sourceImage;
         try {
-            sourceImage = ImageIO.read(new File(pathFull));
+            sourceImage = ImageIO.read(new File(path));
         } catch (IOException e) {
-            throw new IOException("Can not read input file" + ": " + pathFull);
+            throw new IOException("Can not read input file" + ": " + path);
         }
         
         // Create an accelerated image of the right size to store our sprite in

@@ -1,9 +1,5 @@
 package org.voimala.jarzkachess.tests.moves;
 
-import static org.junit.Assert.*;
-
-import java.io.IOException;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.voimala.jarzkachess.gamelogic.Gameboard;
@@ -12,6 +8,10 @@ import org.voimala.jarzkachess.gamelogic.pieces.Pawn;
 import org.voimala.jarzkachess.gamelogic.pieces.Queen;
 import org.voimala.jarzkachess.gamelogic.pieces.Rook;
 import org.voimala.jarzkachess.graphics.ChessSpriteContainer;
+
+import java.io.IOException;
+
+import static org.junit.Assert.assertEquals;
 
 public class KnightTest {
 

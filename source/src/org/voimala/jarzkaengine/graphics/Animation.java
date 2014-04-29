@@ -2,12 +2,8 @@ package org.voimala.jarzkaengine.graphics;
 
 import java.util.ArrayList;
 
-import org.voimala.jarzkachess.programbody.ChessProgram;
-import org.voimala.jarzkaengine.programbody.GameProgram;
-import org.voimala.jarzkaengine.windows.mainwindow.ExtendedCanvas;
-
 public class Animation {
-    private ArrayList<Sprite> sprites = new ArrayList<Sprite>();
+    private ArrayList<Sprite> sprites = new ArrayList<>();
     private String name;
     private double speed = 0.2;
     private double frameCurrent = 1; /** 1-index. */

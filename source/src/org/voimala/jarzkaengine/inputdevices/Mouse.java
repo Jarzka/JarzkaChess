@@ -38,21 +38,13 @@ public abstract class Mouse {
     /** Returns true if less than 0.05 seconds have passed since the user
      * pressed the button. */
     public boolean clickedLeftButton() {
-        if (timeStampLeftButtonPressedInMs + 50 < System.currentTimeMillis()) {
-            return true;
-        }
-        
-        return false;
+        return timeStampLeftButtonPressedInMs + 50 < System.currentTimeMillis();
     }
     
     /** Returns true if less than 0.05 seconds have passed since the user
      * pressed the button. */
     public boolean clickedRightButton() {
-        if (timeStampRightButtonPressedInMs + 50 < System.currentTimeMillis()) {
-            return true;
-        }
-        
-        return false;
+        return timeStampRightButtonPressedInMs + 50 < System.currentTimeMillis();
     }
 
     /** Only Java's real mouse observer/listener should call this method. */

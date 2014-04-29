@@ -21,7 +21,7 @@ public class Bishop extends Piece implements Cloneable {
     }
 
     protected final List<HalfMove> findPossibleRegularMoves() {
-        ArrayList<HalfMove> moves = new ArrayList<HalfMove>();
+        ArrayList<HalfMove> moves = new ArrayList<>();
         
         moves.addAll(findPossibleRegularMoves(Direction.DIRECTION_DOWN_LEFT));
         moves.addAll(findPossibleRegularMoves(Direction.DIRECTION_DOWN_RIGHT));
@@ -32,7 +32,7 @@ public class Bishop extends Piece implements Cloneable {
     }
     
     protected final List<HalfMove> findPossibleAttackMoves() {
-        ArrayList<HalfMove> moves = new ArrayList<HalfMove>();
+        ArrayList<HalfMove> moves = new ArrayList<>();
         
         moves.addAll(findPossibleAttackMoves(Direction.DIRECTION_UP_LEFT));
         moves.addAll(findPossibleAttackMoves(Direction.DIRECTION_UP_RIGHT));
@@ -45,7 +45,7 @@ public class Bishop extends Piece implements Cloneable {
     @Override
     protected final List<HalfMove> findPossibleSpecialMoves() {
         // This piece does not have any special moves
-        return new ArrayList<HalfMove>();
+        return new ArrayList<>();
     }
 
     private List<HalfMove> findPossibleRegularMoves(final Direction direction) {
@@ -57,7 +57,7 @@ public class Bishop extends Piece implements Cloneable {
         }
         
         // Loop until we get null or find a piece that is blocking our way
-        ArrayList<HalfMove> moves = new ArrayList<HalfMove>();
+        ArrayList<HalfMove> moves = new ArrayList<>();
         
         for (int i = 1; i <= 7; i++) {
             Cell possibleTarget = nextCellFromSource(direction, i);
@@ -86,7 +86,7 @@ public class Bishop extends Piece implements Cloneable {
         }
         
         // Loop until we get null or find a piece
-        ArrayList<HalfMove> moves = new ArrayList<HalfMove>();
+        ArrayList<HalfMove> moves = new ArrayList<>();
         
         for (int i = 1; i <= 7; i++) {
             Cell possibleTarget = nextCellFromSource(direction, i);
@@ -110,7 +110,7 @@ public class Bishop extends Piece implements Cloneable {
     }
     
     @Override
-    public final Bishop clone() {
+    public final Bishop clone() throws CloneNotSupportedException {
         return (Bishop) super.clone();
     }
 

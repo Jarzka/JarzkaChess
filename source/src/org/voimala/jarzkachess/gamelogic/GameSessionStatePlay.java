@@ -26,10 +26,10 @@ public class GameSessionStatePlay extends GameSessionState {
         checkEnd();
     }
 
-    private final void checkEnd() {
+    private void checkEnd() {
         /* Checking if the game has ended takes lots of processing power so do it only if the
          * game board has been changed. */
-        if (lastGameboardHash != getOwnerGameSession().getGameboard().getHash()) {
+        if (!lastGameboardHash.equals(getOwnerGameSession().getGameboard().getHash())) {
             lastGameboardHash = getOwnerGameSession().getGameboard().getHash();
             checkCheckMate();
             checkStalemate();
@@ -37,7 +37,6 @@ public class GameSessionStatePlay extends GameSessionState {
     }
 
     private void checkCheckMate() {
-        // TODO Refactor
         try {
             // Find the king and check if it is in checkmate
             for (Piece piece : getOwnerGameSession().getGameboard().getPieces()) {
@@ -58,9 +57,9 @@ public class GameSessionStatePlay extends GameSessionState {
         }
     }
     
-    private final boolean checkStalemate() {
+    private boolean checkStalemate() {
         // The current player's king is not in check and the player can not move any piece.
-        King king = null;
+        King king;
         try {
             king = getOwnerGameSession().getGameboard().findKing(getCurrentlyPlayingPlayer().getNumber());
         } catch (KingNotFoundException e) {

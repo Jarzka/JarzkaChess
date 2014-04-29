@@ -1,12 +1,13 @@
 package org.voimala.jarzkachess.tests.smoketests;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 import org.voimala.jarzkachess.gamelogic.Cell;
 import org.voimala.jarzkachess.gamelogic.Tile;
 import org.voimala.jarzkachess.gamelogic.TileColor;
 import org.voimala.jarzkachess.gamelogic.pieces.Pawn;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class TileTest {
 

@@ -7,13 +7,13 @@ import org.voimala.jarzkachess.programbody.ChessProgram;
 import org.voimala.jarzkaengine.inputdevices.Mouse;
 
 /**
- * This class contains methods that are related to the Chess game.
+ * This class contains mouse methods that are related to the Chess game.
  */
 
 public class ChessMouse extends Mouse {
     protected static ChessMouse instanceOfThis;
     
-    public static final ChessMouse getInstance() {
+    public static ChessMouse getInstance() {
         if (instanceOfThis == null) {
             instanceOfThis = new ChessMouse();
         }
@@ -28,13 +28,10 @@ public class ChessMouse extends Mouse {
         
         final int TILE_SIZE_PIXELS = ChessProgram.getInstance().getTileSize();
         final Gameboard gameboard = tile.getOwnerGameboard();
-        if (getX() >= gameboard.getPositionX() + (tile.getColumn() - 1) * TILE_SIZE_PIXELS
-            && getX() <= gameboard.getPositionX() + ((tile.getColumn() - 1) * TILE_SIZE_PIXELS) + TILE_SIZE_PIXELS
-            && getY() >= gameboard.getPositionY() + (tile.getRow() - 1) * TILE_SIZE_PIXELS
-            && getY() <= gameboard.getPositionY() + ((tile.getRow() - 1) * TILE_SIZE_PIXELS) + TILE_SIZE_PIXELS) {
-            return true;
-        }
-        
-        return false;
+        return getX() >= gameboard.getPositionX() + (tile.getColumn() - 1) * TILE_SIZE_PIXELS
+                && getX() <= gameboard.getPositionX() + ((tile.getColumn() - 1) * TILE_SIZE_PIXELS) + TILE_SIZE_PIXELS
+                && getY() >= gameboard.getPositionY() + (tile.getRow() - 1) * TILE_SIZE_PIXELS
+                && getY() <= gameboard.getPositionY() + ((tile.getRow() - 1) * TILE_SIZE_PIXELS) + TILE_SIZE_PIXELS;
+
     }
 }

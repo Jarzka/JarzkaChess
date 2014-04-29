@@ -39,7 +39,7 @@ public abstract class GameProgram extends Program {
     protected void initializeListeners() {}
 
     /** Loads the external files that the game uses. */
-    private final void initializeResources() throws IOException {
+    private void initializeResources() throws IOException {
         loadGraphicFiles();
         loadAnimations();
     }

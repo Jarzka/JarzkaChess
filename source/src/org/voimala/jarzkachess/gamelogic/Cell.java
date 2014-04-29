@@ -28,11 +28,7 @@ public class Cell implements Cloneable {
     }
     
     public final boolean hasSameRowAndColumn(Cell cell) {
-        if (row == cell.getRow() && column == cell.getColumn()) {
-            return true;
-        }
-        
-        return false;
+        return row == cell.getRow() && column == cell.getColumn();
     }
     
     public final int getRow() {
@@ -53,10 +49,6 @@ public class Cell implements Cloneable {
 
     /** Return true if the cell is located in the center of the board. */
     public final boolean isLocatedInCenter() {
-        if (getRow() >= 4 && getRow() <= 5 && getColumn() >= 4 && getRow() <= 5) {
-            return true;
-        }
-        
-        return false;
+        return getRow() >= 4 && getRow() <= 5 && getColumn() >= 4 && getRow() <= 5;
     }
 }

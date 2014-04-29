@@ -10,7 +10,7 @@ public class ChessMouseMotionListener implements MouseMotionListener {
     private static ChessMouseMotionListener instanceOfThis = null;
     private ChessMouse mouse = ChessMouse.getInstance();
     
-    public static final ChessMouseMotionListener getInstance() {
+    public static ChessMouseMotionListener getInstance() {
         if (instanceOfThis == null) {
             instanceOfThis = new ChessMouseMotionListener();
         }

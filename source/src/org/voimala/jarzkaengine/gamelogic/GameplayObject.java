@@ -27,7 +27,7 @@ public abstract class GameplayObject implements Cloneable {
     }
     
     /** The cloned object will have the same parent layer as the source. */
-    public GameplayObject clone() {
+    public GameplayObject clone() throws CloneNotSupportedException {
         try {
             GameplayObject clone = (GameplayObject) super.clone();
             clone.setAnchorPosition(this.getAnchorPosition().clone());

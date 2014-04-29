@@ -1,23 +1,17 @@
 package org.voimala.jarzkachess.tests.smoketests;
 
-import static org.junit.Assert.*;
-
-import java.io.IOException;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.voimala.jarzkachess.gamelogic.Cell;
 import org.voimala.jarzkachess.gamelogic.GamePhase;
 import org.voimala.jarzkachess.gamelogic.Gameboard;
 import org.voimala.jarzkachess.gamelogic.Tile;
-import org.voimala.jarzkachess.gamelogic.pieces.Bishop;
-import org.voimala.jarzkachess.gamelogic.pieces.King;
-import org.voimala.jarzkachess.gamelogic.pieces.Knight;
-import org.voimala.jarzkachess.gamelogic.pieces.Pawn;
-import org.voimala.jarzkachess.gamelogic.pieces.Piece;
-import org.voimala.jarzkachess.gamelogic.pieces.Queen;
-import org.voimala.jarzkachess.gamelogic.pieces.Rook;
-import org.voimala.jarzkachess.graphics.ChessSpriteContainer;
+import org.voimala.jarzkachess.gamelogic.pieces.*;
+
+import java.io.IOException;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class GameboardTest {
     

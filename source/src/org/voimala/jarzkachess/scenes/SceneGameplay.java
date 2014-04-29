@@ -1,11 +1,5 @@
 package org.voimala.jarzkachess.scenes;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.text.NumberFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.voimala.jarzkachess.gamelogic.GameSession;
 import org.voimala.jarzkachess.gamelogic.GameSessionStateName;
 import org.voimala.jarzkachess.gamelogic.Tile;
@@ -21,16 +15,19 @@ import org.voimala.jarzkachess.inputdevices.ChessMouse;
 import org.voimala.jarzkachess.programbody.ChessProgram;
 import org.voimala.jarzkaengine.exceptions.SpriteNotFoundException;
 import org.voimala.jarzkaengine.graphics.Sprite;
-import org.voimala.jarzkaengine.inputdevices.Mouse;
 import org.voimala.jarzkaengine.inputdevices.MouseButtonState;
 import org.voimala.jarzkaengine.scenes.Scene;
 import org.voimala.jarzkaengine.utility.PositionPoint;
 import org.voimala.jarzkaengine.windows.mainwindow.ExtendedCanvas;
 
+import java.awt.*;
+import java.text.NumberFormat;
+import java.util.logging.Logger;
+
 public class SceneGameplay extends Scene {
     private GameSession gameSession = new GameSession(this);
     private Logger logger = Logger.getLogger(this.getClass().getName());
-    private String lastGameboardHash = ""; // TODO For testing purposes only
+    private String lastGameboardHash = ""; // For testing purposes only
     
     public SceneGameplay(final ExtendedCanvas ownerCanvas) {
         super(ownerCanvas);
@@ -45,7 +42,7 @@ public class SceneGameplay extends Scene {
         setupLogger();
     }
     
-    private final void setupLogger() {
+    private void setupLogger() {
         //logger.setLevel(Level.OFF);
     }
 
@@ -76,7 +73,7 @@ public class SceneGameplay extends Scene {
     }
 
 
-    private final void drawTiles() {
+    private void drawTiles() {
         final int TILE_SIZE_PIXELS = ChessProgram.getInstance().getTileSize();
         
         for (Tile tile : gameSession.getGameboard().getTiles()) {
@@ -95,7 +92,7 @@ public class SceneGameplay extends Scene {
     /** If the player holds the right mouse button down and hovers
      * the mouse on his/her own piece, shows the pieces that protect the
      * selected piece (for testing purposes only). */
-    private final boolean drawHints() {
+    private boolean drawHints() {
         if (ChessMouse.getInstance().getRightButtonState() != MouseButtonState.PRESSED) {
             return false;
         }
@@ -120,7 +117,7 @@ public class SceneGameplay extends Scene {
         return false;
     }
     
-    private final void drawSelections() {
+    private void drawSelections() {
         final int TILE_SIZE_PIXELS = ChessProgram.getInstance().getTileSize();
         
         for (Piece piece : gameSession.getGameboard().getPieces()) {
@@ -139,7 +136,7 @@ public class SceneGameplay extends Scene {
         }
     }
 
-    private final void drawPieces() {
+    private void drawPieces() {
         /** The used game engine offers a position points for every gameplay object. However, in
          * this game the position of the pieces depends of it's parent Tile, so we just draw the
          * sprites in the position that is depended on theyr parent tile.
@@ -182,7 +179,7 @@ public class SceneGameplay extends Scene {
         }
     }
 
-    private final void drawLoadingIcon() {
+    private void drawLoadingIcon() {
         // Draw this if there is an AI player in the game and it is in the state play
         for (Player player : gameSession.getPlayers()) {
             if (!player.isHuman() && player.getStateName() == PlayerStateName.PLAYER_STATE_PLAY) { 
@@ -195,13 +192,13 @@ public class SceneGameplay extends Scene {
         }
     }
 
-    private final boolean drawEndStateText() {
+    private boolean drawEndStateText() {
         if (gameSession.getStateName() != GameSessionStateName.GAME_SESSION_STATE_NAME_END) {
             return false;
         }
        
         // Find the text
-        String text = "";
+        String text;
         if (gameSession.getWinner() == 0) {
             text = "Stealmate!";
         } else {
