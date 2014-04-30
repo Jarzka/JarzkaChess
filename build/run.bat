@@ -1,0 +1,1 @@
+java -server -jar "JarzkaChess Preview 2.jar"

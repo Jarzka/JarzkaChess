@@ -1,8 +1,3 @@
-You can start the game by double clicking the .jar file on Windows.
+To run the game with the maximum operating speed, start the game in Java server mode by using the included run.bat file.
 
-However, the AI seems to work much faster if the app is run from the command line for some reason.
-
-To open command line on windows, navigate to the project's build foder and right click
-and empty area in File explorer while holding Ctrl and Shift at the same time.
-Click "Open command prompt here" and type:
-java -jar "JarzkaChess Preview 2.jar"
+You can read more about Java's client and server mode from here http://stackoverflow.com/questions/198577/real-differences-between-java-server-and-java-client
