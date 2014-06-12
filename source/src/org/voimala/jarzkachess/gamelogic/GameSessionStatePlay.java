@@ -1,7 +1,5 @@
 package org.voimala.jarzkachess.gamelogic;
 
-import java.util.List;
-
 import org.voimala.jarzkachess.exceptions.ChessException;
 import org.voimala.jarzkachess.exceptions.KingNotFoundException;
 import org.voimala.jarzkachess.gamelogic.pieces.King;
@@ -10,6 +8,8 @@ import org.voimala.jarzkachess.gamelogic.pieces.PieceName;
 import org.voimala.jarzkachess.gamelogic.players.Player;
 import org.voimala.jarzkachess.gamelogic.players.PlayerStateIdle;
 import org.voimala.jarzkachess.gamelogic.players.PlayerStateName;
+
+import java.util.List;
 
 public class GameSessionStatePlay extends GameSessionState {
     private String lastGameboardHash = "";

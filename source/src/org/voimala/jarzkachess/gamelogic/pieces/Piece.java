@@ -1,10 +1,5 @@
 package org.voimala.jarzkachess.gamelogic.pieces;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.voimala.jarzkachess.exceptions.ChessException;
 import org.voimala.jarzkachess.exceptions.KingNotFoundException;
 import org.voimala.jarzkachess.gamelogic.Cell;
@@ -13,6 +8,10 @@ import org.voimala.jarzkachess.gamelogic.HalfMove;
 import org.voimala.jarzkachess.gamelogic.Tile;
 import org.voimala.jarzkachess.programbody.ChessProgram;
 import org.voimala.jarzkaengine.gamelogic.GameplayObject;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * This class represents a piece in the gameboard.

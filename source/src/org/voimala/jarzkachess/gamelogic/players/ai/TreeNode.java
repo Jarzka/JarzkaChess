@@ -1,13 +1,12 @@
 package org.voimala.jarzkachess.gamelogic.players.ai;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.voimala.jarzkachess.gamelogic.Gameboard;
 import org.voimala.jarzkachess.gamelogic.HalfMove;
 import org.voimala.jarzkachess.programbody.ChessProgram;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
 
 public class TreeNode {
     private Gameboard gameboard = null;

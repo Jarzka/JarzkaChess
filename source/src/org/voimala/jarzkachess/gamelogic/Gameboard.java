@@ -1,22 +1,14 @@
 package org.voimala.jarzkachess.gamelogic;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.voimala.jarzkachess.exceptions.ChessException;
 import org.voimala.jarzkachess.exceptions.IllegalMoveException;
 import org.voimala.jarzkachess.exceptions.KingNotFoundException;
-import org.voimala.jarzkachess.gamelogic.pieces.Bishop;
-import org.voimala.jarzkachess.gamelogic.pieces.King;
-import org.voimala.jarzkachess.gamelogic.pieces.Knight;
-import org.voimala.jarzkachess.gamelogic.pieces.Pawn;
-import org.voimala.jarzkachess.gamelogic.pieces.Piece;
-import org.voimala.jarzkachess.gamelogic.pieces.PieceName;
-import org.voimala.jarzkachess.gamelogic.pieces.Queen;
-import org.voimala.jarzkachess.gamelogic.pieces.Rook;
+import org.voimala.jarzkachess.gamelogic.pieces.*;
 import org.voimala.jarzkachess.programbody.ChessProgram;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Represents a gameboard, which consists of tiles.

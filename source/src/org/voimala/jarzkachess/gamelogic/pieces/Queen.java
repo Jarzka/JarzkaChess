@@ -1,12 +1,12 @@
 package org.voimala.jarzkachess.gamelogic.pieces;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.voimala.jarzkachess.gamelogic.Cell;
 import org.voimala.jarzkachess.gamelogic.HalfMove;
 import org.voimala.jarzkachess.graphics.ChessSpriteContainer;
 import org.voimala.jarzkaengine.exceptions.SpriteNotFoundException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Queen extends Piece implements Cloneable {
 

@@ -1,18 +1,17 @@
 package org.voimala.jarzkachess.gamelogic.players.ai;
 
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.voimala.jarzkachess.exceptions.ChessException;
 import org.voimala.jarzkachess.gamelogic.Gameboard;
 import org.voimala.jarzkachess.gamelogic.HalfMove;
 import org.voimala.jarzkachess.gamelogic.pieces.Piece;
 import org.voimala.jarzkachess.gamelogic.players.Player;
 import org.voimala.jarzkachess.programbody.ChessProgram;
+
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.logging.Logger;
 
 /***
  * A simple definition of the AI:
