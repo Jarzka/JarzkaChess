@@ -7,19 +7,16 @@ public class HalfMove {
     private Cell source = null;
     private Cell target = null;
     private HalfMoveType type = HalfMoveType.REGULAR;
-    private boolean sourceAndTargetValuesAreFinal = false;
     
     public HalfMove(final Cell source, final Cell target) {
         this.source = source;
         this.target = target;
-        this.sourceAndTargetValuesAreFinal = true;
     }
     
     public HalfMove(final Cell source, final Cell target, final int playerNumber) {
         this.source = source;
         this.target = target;
         this.playerNumber = playerNumber;
-        this.sourceAndTargetValuesAreFinal = true;
     }
     
     public HalfMove(final Cell source, final Cell target, final int playerNumber, HalfMoveType type) {
@@ -27,7 +24,6 @@ public class HalfMove {
         this.target = target;
         this.playerNumber = playerNumber;
         this.type = type;
-        this.sourceAndTargetValuesAreFinal = true;
     }
     
     public HalfMove() {
@@ -35,7 +31,6 @@ public class HalfMove {
         this.target = new Cell(0, 0);
         this.playerNumber = 0;
         this.type = HalfMoveType.REGULAR;
-        this.sourceAndTargetValuesAreFinal = false;
     }
 
     public final HashMap<Cell, Cell> getMoveAsHashMap() {
@@ -92,11 +87,4 @@ public class HalfMove {
         this.type = type;
     }
 
-    public final boolean sourceAndTargetValuesAreFinal() {
-        return sourceAndTargetValuesAreFinal;
-    }
-
-    public final void setSourceAndTargetValuesAreFinal(boolean i) {
-        this.sourceAndTargetValuesAreFinal = i;
-    }
 }

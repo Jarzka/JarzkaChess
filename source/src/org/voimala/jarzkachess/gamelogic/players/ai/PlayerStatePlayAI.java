@@ -10,7 +10,7 @@ import org.voimala.jarzkachess.graphics.ChessAnimationContainer;
 public class PlayerStatePlayAI extends PlayerStatePlay {
     private AIThread aiThread = null;
     /** The AI thread will search for the best move and place it here. */
-    private HalfMove aiThreadMove = new HalfMove();
+    private HalfMove aiThreadMove = null;
 
     public PlayerStatePlayAI(final Player owner) {
         super(owner);
@@ -23,10 +23,12 @@ public class PlayerStatePlayAI extends PlayerStatePlay {
     }
     
     private void findBestMove() {
-        handleAiThread();
-        
-        if (isAnswerFound()) {
+        if (isAIAnswerFound()) {
             performTheBestMove();
+        } else {
+            if (aiThread == null) {
+                startAiThread();
+            }
         }
     }
 
@@ -36,11 +38,12 @@ public class PlayerStatePlayAI extends PlayerStatePlay {
         ChessAnimationContainer.getInstance().getAnimation("loading_icon").animate(timeDelta);
     }
 
-    private void handleAiThread() {
-        if (aiThread == null && !isAnswerFound()) {
-            this.aiThread = new AIThread(getOwnerPlayer().getGameboard(), aiThreadMove, getOwnerPlayer().getNumber(), getOwnerPlayer().getGameboard().getNumberOfPerformedMoves());
-            this.aiThread.start();
-        }
+    private void startAiThread() {
+        this.aiThread = new AIThread(getOwnerPlayer().getGameboard(),
+                getOwnerPlayer().getNumber(),
+                getOwnerPlayer().getGameboard().getNumberOfPerformedMoves(),
+                this);
+        this.aiThread.start();
     }
 
     private void performTheBestMove() {
@@ -56,7 +59,13 @@ public class PlayerStatePlayAI extends PlayerStatePlay {
         return aiThreadMove;
     }
     
-    public final boolean isAnswerFound() {
-        return aiThreadMove.sourceAndTargetValuesAreFinal();
+    public final boolean isAIAnswerFound() {
+        return aiThreadMove != null;
+    }
+
+    /** Note: Only AiThread should call this method when it has found the best move. */
+    public void setAnswer(final HalfMove answer) {
+        aiThreadMove = answer;
+        aiThread = null;
     }
 }

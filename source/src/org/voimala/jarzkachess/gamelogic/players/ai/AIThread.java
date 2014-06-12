@@ -34,25 +34,24 @@ public class AIThread extends Thread {
     private long treeDevelopmentTimeMaxInMs = 4000;
     
     private int turnNumber = 0;
+    private PlayerStatePlayAI player;
     
     private int treeDevelopmentTimes = 0; // How many times developTree added nodes to the tree.
     
-    private HalfMove answer = null;
-    
     private Logger logger = Logger.getLogger(this.getClass().getName());
-    
-    /** @param answer The place where to put the answer when we got it. It is assumed that the
-     * caller has created the object (and it is not set) and can check it's value later. */
-    public AIThread(final Gameboard gameboard, final HalfMove answer, final int playerNumber,
-            final int turnNumber) {
+
+    public AIThread(final Gameboard gameboard,
+                    final int playerNumber,
+                    final int turnNumber,
+                    PlayerStatePlayAI player) {
         super("AIThread");
         
         setPriority(Thread.MAX_PRIORITY);
-        
-        this.answer = answer;
+
         this.playerNumber = playerNumber;
         this.gameboard = gameboard;
         this.turnNumber = turnNumber;
+        this.player = player;
         
         analyseTurnNumber();
         
@@ -145,19 +144,16 @@ public class AIThread extends Thread {
     public final void run() {
         logger.info("AIThread logging started.");
         HalfMove answer = runAI();
-        
-        this.answer.setSource(answer.getSource());
-        this.answer.setTarget(answer.getTarget());
-        this.answer.setPlayerNumber(2);
-        
+        answer.setPlayerNumber(player.getOwnerPlayer().getNumber());
+
+        player.setAnswer(answer);
+
         logger.info("Answer found from the three of" + " " + tree.getNumberOfNodes() + " " + "nodes" + ".");
 
         /* For testing purposes only
         if (logger.isLoggable(Level.ALL)) {
             printFirstMovesOfTree();
         } */
-        
-        this.answer.setSourceAndTargetValuesAreFinal(true);
     }
 
     public final HalfMove runAI() {
