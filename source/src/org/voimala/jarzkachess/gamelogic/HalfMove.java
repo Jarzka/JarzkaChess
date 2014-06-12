@@ -107,13 +107,11 @@ public class HalfMove {
     public final void setType(HalfMoveType type) {
         this.type = type;
     }
-    
-    /** Returns true if the source and target has been set to their final values. */
+
     public final boolean sourceAndTargetValuesAreFinal() {
         return sourceAndTargetValuesAreFinal;
     }
     
-    /** Are the source and the target set to their final values? */
     public final void setSourceAndTargetValuesAreFinal(boolean i) {
         this.sourceAndTargetValuesAreFinal = i;
     }
