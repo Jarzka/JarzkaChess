@@ -16,7 +16,7 @@ import java.util.logging.Level;
 /** This singleton represents the core body of the entire application. */
 public class ChessProgram extends GameProgram {
     protected static ChessProgram instanceOfThis = null;
-    
+
     // Global constants
     protected int tileSizeInPixels = 128;
     /** 
@@ -24,7 +24,7 @@ public class ChessProgram extends GameProgram {
      * If set to 0.5, the program renders all tiles and objects in the half of the actual size.
      * */
     protected double gameplayGraphicsSize = 1;
-    public static final int LOG_LEVEL = Level.OFF;
+    public static final Level LOG_LEVEL = Level.OFF;
     
     private ChessProgram() {
         super("JarzkaChess");
