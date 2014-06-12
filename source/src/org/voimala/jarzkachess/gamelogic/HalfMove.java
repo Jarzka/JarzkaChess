@@ -68,22 +68,6 @@ public class HalfMove {
         return target;
     }
     
-    public final void setSourceRow(final int row) {
-        source.setRow(row);
-    }
-    
-    public final void setSourceColumn(final int column) {
-        source.setColumn(column);
-    }
-    
-    public final void setTargetRow(final int row) {
-        target.setRow(row);
-    }
-    
-    public final void setTargetColumn(final int column) {
-        target.setColumn(column);
-    }
-    
     public final void setSource(final Cell cell) {
         source = cell;
     }
