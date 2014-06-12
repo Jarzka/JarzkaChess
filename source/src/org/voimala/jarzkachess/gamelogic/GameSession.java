@@ -84,7 +84,7 @@ public class GameSession {
 
     /** Resets the turn manager to the first turn. */
     private void resetTurnManager() {
-        turnManager.setCurrentTurn(1);
+        turnManager.reset();
         
     }
 

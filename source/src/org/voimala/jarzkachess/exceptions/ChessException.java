@@ -5,4 +5,5 @@ public class ChessException extends RuntimeException {
     public ChessException(final String message) {
         super(message);
     }
+
 }
