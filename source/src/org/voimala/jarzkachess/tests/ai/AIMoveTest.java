@@ -16,6 +16,8 @@ import java.util.logging.Logger;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+// TODO These tests don't work atm.
+
 public class AIMoveTest {
     private Logger logger = Logger.getLogger(this.getClass().getName());
     
