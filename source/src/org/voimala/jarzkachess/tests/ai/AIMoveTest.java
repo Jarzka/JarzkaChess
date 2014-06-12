@@ -10,7 +10,6 @@ import org.voimala.jarzkachess.gamelogic.players.ai.AIThread;
 import org.voimala.jarzkachess.programbody.ChessProgram;
 
 import java.io.IOException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static org.junit.Assert.assertEquals;
@@ -53,7 +52,7 @@ public class AIMoveTest {
         
         /* Wait for the answer (unfortunately the loop does not break without doing anything in the loop
          * for some reason). */
-        while (!answer.isSet()) { logger.info("Waiting for the answer..."); }
+        while (!answer.sourceAndTargetValuesAreFinal()) { logger.info("Waiting for the answer..."); }
         
         assertEquals(answer.getSourceRow(), 5);
         assertEquals(answer.getSourceColumn(), 5);
@@ -119,7 +118,7 @@ public class AIMoveTest {
         
         /* Wait for the answer (unfortunately the loop does not break without doing anything in the loop
          * for some reason). */
-        while (!answer.isSet()) { logger.info("Waitign for the answer..."); }
+        while (!answer.sourceAndTargetValuesAreFinal()) { logger.info("Waitign for the answer..."); }
         
         assertTrue(true); // Test passed
     }
@@ -147,7 +146,7 @@ public class AIMoveTest {
         
         /* Wait for the answer (unfortunately the loop does not break without doing anything in the loop
          * for some reason). */
-        while (!answer.isSet()) { logger.info("Waitign for the answer..."); }
+        while (!answer.sourceAndTargetValuesAreFinal()) { logger.info("Waitign for the answer..."); }
         
         logAnswer(answer);
 

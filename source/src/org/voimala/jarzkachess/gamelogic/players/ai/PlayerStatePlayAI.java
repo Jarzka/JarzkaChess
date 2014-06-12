@@ -57,6 +57,6 @@ public class PlayerStatePlayAI extends PlayerStatePlay {
     }
     
     public final boolean isAnswerFound() {
-        return aiThreadMove.isSet();
+        return aiThreadMove.sourceAndTargetValuesAreFinal();
     }
 }

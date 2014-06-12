@@ -7,22 +7,19 @@ public class HalfMove {
     private Cell source = null;
     private Cell target = null;
     private HalfMoveType type = HalfMoveType.HALF_MOVE_TYPE_REGULAR;
-    /** The source or target has been set to the final values.
-     * This is true if the caller creates the object using one of the parameter-enabled
-     * constructors, otherwise this is false and the value has to be set manually. */
-    private boolean isSet;
+    private boolean sourceAndTargetValuesAreFinal = false;
     
     public HalfMove(final Cell source, final Cell target) {
         this.source = source;
         this.target = target;
-        this.isSet = true;
+        this.sourceAndTargetValuesAreFinal = true;
     }
     
     public HalfMove(final Cell source, final Cell target, final int playerNumber) {
         this.source = source;
         this.target = target;
         this.playerNumber = playerNumber;
-        this.isSet = true;
+        this.sourceAndTargetValuesAreFinal = true;
     }
     
     public HalfMove(final Cell source, final Cell target, final int playerNumber, HalfMoveType type) {
@@ -30,7 +27,7 @@ public class HalfMove {
         this.target = target;
         this.playerNumber = playerNumber;
         this.type = type;
-        this.isSet = true;
+        this.sourceAndTargetValuesAreFinal = true;
     }
     
     public HalfMove() {
@@ -38,7 +35,7 @@ public class HalfMove {
         this.target = new Cell(0, 0);
         this.playerNumber = 0;
         this.type = HalfMoveType.HALF_MOVE_TYPE_REGULAR;
-        this.isSet = false;
+        this.sourceAndTargetValuesAreFinal = false;
     }
 
     public final HashMap<Cell, Cell> getMoveAsHashMap() {
@@ -112,12 +109,12 @@ public class HalfMove {
     }
     
     /** Returns true if the source and target has been set to their final values. */
-    public final boolean isSet() {
-        return isSet;
+    public final boolean sourceAndTargetValuesAreFinal() {
+        return sourceAndTargetValuesAreFinal;
     }
     
     /** Are the source and the target set to their final values? */
-    public final void setSet(boolean i) {
-        this.isSet = i;
+    public final void setSourceAndTargetValuesAreFinal(boolean i) {
+        this.sourceAndTargetValuesAreFinal = i;
     }
 }

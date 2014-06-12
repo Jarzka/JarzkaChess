@@ -157,7 +157,7 @@ public class AIThread extends Thread {
             printFirstMovesOfTree();
         } */
         
-        this.answer.setSet(true);
+        this.answer.setSourceAndTargetValuesAreFinal(true);
     }
 
     public final HalfMove runAI() {
