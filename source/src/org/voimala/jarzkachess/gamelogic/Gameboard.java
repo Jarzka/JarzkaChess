@@ -16,6 +16,7 @@ import org.voimala.jarzkachess.gamelogic.pieces.Piece;
 import org.voimala.jarzkachess.gamelogic.pieces.PieceName;
 import org.voimala.jarzkachess.gamelogic.pieces.Queen;
 import org.voimala.jarzkachess.gamelogic.pieces.Rook;
+import org.voimala.jarzkachess.programbody.ChessProgram;
 
 /**
  * Represents a gameboard, which consists of tiles.
@@ -53,7 +54,7 @@ public class Gameboard implements Cloneable {
     }
     
     private void setupLogger() {
-        logger.setLevel(Level.OFF);
+        logger.setLevel(ChessProgram.LOG_LEVEL);
     }
 
     public final GameSession getOwnerGameSession() {

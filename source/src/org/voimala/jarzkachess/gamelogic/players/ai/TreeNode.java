@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import org.voimala.jarzkachess.gamelogic.Gameboard;
 import org.voimala.jarzkachess.gamelogic.HalfMove;
+import org.voimala.jarzkachess.programbody.ChessProgram;
 
 public class TreeNode {
     private Gameboard gameboard = null;
@@ -48,7 +49,7 @@ public class TreeNode {
     }
     
     private void setupLogger() {
-        logger.setLevel(Level.OFF);
+        logger.setLevel(ChessProgram.LOG_LEVEL);
     }
     
     private void setLevelInTree() {

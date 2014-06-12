@@ -11,6 +11,7 @@ import org.voimala.jarzkachess.gamelogic.Cell;
 import org.voimala.jarzkachess.gamelogic.Gameboard;
 import org.voimala.jarzkachess.gamelogic.HalfMove;
 import org.voimala.jarzkachess.gamelogic.Tile;
+import org.voimala.jarzkachess.programbody.ChessProgram;
 import org.voimala.jarzkaengine.gamelogic.GameplayObject;
 
 /**
@@ -39,7 +40,7 @@ public abstract class Piece extends GameplayObject implements Cloneable {
     }
     
     private void setupLogger() {
-        logger.setLevel(Level.OFF);
+        logger.setLevel(ChessProgram.LOG_LEVEL);
     }
 
     /** When the Piece is cloned, it has the same ownerTile as the source. */

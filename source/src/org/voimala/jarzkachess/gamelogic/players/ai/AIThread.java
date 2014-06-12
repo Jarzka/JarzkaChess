@@ -12,6 +12,7 @@ import org.voimala.jarzkachess.gamelogic.Gameboard;
 import org.voimala.jarzkachess.gamelogic.HalfMove;
 import org.voimala.jarzkachess.gamelogic.pieces.Piece;
 import org.voimala.jarzkachess.gamelogic.players.Player;
+import org.voimala.jarzkachess.programbody.ChessProgram;
 
 /***
  * A simple definition of the AI:
@@ -68,7 +69,7 @@ public class AIThread extends Thread {
     }
 
     private void setupLogger() {
-        logger.setLevel(Level.OFF);
+        logger.setLevel(ChessProgram.LOG_LEVEL);
     }
     
     private void printFirstMovesOfTree() {

@@ -1,5 +1,7 @@
 package org.voimala.jarzkachess.gamelogic.players.ai;
 
+import org.voimala.jarzkachess.programbody.ChessProgram;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -14,7 +16,7 @@ public class Tree {
     }
     
     private void setupLogger() {
-        logger.setLevel(Level.OFF);
+        logger.setLevel(ChessProgram.LOG_LEVEL);
     }
 
     public final ArrayList<TreeNode> getTree() {

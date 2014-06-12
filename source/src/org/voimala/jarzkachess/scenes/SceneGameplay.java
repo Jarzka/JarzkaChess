@@ -44,7 +44,7 @@ public class SceneGameplay extends Scene {
     }
     
     private void setupLogger() {
-        logger.setLevel(Level.OFF);
+        logger.setLevel(ChessProgram.LOG_LEVEL);
     }
 
     private void logEvaluationPoints() {

@@ -7,6 +7,7 @@ import org.voimala.jarzkachess.gamelogic.Gameboard;
 import org.voimala.jarzkachess.gamelogic.HalfMove;
 import org.voimala.jarzkachess.gamelogic.pieces.*;
 import org.voimala.jarzkachess.gamelogic.players.ai.AIThread;
+import org.voimala.jarzkachess.programbody.ChessProgram;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -20,7 +21,7 @@ public class AIMoveTest {
     
     @Before
     public final void setUp() throws IOException {
-        logger.setLevel(Level.OFF);
+        logger.setLevel(ChessProgram.LOG_LEVEL);
     }
     
     public final void logAnswer(HalfMove answer) {

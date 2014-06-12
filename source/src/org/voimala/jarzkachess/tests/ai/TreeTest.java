@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.voimala.jarzkachess.gamelogic.players.ai.Tree;
 import org.voimala.jarzkachess.gamelogic.players.ai.TreeNode;
+import org.voimala.jarzkachess.programbody.ChessProgram;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -16,7 +17,7 @@ public class TreeTest {
     
     @Before
     public final void setUp() throws IOException {
-        logger.setLevel(Level.OFF);
+        logger.setLevel(ChessProgram.LOG_LEVEL);
     }
     
     @Test
