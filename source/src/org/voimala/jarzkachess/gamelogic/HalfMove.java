@@ -6,7 +6,7 @@ public class HalfMove {
     private int playerNumber = 0; /** Player who makes this move. */
     private Cell source = null;
     private Cell target = null;
-    private HalfMoveType type = HalfMoveType.HALF_MOVE_TYPE_REGULAR;
+    private HalfMoveType type = HalfMoveType.REGULAR;
     private boolean sourceAndTargetValuesAreFinal = false;
     
     public HalfMove(final Cell source, final Cell target) {
@@ -34,7 +34,7 @@ public class HalfMove {
         this.source = new Cell(0, 0);
         this.target = new Cell(0, 0);
         this.playerNumber = 0;
-        this.type = HalfMoveType.HALF_MOVE_TYPE_REGULAR;
+        this.type = HalfMoveType.REGULAR;
         this.sourceAndTargetValuesAreFinal = false;
     }
 
@@ -111,7 +111,7 @@ public class HalfMove {
     public final boolean sourceAndTargetValuesAreFinal() {
         return sourceAndTargetValuesAreFinal;
     }
-    
+
     public final void setSourceAndTargetValuesAreFinal(boolean i) {
         this.sourceAndTargetValuesAreFinal = i;
     }

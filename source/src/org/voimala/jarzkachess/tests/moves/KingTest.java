@@ -478,7 +478,7 @@ public class KingTest {
     private int countCastlingMoves(King king) {
         int castlingMovesCount = 0;
         for (HalfMove move : king.findPossibleMoves(true)) {
-            if (move.getType() == HalfMoveType.HALF_MOVE_TYPE_CASTLING) {
+            if (move.getType() == HalfMoveType.SPECIAL_CASTLING) {
                 castlingMovesCount++;
             }
         }

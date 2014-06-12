@@ -113,7 +113,7 @@ public class King extends Piece implements Cloneable {
                 getPosition(),
                 new Cell(getOwnerTile().getRow(), rooksColumn),
                 getOwnerPlayerNumber(),
-                HalfMoveType.HALF_MOVE_TYPE_CASTLING);
+                HalfMoveType.SPECIAL_CASTLING);
         moves.add(castlingMove);
         
         return moves;
