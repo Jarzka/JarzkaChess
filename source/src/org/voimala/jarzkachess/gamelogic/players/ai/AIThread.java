@@ -64,7 +64,7 @@ public class AIThread extends Thread {
         if (turnNumber < 10) {
             treeDevelopmentTimeMaxInMs = 1000;
         } else {
-            treeDevelopmentTimeMaxInMs = 2000;
+            treeDevelopmentTimeMaxInMs = 4000;
         }
     }
 

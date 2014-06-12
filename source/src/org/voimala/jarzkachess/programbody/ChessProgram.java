@@ -24,7 +24,7 @@ public class ChessProgram extends GameProgram {
      * If set to 0.5, the program renders all tiles and objects in the half of the actual size.
      * */
     protected double gameplayGraphicsSize = 1;
-    public static final Level LOG_LEVEL = Level.OFF;
+    public static final Level LOG_LEVEL = Level.ALL;
     
     private ChessProgram() {
         super("JarzkaChess");
@@ -45,8 +45,8 @@ public class ChessProgram extends GameProgram {
         getMainCanvas().addMouseListener(ChessMouseListener.getInstance());
         getMainCanvas().addMouseMotionListener(ChessMouseMotionListener.getInstance());
 
-        setGraphicsSize75();
         getMainWindow().setSize(tileSizeInPixels * 8, tileSizeInPixels * 8);
+        setGraphicsSize75();
     }
     
     public final void setGraphicsSize75() {
