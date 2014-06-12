@@ -11,6 +11,7 @@ import org.voimala.jarzkaengine.programbody.GameProgram;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.util.logging.Level;
 
 /** This singleton represents the core body of the entire application. */
 public class ChessProgram extends GameProgram {
@@ -23,6 +24,7 @@ public class ChessProgram extends GameProgram {
      * If set to 0.5, the program renders all tiles and objects in the half of the actual size.
      * */
     protected double gameplayGraphicsSize = 1;
+    public static final int LOG_LEVEL = Level.OFF;
     
     private ChessProgram() {
         super("JarzkaChess");
