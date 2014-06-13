@@ -23,10 +23,10 @@ public class Bishop extends Piece implements Cloneable {
     protected final List<HalfMove> findPossibleRegularMoves() {
         ArrayList<HalfMove> moves = new ArrayList<>();
         
-        moves.addAll(findPossibleRegularMoves(Direction.DIRECTION_DOWN_LEFT));
-        moves.addAll(findPossibleRegularMoves(Direction.DIRECTION_DOWN_RIGHT));
-        moves.addAll(findPossibleRegularMoves(Direction.DIRECTION_UP_RIGHT));
-        moves.addAll(findPossibleRegularMoves(Direction.DIRECTION_UP_LEFT));
+        moves.addAll(findPossibleRegularMoves(Direction.DOWN_LEFT));
+        moves.addAll(findPossibleRegularMoves(Direction.DOWN_RIGHT));
+        moves.addAll(findPossibleRegularMoves(Direction.UP_RIGHT));
+        moves.addAll(findPossibleRegularMoves(Direction.UP_LEFT));
 
         return moves;
     }
@@ -34,10 +34,10 @@ public class Bishop extends Piece implements Cloneable {
     protected final List<HalfMove> findPossibleAttackMoves() {
         ArrayList<HalfMove> moves = new ArrayList<>();
         
-        moves.addAll(findPossibleAttackMoves(Direction.DIRECTION_UP_LEFT));
-        moves.addAll(findPossibleAttackMoves(Direction.DIRECTION_UP_RIGHT));
-        moves.addAll(findPossibleAttackMoves(Direction.DIRECTION_DOWN_LEFT));
-        moves.addAll(findPossibleAttackMoves(Direction.DIRECTION_DOWN_RIGHT));
+        moves.addAll(findPossibleAttackMoves(Direction.UP_LEFT));
+        moves.addAll(findPossibleAttackMoves(Direction.UP_RIGHT));
+        moves.addAll(findPossibleAttackMoves(Direction.DOWN_LEFT));
+        moves.addAll(findPossibleAttackMoves(Direction.DOWN_RIGHT));
 
         return moves;
     }
@@ -49,10 +49,10 @@ public class Bishop extends Piece implements Cloneable {
     }
 
     private List<HalfMove> findPossibleRegularMoves(final Direction direction) {
-        if (direction != Direction.DIRECTION_DOWN_LEFT
-                && direction != Direction.DIRECTION_DOWN_RIGHT
-                && direction != Direction.DIRECTION_UP_LEFT
-                && direction != Direction.DIRECTION_UP_RIGHT) {
+        if (direction != Direction.DOWN_LEFT
+                && direction != Direction.DOWN_RIGHT
+                && direction != Direction.UP_LEFT
+                && direction != Direction.UP_RIGHT) {
             throw new ChessException("Direction should be down left, down right, up left or up right.");
         }
         
@@ -78,10 +78,10 @@ public class Bishop extends Piece implements Cloneable {
     }
     
     private List<HalfMove> findPossibleAttackMoves(final Direction direction) {
-        if (direction != Direction.DIRECTION_DOWN_LEFT
-                && direction != Direction.DIRECTION_DOWN_RIGHT
-                && direction != Direction.DIRECTION_UP_LEFT
-                && direction != Direction.DIRECTION_UP_RIGHT) {
+        if (direction != Direction.DOWN_LEFT
+                && direction != Direction.DOWN_RIGHT
+                && direction != Direction.UP_LEFT
+                && direction != Direction.UP_RIGHT) {
             throw new ChessException("Direction should be down left, down right, up left or up right.");
         }
         

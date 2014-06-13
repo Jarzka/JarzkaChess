@@ -276,28 +276,28 @@ public abstract class Piece extends GameplayObject implements Cloneable {
     protected Cell nextCellFromSource(final Direction direction, final int i) {
         Cell cell = null;
         switch (direction) {
-        case DIRECTION_DOWN_LEFT:
+        case DOWN_LEFT:
             cell = new Cell(getRow() + i, getColumn() - i);
             break;
-        case DIRECTION_DOWN_RIGHT:
+        case DOWN_RIGHT:
             cell = new Cell(getRow() + i, getColumn() + i);
             break;
-        case DIRECTION_UP_LEFT:
+        case UP_LEFT:
             cell = new Cell(getRow() - i, getColumn() - i);
             break;
-        case DIRECTION_UP_RIGHT:
+        case UP_RIGHT:
             cell = new Cell(getRow() - i , getColumn() + i);
             break;
-        case DIRECTION_LEFT:
+        case LEFT:
             cell = new Cell(getRow(), getColumn() - i);
             break;
-        case DIRECTION_UP:
+        case UP:
             cell = new Cell(getRow() - i, getColumn());
             break;
-        case DIRECTION_RIGHT:
+        case RIGHT:
             cell = new Cell(getRow(), getColumn() + i);
             break;
-        case DIRECTION_DOWN:
+        case DOWN:
             cell = new Cell(getRow() + i , getColumn());
             break;
         }

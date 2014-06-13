@@ -231,24 +231,24 @@ public class King extends Piece implements Cloneable {
      * Checks the row, the column, diagonal directions, and possible pawn and knight attacks. */
     public final boolean isInCheck() {
         // If any of the following checks returns true, the king is in check
-        return checkCheckPossibleBishopAndQueenAttacks(Direction.DIRECTION_DOWN_LEFT)
-                || checkCheckPossibleBishopAndQueenAttacks(Direction.DIRECTION_DOWN_RIGHT)
-                || checkCheckPossibleBishopAndQueenAttacks(Direction.DIRECTION_UP_LEFT)
-                || checkCheckPossibleBishopAndQueenAttacks(Direction.DIRECTION_UP_RIGHT)
-                || checkCheckPossibleRookAndQueenAttacks(Direction.DIRECTION_UP)
-                || checkCheckPossibleRookAndQueenAttacks(Direction.DIRECTION_DOWN)
-                || checkCheckPossibleRookAndQueenAttacks(Direction.DIRECTION_LEFT)
-                || checkCheckPossibleRookAndQueenAttacks(Direction.DIRECTION_RIGHT)
+        return checkCheckPossibleBishopAndQueenAttacks(Direction.DOWN_LEFT)
+                || checkCheckPossibleBishopAndQueenAttacks(Direction.DOWN_RIGHT)
+                || checkCheckPossibleBishopAndQueenAttacks(Direction.UP_LEFT)
+                || checkCheckPossibleBishopAndQueenAttacks(Direction.UP_RIGHT)
+                || checkCheckPossibleRookAndQueenAttacks(Direction.UP)
+                || checkCheckPossibleRookAndQueenAttacks(Direction.DOWN)
+                || checkCheckPossibleRookAndQueenAttacks(Direction.LEFT)
+                || checkCheckPossibleRookAndQueenAttacks(Direction.RIGHT)
                 || checkCheckPossiblePawnAttacks()
                 || checkCheckPossibleKnightAttacks()
                 || checkCheckPossibleKingAttack();
     }
     
     private boolean checkCheckPossibleRookAndQueenAttacks(Direction direction) {
-        if (direction != Direction.DIRECTION_DOWN
-                && direction != Direction.DIRECTION_UP
-                && direction != Direction.DIRECTION_LEFT
-                && direction != Direction.DIRECTION_RIGHT) {
+        if (direction != Direction.DOWN
+                && direction != Direction.UP
+                && direction != Direction.LEFT
+                && direction != Direction.RIGHT) {
             throw new ChessException("Direction should be down, up, left or right.");
         }
         
@@ -278,10 +278,10 @@ public class King extends Piece implements Cloneable {
     }
     
     private boolean checkCheckPossibleBishopAndQueenAttacks(Direction direction) {
-        if (direction != Direction.DIRECTION_DOWN_LEFT
-                && direction != Direction.DIRECTION_DOWN_RIGHT
-                && direction != Direction.DIRECTION_UP_LEFT
-                && direction != Direction.DIRECTION_UP_RIGHT) {
+        if (direction != Direction.DOWN_LEFT
+                && direction != Direction.DOWN_RIGHT
+                && direction != Direction.UP_LEFT
+                && direction != Direction.UP_RIGHT) {
             throw new ChessException("Direction should be down left, down right, up left or up right.");
         }
         

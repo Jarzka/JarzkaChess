@@ -41,14 +41,14 @@ public class Queen extends Piece implements Cloneable {
     protected final List<HalfMove> findPossibleRegularMoves() {
         ArrayList<HalfMove> moves = new ArrayList<>();
         
-        moves.addAll(findPossibleRegularMoves(Direction.DIRECTION_UP));
-        moves.addAll(findPossibleRegularMoves(Direction.DIRECTION_RIGHT));
-        moves.addAll(findPossibleRegularMoves(Direction.DIRECTION_DOWN));
-        moves.addAll(findPossibleRegularMoves(Direction.DIRECTION_LEFT));
-        moves.addAll(findPossibleRegularMoves(Direction.DIRECTION_DOWN_LEFT));
-        moves.addAll(findPossibleRegularMoves(Direction.DIRECTION_DOWN_RIGHT));
-        moves.addAll(findPossibleRegularMoves(Direction.DIRECTION_UP_RIGHT));
-        moves.addAll(findPossibleRegularMoves(Direction.DIRECTION_UP_LEFT));
+        moves.addAll(findPossibleRegularMoves(Direction.UP));
+        moves.addAll(findPossibleRegularMoves(Direction.RIGHT));
+        moves.addAll(findPossibleRegularMoves(Direction.DOWN));
+        moves.addAll(findPossibleRegularMoves(Direction.LEFT));
+        moves.addAll(findPossibleRegularMoves(Direction.DOWN_LEFT));
+        moves.addAll(findPossibleRegularMoves(Direction.DOWN_RIGHT));
+        moves.addAll(findPossibleRegularMoves(Direction.UP_RIGHT));
+        moves.addAll(findPossibleRegularMoves(Direction.UP_LEFT));
 
         return moves;
     }
@@ -56,14 +56,14 @@ public class Queen extends Piece implements Cloneable {
     protected final List<HalfMove> findPossibleAttackMoves() {
         ArrayList<HalfMove> moves = new ArrayList<>();
         
-        moves.addAll(findPossibleAttackMoves(Direction.DIRECTION_UP));
-        moves.addAll(findPossibleAttackMoves(Direction.DIRECTION_RIGHT));
-        moves.addAll(findPossibleAttackMoves(Direction.DIRECTION_DOWN));
-        moves.addAll(findPossibleAttackMoves(Direction.DIRECTION_LEFT));
-        moves.addAll(findPossibleAttackMoves(Direction.DIRECTION_UP_LEFT));
-        moves.addAll(findPossibleAttackMoves(Direction.DIRECTION_UP_RIGHT));
-        moves.addAll(findPossibleAttackMoves(Direction.DIRECTION_DOWN_LEFT));
-        moves.addAll(findPossibleAttackMoves(Direction.DIRECTION_DOWN_RIGHT));
+        moves.addAll(findPossibleAttackMoves(Direction.UP));
+        moves.addAll(findPossibleAttackMoves(Direction.RIGHT));
+        moves.addAll(findPossibleAttackMoves(Direction.DOWN));
+        moves.addAll(findPossibleAttackMoves(Direction.LEFT));
+        moves.addAll(findPossibleAttackMoves(Direction.UP_LEFT));
+        moves.addAll(findPossibleAttackMoves(Direction.UP_RIGHT));
+        moves.addAll(findPossibleAttackMoves(Direction.DOWN_LEFT));
+        moves.addAll(findPossibleAttackMoves(Direction.DOWN_RIGHT));
 
         return moves;
     }

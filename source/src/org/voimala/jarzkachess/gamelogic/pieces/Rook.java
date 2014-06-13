@@ -23,10 +23,10 @@ public class Rook extends Piece implements Cloneable {
     protected final List<HalfMove> findPossibleRegularMoves() {
         ArrayList<HalfMove> moves = new ArrayList<>();
 
-        moves.addAll(findPossibleRegularMoves(Direction.DIRECTION_UP));
-        moves.addAll(findPossibleRegularMoves(Direction.DIRECTION_RIGHT));
-        moves.addAll(findPossibleRegularMoves(Direction.DIRECTION_DOWN));
-        moves.addAll(findPossibleRegularMoves(Direction.DIRECTION_LEFT));
+        moves.addAll(findPossibleRegularMoves(Direction.UP));
+        moves.addAll(findPossibleRegularMoves(Direction.RIGHT));
+        moves.addAll(findPossibleRegularMoves(Direction.DOWN));
+        moves.addAll(findPossibleRegularMoves(Direction.LEFT));
 
         return moves;
     }
@@ -34,19 +34,19 @@ public class Rook extends Piece implements Cloneable {
     protected final List<HalfMove> findPossibleAttackMoves() {
         ArrayList<HalfMove> moves = new ArrayList<>();
         
-        moves.addAll(findPossibleAttackMoves(Direction.DIRECTION_UP));
-        moves.addAll(findPossibleAttackMoves(Direction.DIRECTION_RIGHT));
-        moves.addAll(findPossibleAttackMoves(Direction.DIRECTION_DOWN));
-        moves.addAll(findPossibleAttackMoves(Direction.DIRECTION_LEFT));
+        moves.addAll(findPossibleAttackMoves(Direction.UP));
+        moves.addAll(findPossibleAttackMoves(Direction.RIGHT));
+        moves.addAll(findPossibleAttackMoves(Direction.DOWN));
+        moves.addAll(findPossibleAttackMoves(Direction.LEFT));
 
         return moves;
     }
     
     private List<HalfMove> findPossibleRegularMoves(final Direction direction) {
-        if (direction != Direction.DIRECTION_DOWN
-                && direction != Direction.DIRECTION_UP
-                && direction != Direction.DIRECTION_LEFT
-                && direction != Direction.DIRECTION_RIGHT) {
+        if (direction != Direction.DOWN
+                && direction != Direction.UP
+                && direction != Direction.LEFT
+                && direction != Direction.RIGHT) {
             throw new ChessException("Direction should be down, up, left or right.");
         }
         
@@ -72,10 +72,10 @@ public class Rook extends Piece implements Cloneable {
     }
     
     private List<HalfMove> findPossibleAttackMoves(final Direction direction) {
-        if (direction != Direction.DIRECTION_DOWN
-                && direction != Direction.DIRECTION_UP
-                && direction != Direction.DIRECTION_LEFT
-                && direction != Direction.DIRECTION_RIGHT) {
+        if (direction != Direction.DOWN
+                && direction != Direction.UP
+                && direction != Direction.LEFT
+                && direction != Direction.RIGHT) {
             throw new ChessException("Direction should be down, up, left or right.");
         }
         
