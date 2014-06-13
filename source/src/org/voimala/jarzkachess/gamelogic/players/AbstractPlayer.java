@@ -5,12 +5,12 @@ import org.voimala.jarzkachess.gamelogic.Cell;
 import org.voimala.jarzkachess.gamelogic.Gameboard;
 import org.voimala.jarzkachess.gamelogic.pieces.Piece;
 
-public abstract class Player {
+public abstract class AbstractPlayer {
     private int number = 0; /** 1 = White, 2 = Black. */
     private Gameboard gameboard;
     private AbstractPlayerState stateCurrent = new PlayerStateIdle(this);
 
-    public Player(final int playerNumber, final Gameboard gameboard) {
+    public AbstractPlayer(final int playerNumber, final Gameboard gameboard) {
         this.setNumber(playerNumber);
         this.setGameboard(gameboard);
     }

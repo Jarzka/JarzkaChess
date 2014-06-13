@@ -5,7 +5,7 @@ import org.voimala.jarzkachess.exceptions.KingNotFoundException;
 import org.voimala.jarzkachess.gamelogic.pieces.King;
 import org.voimala.jarzkachess.gamelogic.pieces.Piece;
 import org.voimala.jarzkachess.gamelogic.pieces.PieceName;
-import org.voimala.jarzkachess.gamelogic.players.Player;
+import org.voimala.jarzkachess.gamelogic.players.AbstractPlayer;
 import org.voimala.jarzkachess.gamelogic.players.PlayerStateIdle;
 import org.voimala.jarzkachess.gamelogic.players.PlayerStateName;
 
@@ -82,8 +82,8 @@ public class GameSessionStatePlay extends GameSessionState {
         return true;
     }
     
-    private Player getCurrentlyPlayingPlayer() {
-        for (Player player : getOwnerGameSession().getPlayers()) {
+    private AbstractPlayer getCurrentlyPlayingPlayer() {
+        for (AbstractPlayer player : getOwnerGameSession().getPlayers()) {
             if (player.getNumber() == getOwnerGameSession().getTurnManager().getTurn()) {
                     return player;
             }
@@ -95,7 +95,7 @@ public class GameSessionStatePlay extends GameSessionState {
     /** Finds the current player and lets him/her play. */
     private void updatePlayers() {
         
-        for (Player player : getOwnerGameSession().getPlayers()) {
+        for (AbstractPlayer player : getOwnerGameSession().getPlayers()) {
             if (player.getNumber() == getOwnerGameSession().getTurnManager().getTurn()) {
                 if (player.getStateName() == PlayerStateName.IDLE) {
                     player.changeStateToPlay();
@@ -115,7 +115,7 @@ public class GameSessionStatePlay extends GameSessionState {
 
     /** If one player is in the final state, we can change a turn. */
     private void updateTurn() {
-        for (Player player : getOwnerGameSession().getPlayers()) {
+        for (AbstractPlayer player : getOwnerGameSession().getPlayers()) {
             if (player.getStateName() == PlayerStateName.FINAL) {
                 player.changeState(new PlayerStateIdle(player));
                 getOwnerGameSession().getTurnManager().nextTurn();

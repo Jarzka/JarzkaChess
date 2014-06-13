@@ -2,7 +2,7 @@ package org.voimala.jarzkachess.gamelogic.players;
 
 public abstract class PlayerStatePlay extends AbstractPlayerState {
 
-    public PlayerStatePlay(final Player owner) {
+    public PlayerStatePlay(final AbstractPlayer owner) {
         super(owner);
     }
 

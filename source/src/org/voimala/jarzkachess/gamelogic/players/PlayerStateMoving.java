@@ -11,7 +11,7 @@ public class PlayerStateMoving extends AbstractPlayerState {
     /**
      * @param pieceMoving The piece that the player is currently moving
      */
-    public PlayerStateMoving(final Player owner, final Piece pieceMoving) {
+    public PlayerStateMoving(final AbstractPlayer owner, final Piece pieceMoving) {
         super(owner);
         this.pieceMoving = pieceMoving;
     }

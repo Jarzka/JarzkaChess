@@ -6,7 +6,8 @@ import org.voimala.jarzkachess.gamelogic.pieces.Piece;
 import org.voimala.jarzkachess.inputdevices.ChessMouse;
 
 public class PlayerStatePlayHuman extends PlayerStatePlay {
-    public PlayerStatePlayHuman(final Player owner) {
+
+    public PlayerStatePlayHuman(final AbstractPlayer owner) {
         super(owner);
     }
     
@@ -55,4 +56,5 @@ public class PlayerStatePlayHuman extends PlayerStatePlay {
         
         return true;
     }
+
 }

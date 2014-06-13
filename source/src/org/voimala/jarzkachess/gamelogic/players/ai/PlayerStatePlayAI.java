@@ -3,7 +3,7 @@ package org.voimala.jarzkachess.gamelogic.players.ai;
 import org.voimala.jarzkachess.gamelogic.Cell;
 import org.voimala.jarzkachess.gamelogic.Move;
 import org.voimala.jarzkachess.gamelogic.pieces.Piece;
-import org.voimala.jarzkachess.gamelogic.players.Player;
+import org.voimala.jarzkachess.gamelogic.players.AbstractPlayer;
 import org.voimala.jarzkachess.gamelogic.players.PlayerStatePlay;
 import org.voimala.jarzkachess.graphics.ChessAnimationContainer;
 
@@ -12,7 +12,7 @@ public class PlayerStatePlayAI extends PlayerStatePlay {
     /** The AI thread will search for the best move and place it here. */
     private Move aiThreadMove = null;
 
-    public PlayerStatePlayAI(final Player owner) {
+    public PlayerStatePlayAI(final AbstractPlayer owner) {
         super(owner);
     }
     

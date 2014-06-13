@@ -5,8 +5,8 @@ import org.voimala.jarzkachess.gamelogic.GameSessionStateName;
 import org.voimala.jarzkachess.gamelogic.Tile;
 import org.voimala.jarzkachess.gamelogic.pieces.Piece;
 import org.voimala.jarzkachess.gamelogic.pieces.PieceStateName;
+import org.voimala.jarzkachess.gamelogic.players.AbstractPlayer;
 import org.voimala.jarzkachess.gamelogic.players.HumanPlayerLocal;
-import org.voimala.jarzkachess.gamelogic.players.Player;
 import org.voimala.jarzkachess.gamelogic.players.PlayerStateName;
 import org.voimala.jarzkachess.gamelogic.players.ai.AIPlayerLocal;
 import org.voimala.jarzkachess.graphics.ChessAnimationContainer;
@@ -181,7 +181,7 @@ public class SceneGameplay extends Scene {
 
     private void drawLoadingIcon() {
         // Draw this if there is an AI player in the game and it is in the state play
-        for (Player player : gameSession.getPlayers()) {
+        for (AbstractPlayer player : gameSession.getPlayers()) {
             if (!player.isHuman() && player.getStateName() == PlayerStateName.PLAY) {
                 Sprite sprite = ChessAnimationContainer.getInstance().getAnimation("loading_icon").getCurrentSprite();
                 sprite.draw(ownerCanvas.getBufferStrategy().getDrawGraphics(), new PositionPoint(

@@ -4,7 +4,7 @@ import org.voimala.jarzkachess.exceptions.ChessException;
 import org.voimala.jarzkachess.gamelogic.Gameboard;
 import org.voimala.jarzkachess.gamelogic.Move;
 import org.voimala.jarzkachess.gamelogic.pieces.Piece;
-import org.voimala.jarzkachess.gamelogic.players.Player;
+import org.voimala.jarzkachess.gamelogic.players.AbstractPlayer;
 import org.voimala.jarzkachess.programbody.ChessProgram;
 
 import java.text.NumberFormat;
@@ -206,7 +206,7 @@ public class AIThread extends Thread {
         logger.info("Current player's possible moves found.");
         
         // For every own move that we just found, find the opponent's possible counter-moves
-        int opponentNumber = Player.findOpponentForPlayer(playerNumber);
+        int opponentNumber = AbstractPlayer.findOpponentForPlayer(playerNumber);
         for (TreeNode ownMove : ownMoves) {
             logger.info("Finding opponent's possible counter-moves against our own move.");
             ArrayList<TreeNode> opponentMoves = (ArrayList<TreeNode>) findPossibleMovesForPlayer(ownMove, opponentNumber);

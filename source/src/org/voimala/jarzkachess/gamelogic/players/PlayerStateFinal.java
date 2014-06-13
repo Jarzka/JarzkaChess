@@ -9,7 +9,7 @@ public class PlayerStateFinal extends AbstractPlayerState {
     /**
      * @param pieceMoved The piece that the player just moved
      */
-    public PlayerStateFinal(final Player owner, final Piece pieceMoved) {
+    public PlayerStateFinal(final AbstractPlayer owner, final Piece pieceMoved) {
         super(owner);
         this.pieceMoved = pieceMoved;
     }
