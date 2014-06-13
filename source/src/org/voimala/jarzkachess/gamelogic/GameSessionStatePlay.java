@@ -96,7 +96,7 @@ public class GameSessionStatePlay extends GameSessionState {
         
         for (Player player : getOwnerGameSession().getPlayers()) {
             if (player.getNumber() == getOwnerGameSession().getTurnManager().getTurn()) {
-                if (player.getStateName() == PlayerStateName.PLAYER_STATE_IDLE) {
+                if (player.getStateName() == PlayerStateName.IDLE) {
                     player.changeStateToPlay();
                 }
                 
@@ -115,7 +115,7 @@ public class GameSessionStatePlay extends GameSessionState {
     /** If one player is in the final state, we can change a turn. */
     private void updateTurn() {
         for (Player player : getOwnerGameSession().getPlayers()) {
-            if (player.getStateName() == PlayerStateName.PLAYER_STATE_FINAL) {
+            if (player.getStateName() == PlayerStateName.FINAL) {
                 player.changeState(new PlayerStateIdle(player));
                 getOwnerGameSession().getTurnManager().nextTurn();
                 break;

@@ -8,6 +8,6 @@ public abstract class PlayerStatePlay extends PlayerState {
 
     @Override
     public final PlayerStateName getStateName() {
-        return PlayerStateName.PLAYER_STATE_PLAY;
+        return PlayerStateName.PLAY;
     }
 }

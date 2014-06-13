@@ -20,6 +20,6 @@ public class PlayerStateFinal extends PlayerState {
 
     @Override
     public final PlayerStateName getStateName() {
-        return PlayerStateName.PLAYER_STATE_FINAL;
+        return PlayerStateName.FINAL;
     }
 }

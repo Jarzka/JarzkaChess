@@ -22,7 +22,6 @@ import org.voimala.jarzkaengine.windows.mainwindow.ExtendedCanvas;
 
 import java.awt.*;
 import java.text.NumberFormat;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SceneGameplay extends Scene {
@@ -183,7 +182,7 @@ public class SceneGameplay extends Scene {
     private void drawLoadingIcon() {
         // Draw this if there is an AI player in the game and it is in the state play
         for (Player player : gameSession.getPlayers()) {
-            if (!player.isHuman() && player.getStateName() == PlayerStateName.PLAYER_STATE_PLAY) { 
+            if (!player.isHuman() && player.getStateName() == PlayerStateName.PLAY) {
                 Sprite sprite = ChessAnimationContainer.getInstance().getAnimation("loading_icon").getCurrentSprite();
                 sprite.draw(ownerCanvas.getBufferStrategy().getDrawGraphics(), new PositionPoint(
                         ownerCanvas.getWidth() / 2 - sprite.getWidth() / 2,

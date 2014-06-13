@@ -27,7 +27,7 @@ public class PlayerStateMoving extends PlayerState {
 
     @Override
     public final PlayerStateName getStateName() {
-        return PlayerStateName.PLAYER_STATE_MOVING;
+        return PlayerStateName.MOVING;
     }
 
 }

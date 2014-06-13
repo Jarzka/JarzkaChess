@@ -14,7 +14,7 @@ public class PlayerStateIdle extends PlayerState {
 
     @Override
     public final PlayerStateName getStateName() {
-        return PlayerStateName.PLAYER_STATE_IDLE;
+        return PlayerStateName.IDLE;
     }
 
 }
