@@ -101,7 +101,6 @@ public class AIThread extends Thread {
                 output += printEvaluationPoints(ownMove, "    " + "    ");
                 output += "\n";
                 output += "\n";
-
             }
         }
         
@@ -149,10 +148,7 @@ public class AIThread extends Thread {
 
         logger.info("Answer found from the three of" + " " + tree.getNumberOfNodes() + " " + "nodes" + ".");
 
-        /* For testing purposes only
-        if (logger.isLoggable(Level.ALL)) {
-            printFirstMovesOfTree();
-        } */
+        printFirstMovesOfTree();
     }
 
     public final Move runAI() {

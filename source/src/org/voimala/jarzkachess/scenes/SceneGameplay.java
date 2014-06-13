@@ -147,7 +147,7 @@ public class SceneGameplay extends Scene {
         for (Piece piece : gameSession.getGameboard().getPieces()) {
             try {
                 // The piece is moving, calculate it's position
-                if (piece.getStateName() == PieceStateName.PIECE_STATE_MOVE) {
+                if (piece.getStateName() == PieceStateName.MOVING) {
                     /**
                      * The position depends on the movement's progress
                      * Formula for calculating the position in the X axis:

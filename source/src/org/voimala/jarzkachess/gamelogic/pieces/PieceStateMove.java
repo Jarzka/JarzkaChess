@@ -36,7 +36,7 @@ public class PieceStateMove extends AbstractPieceState {
 
     @Override
     public final PieceStateName getStateName() {
-        return PieceStateName.PIECE_STATE_MOVE;
+        return PieceStateName.MOVING;
     }
     
     @Override

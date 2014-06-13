@@ -40,7 +40,6 @@ public class PlayerStatePlayAI extends PlayerStatePlay {
 
     private void startAiThread() {
         this.aiThread = new AIThread(getOwnerPlayer().getGameboard(),
-                getOwnerPlayer().getNumber(),
                 getOwnerPlayer().getGameboard().getNumberOfPerformedMoves(),
                 this);
         this.aiThread.start();
