@@ -95,7 +95,7 @@ public abstract class Piece extends GameplayObject implements Cloneable {
     }
     
     public final void changeState(final PieceState newState) {
-        if (newState.getStateName() == PieceStateName.PIECE_STATE_IDLE) {
+        if (newState.getStateName() == PieceStateName.IDLE) {
             target = null;
         }
         
@@ -103,7 +103,7 @@ public abstract class Piece extends GameplayObject implements Cloneable {
     }
     
     public final void moveAnimated(final Cell target) {
-        if (stateCurrent.getStateName() == PieceStateName.PIECE_STATE_IDLE) {
+        if (stateCurrent.getStateName() == PieceStateName.IDLE) {
             changeState(new PieceStateMove(this, ownerTile.getPosition(), target));
             this.target = target;
         }

@@ -13,6 +13,6 @@ public class PieceStateIdle extends PieceState {
 
     @Override
     public final PieceStateName getStateName() {
-        return PieceStateName.PIECE_STATE_IDLE;
+        return PieceStateName.IDLE;
     }
 }

@@ -19,7 +19,7 @@ public class PlayerStateMoving extends AbstractPlayerState {
     @Override
     public final void updateState() {
         // Change state to final if the move is completed
-        if (pieceMoving.getStateName() == PieceStateName.PIECE_STATE_FINAL) {
+        if (pieceMoving.getStateName() == PieceStateName.MOVED) {
             getOwnerPlayer().changeState(new PlayerStateFinal(getOwnerPlayer(), pieceMoving));
             pieceMoving.changeState(new PieceStateIdle(pieceMoving));
         }

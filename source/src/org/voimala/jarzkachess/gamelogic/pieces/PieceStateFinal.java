@@ -13,6 +13,6 @@ public class PieceStateFinal extends PieceState {
 
     @Override
     public final PieceStateName getStateName() {
-        return PieceStateName.PIECE_STATE_FINAL;
+        return PieceStateName.MOVED;
     }
 }
