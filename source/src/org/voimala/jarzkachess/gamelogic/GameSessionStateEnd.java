@@ -13,7 +13,7 @@ public class GameSessionStateEnd extends GameSessionState {
 
     @Override
     public final GameSessionStateName getStateName() {
-        return GameSessionStateName.GAME_SESSION_STATE_NAME_END;
+        return GameSessionStateName.GAME_OVER;
     }
 
 }

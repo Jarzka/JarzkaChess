@@ -69,7 +69,7 @@ public class GameSession {
 
     /** Can be set only if the gamesession is in the end state. */
     public final void setWinner(final int winner) {
-        if (stateCurrent.getStateName() == GameSessionStateName.GAME_SESSION_STATE_NAME_END) {
+        if (stateCurrent.getStateName() == GameSessionStateName.GAME_OVER) {
             this.winner = winner;
         }
     }

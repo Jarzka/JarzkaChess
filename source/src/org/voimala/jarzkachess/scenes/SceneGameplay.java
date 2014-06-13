@@ -193,7 +193,7 @@ public class SceneGameplay extends Scene {
     }
 
     private boolean drawEndStateText() {
-        if (gameSession.getStateName() != GameSessionStateName.GAME_SESSION_STATE_NAME_END) {
+        if (gameSession.getStateName() != GameSessionStateName.GAME_OVER) {
             return false;
         }
        
