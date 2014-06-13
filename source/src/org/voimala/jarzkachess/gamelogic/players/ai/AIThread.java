@@ -2,7 +2,7 @@ package org.voimala.jarzkachess.gamelogic.players.ai;
 
 import org.voimala.jarzkachess.exceptions.ChessException;
 import org.voimala.jarzkachess.gamelogic.Gameboard;
-import org.voimala.jarzkachess.gamelogic.HalfMove;
+import org.voimala.jarzkachess.gamelogic.Move;
 import org.voimala.jarzkachess.gamelogic.pieces.Piece;
 import org.voimala.jarzkachess.gamelogic.players.Player;
 import org.voimala.jarzkachess.programbody.ChessProgram;
@@ -142,7 +142,7 @@ public class AIThread extends Thread {
     @Override
     public final void run() {
         logger.info("AIThread logging started.");
-        HalfMove answer = runAI();
+        Move answer = runAI();
         answer.setPlayerNumber(player.getOwnerPlayer().getNumber());
 
         player.setAnswer(answer);
@@ -155,7 +155,7 @@ public class AIThread extends Thread {
         } */
     }
 
-    public final HalfMove runAI() {
+    public final Move runAI() {
         timestampAIBegin = System.currentTimeMillis();
         
         constructTree();
@@ -241,7 +241,7 @@ public class AIThread extends Thread {
         // Find every piece owned by this player
         for (Piece piece : parentNode.getGameboard().findPiecesOwnedByPlayer(playerNumber)) { 
              // Find every possible move for this piece
-            for (HalfMove move : piece.findPossibleMoves(true)) {
+            for (Move move : piece.findPossibleMoves(true)) {
                 // Clone the gameboard and perform the move
                 Gameboard newGameboard = parentNode.getGameboard().clone();
                 newGameboard.movePieceImmediately(move);
@@ -391,7 +391,7 @@ public class AIThread extends Thread {
      * node that we have found in the tree. The best node represents a position
      * that we want to achieve.
      */
-    public HalfMove createMoveTowardsNode(TreeNode node) {
+    public Move createMoveTowardsNode(TreeNode node) {
         if (node == tree.getFirstTopNode()) {
             throw new ChessException("The node can not be the top node.");
         }

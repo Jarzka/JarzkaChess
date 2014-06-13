@@ -3,7 +3,7 @@ package org.voimala.jarzkachess.tests.moves;
 import org.junit.Before;
 import org.junit.Test;
 import org.voimala.jarzkachess.gamelogic.Gameboard;
-import org.voimala.jarzkachess.gamelogic.HalfMove;
+import org.voimala.jarzkachess.gamelogic.Move;
 import org.voimala.jarzkachess.gamelogic.pieces.King;
 import org.voimala.jarzkachess.gamelogic.pieces.Pawn;
 
@@ -34,7 +34,7 @@ public class PawnTest {
 
         assertEquals(pawn.findPossibleMoves(false).size(), 2);
         
-        for (HalfMove move : pawn.findPossibleMoves(false)) {
+        for (Move move : pawn.findPossibleMoves(false)) {
             assertTrue(move.getTargetRow() < pawn.getOwnerTile().getRow());
             assertTrue(move.getTargetColumn() == pawn.getOwnerTile().getColumn());
         }
@@ -57,7 +57,7 @@ public class PawnTest {
 
         assertEquals(pawn.findPossibleMoves(false).size(), 2);
         
-        for (HalfMove move : pawn.findPossibleMoves(false)) {
+        for (Move move : pawn.findPossibleMoves(false)) {
             assertTrue(move.getTargetRow() > pawn.getOwnerTile().getRow());
             assertTrue(move.getTargetColumn() == pawn.getOwnerTile().getColumn());
         }
@@ -204,7 +204,7 @@ public class PawnTest {
         
         assertEquals(pawn.findPossibleMoves(false).size(), 1);
         
-        for (HalfMove move : pawn.findPossibleMoves(false)) {
+        for (Move move : pawn.findPossibleMoves(false)) {
             assertTrue(move.getTargetRow() < pawn.getOwnerTile().getRow());
             assertTrue(move.getTargetColumn() == pawn.getOwnerTile().getColumn());
         }

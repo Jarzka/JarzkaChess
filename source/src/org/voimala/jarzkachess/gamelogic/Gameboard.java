@@ -204,7 +204,7 @@ public class Gameboard implements Cloneable {
      * 
      * If the target tile has an enemy piece, it will be killed
      */
-    public final void movePieceImmediately(final HalfMove move) {
+    public final void movePieceImmediately(final Move move) {
         Tile tileSource = getTileAtPosition(move.getSource());
         Tile tileTarget = getTileAtPosition(move.getTarget());
         
@@ -265,7 +265,7 @@ public class Gameboard implements Cloneable {
     public final void movePieceImmediately(final Piece piece, final Cell target) {
         Cell source = new Cell(piece.getPosition().getRow(),
                 piece.getPosition().getColumn());
-        HalfMove move = new HalfMove(source, target);
+        Move move = new Move(source, target);
         movePieceImmediately(move);
     }
     
@@ -563,7 +563,7 @@ public class Gameboard implements Cloneable {
         double centerControlPoint = 0.15;
         
         for (Piece piece : getPieces()) {
-            for (HalfMove move : piece.findPossibleMoves(true)) {
+            for (Move move : piece.findPossibleMoves(true)) {
                 if (move.getTarget().isLocatedInCenter()) {
                     double controlValue = centerControlPoint;
                     if (piece.getOwnerPlayerNumber() == 2) {

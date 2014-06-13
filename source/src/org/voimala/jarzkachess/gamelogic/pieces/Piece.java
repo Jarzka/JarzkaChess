@@ -4,7 +4,7 @@ import org.voimala.jarzkachess.exceptions.ChessException;
 import org.voimala.jarzkachess.exceptions.KingNotFoundException;
 import org.voimala.jarzkachess.gamelogic.Cell;
 import org.voimala.jarzkachess.gamelogic.Gameboard;
-import org.voimala.jarzkachess.gamelogic.HalfMove;
+import org.voimala.jarzkachess.gamelogic.Move;
 import org.voimala.jarzkachess.gamelogic.Tile;
 import org.voimala.jarzkachess.programbody.ChessProgram;
 import org.voimala.jarzkaengine.gamelogic.GameplayObject;
@@ -51,7 +51,7 @@ public abstract class Piece extends GameplayObject implements Cloneable {
         return ownerTile.getOwnerGameboard();
     }
     
-    protected final void removeMovesThatWouldLeftKingInCheck(List<HalfMove> moves) {
+    protected final void removeMovesThatWouldLeftKingInCheck(List<Move> moves) {
         for (int i = 0; i < moves.size(); i++) {
             // Clone the current gameboard and perform the move.
             Gameboard gameboardClone = getOwnerGameboard().clone();
@@ -118,7 +118,7 @@ public abstract class Piece extends GameplayObject implements Cloneable {
     }
     
     public final void moveImmediately(final Cell target) {
-        getOwnerGameboard().movePieceImmediately(new HalfMove(new Cell(getRow(), getColumn()), target));
+        getOwnerGameboard().movePieceImmediately(new Move(new Cell(getRow(), getColumn()), target));
     }
     
     public final int getOwnerPlayerNumber() {
@@ -170,11 +170,11 @@ public abstract class Piece extends GameplayObject implements Cloneable {
      * the piece's team's king in check
      * */
     public final List<Piece> findPiecesThatCanBeKilledByThisPiece(final boolean includeCheck) {
-        List<HalfMove> attackMoves = findPossibleMoves(includeCheck);
+        List<Move> attackMoves = findPossibleMoves(includeCheck);
         ArrayList<Piece> piecesThatCanBeKilled = new ArrayList<>();
         
         // Lets see if there exists enemy pieces in the target cells
-        for (HalfMove move : attackMoves) {
+        for (Move move : attackMoves) {
             Piece pieceInTargetTile = getOwnerTile().getOwnerGameboard().
                     getTileAtPosition(move.getTarget()).getPiece();
             
@@ -242,8 +242,8 @@ public abstract class Piece extends GameplayObject implements Cloneable {
 
     public abstract PieceName getName();
 
-    public final List<HalfMove> findPossibleMoves(final boolean includeCheck) {
-        ArrayList<HalfMove> moves = new ArrayList<>();
+    public final List<Move> findPossibleMoves(final boolean includeCheck) {
+        ArrayList<Move> moves = new ArrayList<>();
         moves.addAll(findPossibleRegularMoves());
         moves.addAll(findPossibleAttackMoves());
         // moves.addAll(findPossibleSpecialMoves());
@@ -265,11 +265,11 @@ public abstract class Piece extends GameplayObject implements Cloneable {
     }
     
     /** Returns an empty list if there are no moves available. */
-    protected abstract List<HalfMove> findPossibleRegularMoves();
+    protected abstract List<Move> findPossibleRegularMoves();
     /** Returns an empty list if there are no moves available. */
-    protected abstract List<HalfMove> findPossibleAttackMoves();
+    protected abstract List<Move> findPossibleAttackMoves();
     /** Returns an empty list if there are no moves available. */
-    protected abstract List<HalfMove> findPossibleSpecialMoves();
+    protected abstract List<Move> findPossibleSpecialMoves();
     /** Returns a value which represents how valuable this piece is. */
     public abstract int getFightingValue();
 

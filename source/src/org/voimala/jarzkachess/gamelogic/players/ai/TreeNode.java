@@ -1,7 +1,7 @@
 package org.voimala.jarzkachess.gamelogic.players.ai;
 
 import org.voimala.jarzkachess.gamelogic.Gameboard;
-import org.voimala.jarzkachess.gamelogic.HalfMove;
+import org.voimala.jarzkachess.gamelogic.Move;
 import org.voimala.jarzkachess.programbody.ChessProgram;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ public class TreeNode {
     private TreeNode parent = null;
     private ArrayList<TreeNode> children = new ArrayList<>();
     private int lastMovePlayer = 0; /** The player who made the last move (the move which lead to this position). */
-    private HalfMove lastMove = null; /** The move which led to this state.*/
+    private Move lastMove = null; /** The move which led to this state.*/
     private int levelInTree = 0; /** The top node operates on level 1, it's children operate on level 2 etc.*/
     private double positionPoints = 0;
     private double routePoints = 0; /** The average of the position points starting from the top parent node. */
@@ -25,7 +25,7 @@ public class TreeNode {
      * @param lastMovePlayer Player number who made the last move.
      * @param lastMove The move which led to this state.
      */
-    public TreeNode(final Gameboard gameboard, final TreeNode parent, final int lastMovePlayer, final HalfMove lastMove) {
+    public TreeNode(final Gameboard gameboard, final TreeNode parent, final int lastMovePlayer, final Move lastMove) {
         this.gameboard = gameboard;
         this.parent = parent;
         this.lastMovePlayer = lastMovePlayer;
@@ -185,7 +185,7 @@ public class TreeNode {
         return node2;
     }
 
-    public final HalfMove getMove() {
+    public final Move getMove() {
         return lastMove;
     }
 

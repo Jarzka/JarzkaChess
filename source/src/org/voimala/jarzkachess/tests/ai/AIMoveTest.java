@@ -4,9 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.voimala.jarzkachess.gamelogic.Cell;
 import org.voimala.jarzkachess.gamelogic.Gameboard;
-import org.voimala.jarzkachess.gamelogic.HalfMove;
+import org.voimala.jarzkachess.gamelogic.Move;
 import org.voimala.jarzkachess.gamelogic.pieces.*;
-import org.voimala.jarzkachess.gamelogic.players.Player;
 import org.voimala.jarzkachess.gamelogic.players.ai.AIPlayerLocal;
 import org.voimala.jarzkachess.gamelogic.players.ai.AIThread;
 import org.voimala.jarzkachess.gamelogic.players.ai.PlayerStatePlayAI;
@@ -28,7 +27,7 @@ public class AIMoveTest {
         logger.setLevel(ChessProgram.LOG_LEVEL);
     }
     
-    public final void logAnswer(HalfMove answer) {
+    public final void logAnswer(Move answer) {
         logger.info("Source: " + answer.getSourceRow() + ","
                 + answer.getSourceColumn());
         logger.info("Target: " + answer.getTargetRow() + ","
@@ -144,13 +143,13 @@ public class AIMoveTest {
         Gameboard gameboard = new Gameboard();
         
         gameboard.resetGameboard();
-        gameboard.movePieceImmediately(new HalfMove(
+        gameboard.movePieceImmediately(new Move(
                 new Cell(8, 7), new Cell(6, 6)));
-        gameboard.movePieceImmediately(new HalfMove(
+        gameboard.movePieceImmediately(new Move(
                 new Cell(1, 7), new Cell(3, 6)));
-        gameboard.movePieceImmediately(new HalfMove(
+        gameboard.movePieceImmediately(new Move(
                 new Cell(8, 2), new Cell(6, 3)));
-        gameboard.movePieceImmediately(new HalfMove(
+        gameboard.movePieceImmediately(new Move(
                 new Cell(1, 2), new Cell(3, 3)));
 
         AIPlayerLocal playerAi = new AIPlayerLocal(2, gameboard);

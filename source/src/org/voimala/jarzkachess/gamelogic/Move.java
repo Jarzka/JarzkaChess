@@ -2,35 +2,35 @@ package org.voimala.jarzkachess.gamelogic;
 
 import java.util.HashMap;
 
-public class HalfMove {
+public class Move {
     private int playerNumber = 0; /** Player who makes this move. */
     private Cell source = null;
     private Cell target = null;
-    private HalfMoveType type = HalfMoveType.REGULAR;
+    private MoveType type = MoveType.REGULAR;
     
-    public HalfMove(final Cell source, final Cell target) {
+    public Move(final Cell source, final Cell target) {
         this.source = source;
         this.target = target;
     }
     
-    public HalfMove(final Cell source, final Cell target, final int playerNumber) {
+    public Move(final Cell source, final Cell target, final int playerNumber) {
         this.source = source;
         this.target = target;
         this.playerNumber = playerNumber;
     }
     
-    public HalfMove(final Cell source, final Cell target, final int playerNumber, HalfMoveType type) {
+    public Move(final Cell source, final Cell target, final int playerNumber, MoveType type) {
         this.source = source;
         this.target = target;
         this.playerNumber = playerNumber;
         this.type = type;
     }
     
-    public HalfMove() {
+    public Move() {
         this.source = new Cell(0, 0);
         this.target = new Cell(0, 0);
         this.playerNumber = 0;
-        this.type = HalfMoveType.REGULAR;
+        this.type = MoveType.REGULAR;
     }
 
     public final HashMap<Cell, Cell> getMoveAsHashMap() {
@@ -79,11 +79,11 @@ public class HalfMove {
 		this.playerNumber = playerNumber;
 	}
 
-    public final HalfMoveType getType() {
+    public final MoveType getType() {
         return type;
     }
 
-    public final void setType(HalfMoveType type) {
+    public final void setType(MoveType type) {
         this.type = type;
     }
 

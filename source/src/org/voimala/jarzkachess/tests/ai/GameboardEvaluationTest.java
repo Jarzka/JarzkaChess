@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.voimala.jarzkachess.gamelogic.Cell;
 import org.voimala.jarzkachess.gamelogic.Gameboard;
-import org.voimala.jarzkachess.gamelogic.HalfMove;
+import org.voimala.jarzkachess.gamelogic.Move;
 import org.voimala.jarzkachess.gamelogic.pieces.Bishop;
 import org.voimala.jarzkachess.gamelogic.pieces.Knight;
 import org.voimala.jarzkachess.gamelogic.pieces.Pawn;
@@ -90,9 +90,9 @@ public class GameboardEvaluationTest {
     public void testEvaluationEqual3() {
         Gameboard gameboard = new Gameboard(null);
         gameboard.resetGameboard();
-        gameboard.movePieceImmediately(new HalfMove(
+        gameboard.movePieceImmediately(new Move(
                 new Cell(8, 7), new Cell(6, 6)));
-        gameboard.movePieceImmediately(new HalfMove(
+        gameboard.movePieceImmediately(new Move(
                 new Cell(1, 7), new Cell(3, 6)));
         
         NumberFormat nf = NumberFormat.getNumberInstance();  

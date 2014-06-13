@@ -2,6 +2,7 @@ package org.voimala.jarzkachess.gamelogic.players;
 
 import org.voimala.jarzkachess.gamelogic.pieces.Piece;
 
+/* The player has just moved his/her piece. */
 public class PlayerStateFinal extends AbstractPlayerState {
     private Piece pieceMoved = null;
     
