@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  * The piece also knows it's owner tile
  */
 public abstract class Piece extends GameplayObject implements Cloneable {
-    private PieceState stateCurrent = new PieceStateIdle(this);
+    private AbstractPieceState stateCurrent = new PieceStateIdle(this);
     private Tile ownerTile = null;
     private int ownerPlayer = 0; /** Should always be 1 or 2. */
      /** The target cell where this piece is moving. May be null if the piece is idling. */
@@ -94,7 +94,7 @@ public abstract class Piece extends GameplayObject implements Cloneable {
         getOwnerTile().getOwnerGameboard().removePiece(this);
     }
     
-    public final void changeState(final PieceState newState) {
+    public final void changeState(final AbstractPieceState newState) {
         if (newState.getStateName() == PieceStateName.IDLE) {
             target = null;
         }

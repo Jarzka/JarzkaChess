@@ -1,7 +1,7 @@
 package org.voimala.jarzkachess.gamelogic.pieces;
 
 
-public class PieceStateIdle extends PieceState {
+public class PieceStateIdle extends AbstractPieceState {
     public PieceStateIdle(final Piece owner) {
         super(owner);
     }
