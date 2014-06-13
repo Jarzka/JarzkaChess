@@ -43,7 +43,7 @@ public class GameSessionStatePlay extends GameSessionState {
                 if (piece.getName() == PieceName.KING) {
                     King king = (King) piece;
                     if (king.isInCheckMate()) {
-                        getOwnerGameSession().changeState(new GameSessionStateEnd(getOwnerGameSession()));
+                        getOwnerGameSession().changeState(new GameSessionStateGameOver(getOwnerGameSession()));
                         if (king.getOwnerPlayerNumber() == 1) {
                             getOwnerGameSession().setWinner(2);
                         } else {
@@ -77,7 +77,7 @@ public class GameSessionStatePlay extends GameSessionState {
             }
         }
         
-        getOwnerGameSession().changeState(new GameSessionStateEnd(getOwnerGameSession()));
+        getOwnerGameSession().changeState(new GameSessionStateGameOver(getOwnerGameSession()));
         return true;
     }
     
