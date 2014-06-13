@@ -240,12 +240,12 @@ public class Pawn extends Piece implements Cloneable {
     
     /** Promotes the piece to Queen. */
     public final void promote() {
-        getOwnerTile().getOwnerGameboard().changePieceType(this, PieceName.PIECE_NAME_QUEEN);
+        getOwnerTile().getOwnerGameboard().changePieceType(this, PieceName.QUEEN);
     }
 
     @Override
     public final PieceName getName() {
-        return PieceName.PIECE_NAME_PAWN;
+        return PieceName.PAWN;
     }
 
     @Override

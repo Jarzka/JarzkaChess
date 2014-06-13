@@ -246,7 +246,7 @@ public class Gameboard implements Cloneable {
     /** If the piece's type is pawn and it has reached the final row,
      * promote it. */
     private boolean checkFinalRowForPawns(Piece piece) {
-        if (piece.getName() != PieceName.PIECE_NAME_PAWN) {
+        if (piece.getName() != PieceName.PAWN) {
             return false;
         }
 
@@ -316,7 +316,7 @@ public class Gameboard implements Cloneable {
         double points = 0;
         double oneMovePoint = 0.1;
 
-        for (Piece piece : findPiecesByType(PieceName.PIECE_NAME_PAWN)) {
+        for (Piece piece : findPiecesByType(PieceName.PAWN)) {
             Pawn pawn = (Pawn) piece;
             double movePoint = 0;
             if (pawn.getOwnerPlayerNumber() == 1) {
@@ -343,7 +343,7 @@ public class Gameboard implements Cloneable {
         double finalRowMinusOnePoints = 4;
         double finalRowMinusTwoPoints = 2;
         
-        for (Piece piece : findPiecesByType(PieceName.PIECE_NAME_PAWN)) {
+        for (Piece piece : findPiecesByType(PieceName.PAWN)) {
             Pawn pawn = (Pawn) piece;
             double advancedValue = 0;
             if (pawn.getOwnerPlayerNumber() == 1) {
@@ -389,7 +389,7 @@ public class Gameboard implements Cloneable {
             for (int j = 0; j < 8; j++) {
                 if (getTileAtPosition(j, i) == null) { continue; }
                 if (!getTileAtPosition(j, i).hasPiece()) { continue; }
-                if (getTileAtPosition(j, i).getPiece().getName() != PieceName.PIECE_NAME_PAWN) { continue; }
+                if (getTileAtPosition(j, i).getPiece().getName() != PieceName.PAWN) { continue; }
                 if (getTileAtPosition(j, i).getPiece().getOwnerPlayerNumber() != playerNumber) { continue; }
                 
                 numberOfPawnsInColumn++;
@@ -410,7 +410,7 @@ public class Gameboard implements Cloneable {
         double points = 0;
         double isolatedPawnPenalty = -0.5;
         
-        for (Piece pawn : findPiecesByType(PieceName.PIECE_NAME_PAWN)) {
+        for (Piece pawn : findPiecesByType(PieceName.PAWN)) {
             int numberOfOwnAdjantacedPieces = 0;
             for (int i = pawn.getRow() - 1; i <= pawn.getRow() + 1; i++) {
                 for (int j = pawn.getColumn() - 1; j <= pawn.getColumn() + 1; j++) {
@@ -442,10 +442,10 @@ public class Gameboard implements Cloneable {
         int multipleBishopsPoints = 2;
     
     
-        numberOfBishops = findPiecesByTypeAndOwnerPlayer(PieceName.PIECE_NAME_BISHOP, 1).size();
+        numberOfBishops = findPiecesByTypeAndOwnerPlayer(PieceName.BISHOP, 1).size();
         if (numberOfBishops >= 2) { points += multipleBishopsPoints; }
         
-        numberOfBishops = findPiecesByTypeAndOwnerPlayer(PieceName.PIECE_NAME_BISHOP, 2).size();
+        numberOfBishops = findPiecesByTypeAndOwnerPlayer(PieceName.BISHOP, 2).size();
         if (numberOfBishops >= 2) { points -= multipleBishopsPoints; }
         
         return points;
@@ -485,7 +485,7 @@ public class Gameboard implements Cloneable {
         double points = 0;
         double penaltyPoints = -4;
         
-        for (Piece piece : findPiecesByTypeAndOwnerPlayer(PieceName.PIECE_NAME_ROOK, playerNumber)) {
+        for (Piece piece : findPiecesByTypeAndOwnerPlayer(PieceName.ROOK, playerNumber)) {
             if (playerNumber == 1 && piece.hasMoved()) {
                 points += penaltyPoints;
             } else if (playerNumber == 2 && piece.hasMoved()) { 
@@ -493,7 +493,7 @@ public class Gameboard implements Cloneable {
             }
         }
         
-        for (Piece piece : findPiecesByTypeAndOwnerPlayer(PieceName.PIECE_NAME_QUEEN, playerNumber)) {
+        for (Piece piece : findPiecesByTypeAndOwnerPlayer(PieceName.QUEEN, playerNumber)) {
             if (playerNumber == 1 && piece.hasMoved()) {
                 points += penaltyPoints;
             } else if (playerNumber == 2 && piece.hasMoved()) { 
@@ -822,7 +822,7 @@ public class Gameboard implements Cloneable {
 
     public final King findKing(final int ownerPlayer) {
         for (Piece piece : findPiecesOwnedByPlayer(ownerPlayer)) {
-            if (piece.getName() == PieceName.PIECE_NAME_KING) {
+            if (piece.getName() == PieceName.KING) {
                 return (King) piece;
             }
         }
@@ -840,7 +840,7 @@ public class Gameboard implements Cloneable {
         int playerOwner = piece.getOwnerPlayerNumber();
         piece.die();
         
-        if (newType == PieceName.PIECE_NAME_QUEEN) {
+        if (newType == PieceName.QUEEN) {
             Queen queen = new Queen(playerOwner);
             tile.setPiece(queen);
         }

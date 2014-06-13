@@ -125,7 +125,7 @@ public class Bishop extends Piece implements Cloneable {
 
     @Override
     public final PieceName getName() {
-        return PieceName.PIECE_NAME_BISHOP;
+        return PieceName.BISHOP;
     }
 
     @Override

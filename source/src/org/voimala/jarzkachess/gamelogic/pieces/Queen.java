@@ -35,7 +35,7 @@ public class Queen extends Piece implements Cloneable {
 
     @Override
     public final PieceName getName() {
-        return PieceName.PIECE_NAME_QUEEN;
+        return PieceName.QUEEN;
     }
 
     protected final List<HalfMove> findPossibleRegularMoves() {

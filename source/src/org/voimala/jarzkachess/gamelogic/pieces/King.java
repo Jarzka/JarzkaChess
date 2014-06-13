@@ -176,7 +176,7 @@ public class King extends Piece implements Cloneable {
             throw new ChessException("Rook not found!");
         }
         
-        if (rooksTile.getPiece().getName() != PieceName.PIECE_NAME_ROOK) {
+        if (rooksTile.getPiece().getName() != PieceName.ROOK) {
             throw new ChessException("Rook not found!");
         }
         
@@ -267,7 +267,7 @@ public class King extends Piece implements Cloneable {
                 break;
             }
             
-            if (piece.getName() != PieceName.PIECE_NAME_QUEEN && piece.getName() != PieceName.PIECE_NAME_ROOK) {
+            if (piece.getName() != PieceName.QUEEN && piece.getName() != PieceName.ROOK) {
                 break;
             }
             
@@ -300,7 +300,7 @@ public class King extends Piece implements Cloneable {
                 break;
             }
             
-            if (piece.getName() != PieceName.PIECE_NAME_QUEEN && piece.getName() != PieceName.PIECE_NAME_BISHOP) {
+            if (piece.getName() != PieceName.QUEEN && piece.getName() != PieceName.BISHOP) {
                 break;
             }
             
@@ -322,7 +322,7 @@ public class King extends Piece implements Cloneable {
         if (getOwnerTile().getOwnerGameboard().getTileAtPosition(getRow() - 1, getColumn() - 1) != null) {
             Piece piece = getOwnerTile().getOwnerGameboard().getTileAtPosition(getRow() - 1, getColumn() - 1).getPiece();
             if (piece != null) {
-                if (piece.getOwnerPlayerNumber() != getOwnerPlayerNumber() && piece.getName() == PieceName.PIECE_NAME_PAWN) {
+                if (piece.getOwnerPlayerNumber() != getOwnerPlayerNumber() && piece.getName() == PieceName.PAWN) {
                         return true;
                 }
             }
@@ -331,7 +331,7 @@ public class King extends Piece implements Cloneable {
         if (getOwnerTile().getOwnerGameboard().getTileAtPosition(getRow() - 1, getColumn() + 1) != null) {
             Piece piece = getOwnerTile().getOwnerGameboard().getTileAtPosition(getRow() - 1, getColumn() + 1).getPiece();
             if (piece != null) {
-                if (piece.getOwnerPlayerNumber() != getOwnerPlayerNumber() && piece.getName() == PieceName.PIECE_NAME_PAWN) {
+                if (piece.getOwnerPlayerNumber() != getOwnerPlayerNumber() && piece.getName() == PieceName.PAWN) {
                         return true;
                 }
             }
@@ -344,7 +344,7 @@ public class King extends Piece implements Cloneable {
         if (getOwnerTile().getOwnerGameboard().getTileAtPosition(getRow() + 1, getColumn() + 1) != null) {
             Piece piece = getOwnerTile().getOwnerGameboard().getTileAtPosition(getRow() + 1, getColumn() + 1).getPiece();
             if (piece != null) {
-                if (piece.getOwnerPlayerNumber() != getOwnerPlayerNumber() && piece.getName() == PieceName.PIECE_NAME_PAWN) {
+                if (piece.getOwnerPlayerNumber() != getOwnerPlayerNumber() && piece.getName() == PieceName.PAWN) {
                         return true;
                 }
             }
@@ -353,7 +353,7 @@ public class King extends Piece implements Cloneable {
         if (getOwnerTile().getOwnerGameboard().getTileAtPosition(getRow() + 1, getColumn() - 1) != null) {
             Piece piece = getOwnerTile().getOwnerGameboard().getTileAtPosition(getRow() + 1, getColumn() - 1).getPiece();
             if (piece != null) {
-                if (piece.getOwnerPlayerNumber() != getOwnerPlayerNumber() && piece.getName() == PieceName.PIECE_NAME_PAWN) {
+                if (piece.getOwnerPlayerNumber() != getOwnerPlayerNumber() && piece.getName() == PieceName.PAWN) {
                         return true;
                 }
             }
@@ -383,7 +383,7 @@ public class King extends Piece implements Cloneable {
         }
         
         Piece piece = getOwnerTile().getAdjacentTile(rowFromSource, columnFromSource).getPiece();
-        if (piece.getName() != PieceName.PIECE_NAME_KNIGHT) {
+        if (piece.getName() != PieceName.KNIGHT) {
             return false;
         }
 
@@ -408,7 +408,7 @@ public class King extends Piece implements Cloneable {
                 }
                 
                 Piece piece = getOwnerTile().getOwnerGameboard().getTileAtPosition(i, j).getPiece();
-                if (piece.getName() != PieceName.PIECE_NAME_KING) {
+                if (piece.getName() != PieceName.KING) {
                     continue;
                 }
                 
@@ -445,7 +445,7 @@ public class King extends Piece implements Cloneable {
 
     @Override
     public final PieceName getName() {
-        return PieceName.PIECE_NAME_KING;
+        return PieceName.KING;
     }
 
     @Override

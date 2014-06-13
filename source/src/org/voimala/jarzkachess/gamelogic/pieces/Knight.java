@@ -36,7 +36,7 @@ public class Knight extends Piece implements Cloneable {
 
     @Override
     public final PieceName getName() {
-        return PieceName.PIECE_NAME_KNIGHT;
+        return PieceName.KNIGHT;
     }
 
     @Override

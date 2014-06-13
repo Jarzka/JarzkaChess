@@ -125,7 +125,7 @@ public class Rook extends Piece implements Cloneable {
 
     @Override
     public final PieceName getName() {
-        return PieceName.PIECE_NAME_ROOK;
+        return PieceName.ROOK;
     }
 
     @Override

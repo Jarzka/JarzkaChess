@@ -40,7 +40,7 @@ public class GameSessionStatePlay extends GameSessionState {
         try {
             // Find the king and check if it is in checkmate
             for (Piece piece : getOwnerGameSession().getGameboard().getPieces()) {
-                if (piece.getName() == PieceName.PIECE_NAME_KING) {
+                if (piece.getName() == PieceName.KING) {
                     King king = (King) piece;
                     if (king.isInCheckMate()) {
                         getOwnerGameSession().changeState(new GameSessionStateEnd(getOwnerGameSession()));
