@@ -26,13 +26,13 @@ import java.util.logging.Logger;
 
 public class AIThread extends Thread {
     private Tree tree = null;
-    
-    private int playerNumber = 0;
+
     private Gameboard gameboard = null;
     private long timestampAIBegin = 0;
     
     private long treeDevelopmentTimeMaxInMs = 4000;
-    
+
+    private int playerNumber;
     private int turnNumber = 0;
     private PlayerStatePlayAI player;
     
@@ -41,14 +41,13 @@ public class AIThread extends Thread {
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
     public AIThread(final Gameboard gameboard,
-                    final int playerNumber,
                     final int turnNumber,
                     PlayerStatePlayAI player) {
         super("AIThread");
         
         setPriority(Thread.MAX_PRIORITY);
 
-        this.playerNumber = playerNumber;
+        this.playerNumber = player.getOwnerPlayer().getNumber();
         this.gameboard = gameboard;
         this.turnNumber = turnNumber;
         this.player = player;
