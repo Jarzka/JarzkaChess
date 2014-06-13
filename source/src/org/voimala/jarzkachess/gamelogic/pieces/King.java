@@ -450,7 +450,7 @@ public class King extends Piece implements Cloneable {
 
     @Override
     public int getFightingValue() {
-        if (getOwnerTile().getOwnerGameboard().getCurrentGamePhase() == GamePhase.GAME_PHASE_ENDGAME) {
+        if (getOwnerTile().getOwnerGameboard().getCurrentGamePhase() == GamePhase.ENDGAME) {
             return 4;
         } else {
             return 0;

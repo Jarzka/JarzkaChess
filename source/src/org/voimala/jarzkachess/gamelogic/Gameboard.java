@@ -101,14 +101,14 @@ public class Gameboard implements Cloneable {
     }
 
     public final GamePhase getCurrentGamePhase() {
-        GamePhase gamePhase = GamePhase.GAME_PHASE_OPENING;
+        GamePhase gamePhase = GamePhase.OPENING;
         
         if (countPerformedMoves > 20) {
-            gamePhase = GamePhase.GAME_PHASE_MIDDLEGAME;
+            gamePhase = GamePhase.MIDDLEGAME;
         }
         
         if (getPieces().size() <= 10) {
-            gamePhase = GamePhase.GAME_PHASE_ENDGAME;
+            gamePhase = GamePhase.ENDGAME;
         }
         
         return gamePhase;
@@ -462,7 +462,7 @@ public class Gameboard implements Cloneable {
     private double evaluateOpeningGame() {
         double points = 0;
         
-        if (getCurrentGamePhase() == GamePhase.GAME_PHASE_OPENING) {
+        if (getCurrentGamePhase() == GamePhase.OPENING) {
             points += evaluatePenaltyFromMovingPiecesTooEarly();
         }
         
@@ -472,7 +472,7 @@ public class Gameboard implements Cloneable {
     private double evaluatePenaltyFromMovingPiecesTooEarly() {
         double points = 0;
         
-        if (getCurrentGamePhase() == GamePhase.GAME_PHASE_OPENING) {
+        if (getCurrentGamePhase() == GamePhase.OPENING) {
             points += evaluatePenaltyFromMovingPiecesTooEarlyForPlayer(1);
             points += evaluatePenaltyFromMovingPiecesTooEarlyForPlayer(2);
         }

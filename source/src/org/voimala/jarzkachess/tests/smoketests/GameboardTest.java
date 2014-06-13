@@ -122,7 +122,7 @@ public class GameboardTest {
         gameboard.insertPieceToTile(new Knight(1), 8, 7);
         gameboard.insertPieceToTile(new Rook(1), 8, 8);
 
-        assertEquals(gameboard.getCurrentGamePhase(), GamePhase.GAME_PHASE_OPENING);
+        assertEquals(gameboard.getCurrentGamePhase(), GamePhase.OPENING);
     }
     
     @Test
