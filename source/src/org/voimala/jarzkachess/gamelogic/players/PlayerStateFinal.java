@@ -2,7 +2,7 @@ package org.voimala.jarzkachess.gamelogic.players;
 
 import org.voimala.jarzkachess.gamelogic.pieces.Piece;
 
-public class PlayerStateFinal extends PlayerState {
+public class PlayerStateFinal extends AbstractPlayerState {
     private Piece pieceMoved = null;
     
     /**

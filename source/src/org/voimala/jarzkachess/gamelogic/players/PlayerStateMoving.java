@@ -5,7 +5,7 @@ import org.voimala.jarzkachess.gamelogic.pieces.PieceStateIdle;
 import org.voimala.jarzkachess.gamelogic.pieces.PieceStateName;
 
 /** The player is moving piece. */
-public class PlayerStateMoving extends PlayerState {
+public class PlayerStateMoving extends AbstractPlayerState {
     private Piece pieceMoving = null;
     
     /**

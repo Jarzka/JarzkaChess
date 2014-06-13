@@ -1,9 +1,9 @@
 package org.voimala.jarzkachess.gamelogic.players;
 
-public abstract class PlayerState {
+public abstract class AbstractPlayerState {
     private Player ownerPlayer;
     
-    public PlayerState(final Player owner) {
+    public AbstractPlayerState(final Player owner) {
         this.ownerPlayer = owner;
     }
     
