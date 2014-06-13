@@ -12,6 +12,7 @@ import org.voimala.jarzkachess.gamelogic.players.PlayerStateName;
 import java.util.List;
 
 public class GameSessionStatePlay extends GameSessionState {
+
     private String lastGameboardHash = "";
     
     public GameSessionStatePlay(final GameSession ownerGameSession) {
@@ -127,4 +128,5 @@ public class GameSessionStatePlay extends GameSessionState {
     public final GameSessionStateName getStateName() {
         return GameSessionStateName.PLAY;
     }
+
 }

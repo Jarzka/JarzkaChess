@@ -13,7 +13,7 @@ public class TileTest {
 
     @Test
     public final void testClone() {
-        Tile tileSource = new Tile(null, new Cell(1, 1), TileColor.TILE_COLOR_BLACK);
+        Tile tileSource = new Tile(null, new Cell(1, 1), TileColor.BLACK);
         tileSource.setPiece(new Pawn(1));
         
         Tile tileClone = tileSource.clone();
@@ -33,7 +33,7 @@ public class TileTest {
 
     @Test
     public final void testSetPiece() {
-        Tile tile = new Tile(null, new Cell(1, 1), TileColor.TILE_COLOR_BLACK);
+        Tile tile = new Tile(null, new Cell(1, 1), TileColor.BLACK);
         Pawn pawn = new Pawn(1);
         
         tile.setPiece(pawn);

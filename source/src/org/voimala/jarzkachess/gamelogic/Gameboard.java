@@ -118,19 +118,19 @@ public class Gameboard implements Cloneable {
     private void initializeTiles() {
         tiles = new ArrayList<>();
 
-        TileColor tileColor = TileColor.TILE_COLOR_WHITE;
+        TileColor tileColor = TileColor.WHITE;
         for (int i = 1; i <= boardSize; i++) {
-            if (tileColor == TileColor.TILE_COLOR_WHITE) {
-                tileColor = TileColor.TILE_COLOR_BLACK;
+            if (tileColor == TileColor.WHITE) {
+                tileColor = TileColor.BLACK;
             } else {
-                tileColor = TileColor.TILE_COLOR_WHITE;
+                tileColor = TileColor.WHITE;
             }
 
             for (int j = 1; j <= boardSize; j++) {
-                if (tileColor == TileColor.TILE_COLOR_WHITE) {
-                    tileColor = TileColor.TILE_COLOR_BLACK;
+                if (tileColor == TileColor.WHITE) {
+                    tileColor = TileColor.BLACK;
                 } else {
-                    tileColor = TileColor.TILE_COLOR_WHITE;
+                    tileColor = TileColor.WHITE;
                 }
                 
                 Tile tile = new Tile(this, new Cell(i, j), tileColor);

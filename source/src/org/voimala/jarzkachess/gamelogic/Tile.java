@@ -14,7 +14,7 @@ public class Tile extends GameplayObject implements Cloneable {
     private Gameboard ownerGameboard = null;
     private Piece piece = null;
     private Cell position = null; /** This tile's current position (row and column) in the gameboard. */
-    private TileColor color = TileColor.TILE_COLOR_BLACK;
+    private TileColor color = TileColor.BLACK;
     
     public Tile() {
         try {
@@ -70,7 +70,7 @@ public class Tile extends GameplayObject implements Cloneable {
     
     /** Asks the SpriteContainer to deliver the corresponding sprite. */
     public final void loadSprite() {
-        if (color == TileColor.TILE_COLOR_WHITE) {
+        if (color == TileColor.WHITE) {
             setSprite(ChessSpriteContainer.getInstance().getSprite("tile_white"));
         } else {
             setSprite(ChessSpriteContainer.getInstance().getSprite("tile_black"));
