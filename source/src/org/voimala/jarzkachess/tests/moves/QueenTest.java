@@ -11,10 +11,6 @@ import static org.junit.Assert.assertEquals;
 
 public class QueenTest {
 
-    @Before
-    public final void setUp() throws IOException {
-    }
-    
     @Test
     /* 00000000
      * 0Q000000

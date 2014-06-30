@@ -57,6 +57,6 @@ public class PawnTest {
         gameboard.insertPieceToTile(pawn, 2, 1);
         pawn.moveAnimated(new Cell(3, 1));
         
-        assertTrue(pawn.getStateName() == PieceStateName.PIECE_STATE_MOVE);
+        assertTrue(pawn.getStateName() == PieceStateName.MOVING);
     }
 }

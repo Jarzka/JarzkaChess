@@ -16,11 +16,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class KingTest {
-    @Before
-    public final void setUp() throws IOException {
-        ChessSpriteContainer.getInstance().loadAllSprites();
-    }
-    
+
     @Test
     /* 00000000
      * 00000000
