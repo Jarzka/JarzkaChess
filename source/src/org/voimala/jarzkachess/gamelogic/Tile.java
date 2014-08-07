@@ -3,8 +3,8 @@ package org.voimala.jarzkachess.gamelogic;
 import org.voimala.jarzkachess.exceptions.TilePositionNotDefinedException;
 import org.voimala.jarzkachess.gamelogic.pieces.Piece;
 import org.voimala.jarzkachess.graphics.ChessSpriteContainer;
-import org.voimala.jarzkaengine.gamelogic.GameplayObject;
 import org.voimala.jarzkaengine.exceptions.SpriteNotFoundException;
+import org.voimala.jarzkaengine.gamelogic.GameplayObject;
 
 /**
  * A Tile represents a tile in the gameboard. 
@@ -14,7 +14,7 @@ public class Tile extends GameplayObject implements Cloneable {
     private Gameboard ownerGameboard = null;
     private Piece piece = null;
     private Cell position = null; /** This tile's current position (row and column) in the gameboard. */
-    private TileColor color = TileColor.TILE_COLOR_BLACK;
+    private TileColor color = TileColor.BLACK;
     
     public Tile() {
         try {
@@ -70,7 +70,7 @@ public class Tile extends GameplayObject implements Cloneable {
     
     /** Asks the SpriteContainer to deliver the corresponding sprite. */
     public final void loadSprite() {
-        if (color == TileColor.TILE_COLOR_WHITE) {
+        if (color == TileColor.WHITE) {
             setSprite(ChessSpriteContainer.getInstance().getSprite("tile_white"));
         } else {
             setSprite(ChessSpriteContainer.getInstance().getSprite("tile_black"));

@@ -11,23 +11,12 @@ import org.voimala.jarzkaengine.programbody.GameProgram;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.util.logging.Level;
 
 /** This singleton represents the core body of the entire application. */
 public class ChessProgram extends GameProgram {
     protected static ChessProgram instanceOfThis = null;
-    
-    // Top menus
-    private JMenuBar menuBar = new JMenuBar();
-    private JMenu jMenuGame = new JMenu("Game");
-    private JMenu jMenuView = new JMenu("View");
-    // Game
-    private JMenuItem jMenuItemNew = new JMenuItem("New");
-    private JMenuItem jMenuItemQuit = new JMenuItem("Quit");
-    // View
-    private JMenuItem jMenuItem100Percent = new JMenuItem("100%");
-    private JMenuItem jMenuItem75Percent = new JMenuItem("75%");
-    private JMenuItem jMenuItem50Percent = new JMenuItem("50%");
-    
+
     // Global constants
     protected int tileSizeInPixels = 128;
     /** 
@@ -35,6 +24,7 @@ public class ChessProgram extends GameProgram {
      * If set to 0.5, the program renders all tiles and objects in the half of the actual size.
      * */
     protected double gameplayGraphicsSize = 1;
+    public static final Level LOG_LEVEL = Level.ALL;
     
     private ChessProgram() {
         super("JarzkaChess");
@@ -51,8 +41,12 @@ public class ChessProgram extends GameProgram {
     @Override
     protected void initializeMainWindow() {
         super.initializeMainWindow();
-        setGraphicsSize75();
+
+        getMainCanvas().addMouseListener(ChessMouseListener.getInstance());
+        getMainCanvas().addMouseMotionListener(ChessMouseMotionListener.getInstance());
+
         getMainWindow().setSize(tileSizeInPixels * 8, tileSizeInPixels * 8);
+        setGraphicsSize75();
     }
     
     public final void setGraphicsSize75() {
@@ -74,19 +68,6 @@ public class ChessProgram extends GameProgram {
         getMainWindow().setSize(tileSizeInPixels * 8, tileSizeInPixels * 8);
     }
     
-    @Override
-    protected void initializeListeners() {
-        super.initializeListeners();
-        getMainCanvas().addMouseListener(ChessMouseListener.getInstance());
-        getMainCanvas().addMouseMotionListener(ChessMouseMotionListener.getInstance());
-        
-        jMenuItemNew.addActionListener(ChessMenuGameNewListener.getInstance());
-        jMenuItemQuit.addActionListener(ChessMenuGameQuitListener.getInstance());
-        jMenuItem100Percent.addActionListener(ChessMenuView100Listener.getInstance());
-        jMenuItem75Percent.addActionListener(ChessMenuView75Listener.getInstance());
-        jMenuItem50Percent.addActionListener(ChessMenuView50Listener.getInstance());
-    }
-    
     /** Adds all graphic files to the SpriteContainer as Sprite objects. */
     @Override
     protected void loadGraphicFiles() throws IOException {
@@ -104,6 +85,19 @@ public class ChessProgram extends GameProgram {
     @Override
     protected void initializeMenuBar() {
         super.initializeMenuBar();
+
+        JMenuBar menuBar = new JMenuBar();
+        JMenu jMenuGame = new JMenu("Game");
+        JMenu jMenuView = new JMenu("View");
+
+        // Game
+        JMenuItem jMenuItemNew = new JMenuItem("New");
+        JMenuItem jMenuItemQuit = new JMenuItem("Quit");
+
+        // View
+        JMenuItem jMenuItem100Percent = new JMenuItem("100%");
+        JMenuItem jMenuItem75Percent = new JMenuItem("75%");
+        JMenuItem jMenuItem50Percent = new JMenuItem("50%");
         
         // Construct top menus
         menuBar.add(jMenuGame);
@@ -113,11 +107,17 @@ public class ChessProgram extends GameProgram {
         
         // Game
         jMenuGame.add(jMenuItemNew);
+        jMenuItemNew.addActionListener(ChessMenuGameNewListener.getInstance());
         jMenuGame.add(jMenuItemQuit);
+        jMenuItemQuit.addActionListener(ChessMenuGameQuitListener.getInstance());
+
         // View
         jMenuView.add(jMenuItem100Percent);
+        jMenuItem100Percent.addActionListener(ChessMenuView100Listener.getInstance());
         jMenuView.add(jMenuItem75Percent);
+        jMenuItem75Percent.addActionListener(ChessMenuView75Listener.getInstance());
         jMenuView.add(jMenuItem50Percent);
+        jMenuItem50Percent.addActionListener(ChessMenuView50Listener.getInstance());
         
         getMainWindow().setJMenuBar(menuBar);
         /* Turns out that menu bar does not show up if the main window is set to

@@ -1,18 +1,18 @@
 package org.voimala.jarzkachess.gamelogic.players.ai;
 
 import org.voimala.jarzkachess.gamelogic.Cell;
-import org.voimala.jarzkachess.gamelogic.HalfMove;
+import org.voimala.jarzkachess.gamelogic.Move;
 import org.voimala.jarzkachess.gamelogic.pieces.Piece;
-import org.voimala.jarzkachess.gamelogic.players.Player;
+import org.voimala.jarzkachess.gamelogic.players.AbstractPlayer;
 import org.voimala.jarzkachess.gamelogic.players.PlayerStatePlay;
 import org.voimala.jarzkachess.graphics.ChessAnimationContainer;
 
 public class PlayerStatePlayAI extends PlayerStatePlay {
     private AIThread aiThread = null;
     /** The AI thread will search for the best move and place it here. */
-    private HalfMove aiThreadMove = new HalfMove();
+    private Move aiThreadMove = null;
 
-    public PlayerStatePlayAI(final Player owner) {
+    public PlayerStatePlayAI(final AbstractPlayer owner) {
         super(owner);
     }
     
@@ -23,10 +23,12 @@ public class PlayerStatePlayAI extends PlayerStatePlay {
     }
     
     private void findBestMove() {
-        handleAiThread();
-        
-        if (isAnswerFound()) {
+        if (isAIAnswerFound()) {
             performTheBestMove();
+        } else {
+            if (aiThread == null) {
+                startAiThread();
+            }
         }
     }
 
@@ -36,11 +38,11 @@ public class PlayerStatePlayAI extends PlayerStatePlay {
         ChessAnimationContainer.getInstance().getAnimation("loading_icon").animate(timeDelta);
     }
 
-    private void handleAiThread() {
-        if (aiThread == null && !isAnswerFound()) {
-            this.aiThread = new AIThread(getOwnerPlayer().getGameboard(), aiThreadMove, getOwnerPlayer().getNumber(), getOwnerPlayer().getGameboard().getNumberOfPerformedMoves());
-            this.aiThread.start();
-        }
+    private void startAiThread() {
+        this.aiThread = new AIThread(getOwnerPlayer().getGameboard(),
+                getOwnerPlayer().getGameboard().getNumberOfPerformedMoves(),
+                this);
+        this.aiThread.start();
     }
 
     private void performTheBestMove() {
@@ -52,11 +54,17 @@ public class PlayerStatePlayAI extends PlayerStatePlay {
         }
     }
 
-    public final HalfMove getMove() {
+    public final Move getMove() {
         return aiThreadMove;
     }
     
-    public final boolean isAnswerFound() {
-        return aiThreadMove.isSet();
+    public final boolean isAIAnswerFound() {
+        return aiThreadMove != null;
+    }
+
+    /** Note: Only AiThread should call this method when it has found the best move. */
+    public void setAnswer(final Move answer) {
+        aiThreadMove = answer;
+        aiThread = null;
     }
 }

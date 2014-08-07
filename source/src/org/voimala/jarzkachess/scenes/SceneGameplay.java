@@ -5,8 +5,8 @@ import org.voimala.jarzkachess.gamelogic.GameSessionStateName;
 import org.voimala.jarzkachess.gamelogic.Tile;
 import org.voimala.jarzkachess.gamelogic.pieces.Piece;
 import org.voimala.jarzkachess.gamelogic.pieces.PieceStateName;
+import org.voimala.jarzkachess.gamelogic.players.AbstractPlayer;
 import org.voimala.jarzkachess.gamelogic.players.HumanPlayerLocal;
-import org.voimala.jarzkachess.gamelogic.players.Player;
 import org.voimala.jarzkachess.gamelogic.players.PlayerStateName;
 import org.voimala.jarzkachess.gamelogic.players.ai.AIPlayerLocal;
 import org.voimala.jarzkachess.graphics.ChessAnimationContainer;
@@ -22,7 +22,6 @@ import org.voimala.jarzkaengine.windows.mainwindow.ExtendedCanvas;
 
 import java.awt.*;
 import java.text.NumberFormat;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SceneGameplay extends Scene {
@@ -44,7 +43,7 @@ public class SceneGameplay extends Scene {
     }
     
     private void setupLogger() {
-        logger.setLevel(Level.OFF);
+        logger.setLevel(ChessProgram.LOG_LEVEL);
     }
 
     private void logEvaluationPoints() {
@@ -148,7 +147,7 @@ public class SceneGameplay extends Scene {
         for (Piece piece : gameSession.getGameboard().getPieces()) {
             try {
                 // The piece is moving, calculate it's position
-                if (piece.getStateName() == PieceStateName.PIECE_STATE_MOVE) {
+                if (piece.getStateName() == PieceStateName.MOVING) {
                     /**
                      * The position depends on the movement's progress
                      * Formula for calculating the position in the X axis:
@@ -182,8 +181,8 @@ public class SceneGameplay extends Scene {
 
     private void drawLoadingIcon() {
         // Draw this if there is an AI player in the game and it is in the state play
-        for (Player player : gameSession.getPlayers()) {
-            if (!player.isHuman() && player.getStateName() == PlayerStateName.PLAYER_STATE_PLAY) { 
+        for (AbstractPlayer player : gameSession.getPlayers()) {
+            if (!player.isHuman() && player.getStateName() == PlayerStateName.PLAY) {
                 Sprite sprite = ChessAnimationContainer.getInstance().getAnimation("loading_icon").getCurrentSprite();
                 sprite.draw(ownerCanvas.getBufferStrategy().getDrawGraphics(), new PositionPoint(
                         ownerCanvas.getWidth() / 2 - sprite.getWidth() / 2,
@@ -194,7 +193,7 @@ public class SceneGameplay extends Scene {
     }
 
     private boolean drawEndStateText() {
-        if (gameSession.getStateName() != GameSessionStateName.GAME_SESSION_STATE_NAME_END) {
+        if (gameSession.getStateName() != GameSessionStateName.GAME_OVER) {
             return false;
         }
        

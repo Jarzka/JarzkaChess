@@ -1,17 +1,17 @@
 package org.voimala.jarzkachess.gamelogic.pieces;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.voimala.jarzkachess.exceptions.ChessException;
 import org.voimala.jarzkachess.exceptions.KingNotFoundException;
 import org.voimala.jarzkachess.gamelogic.Cell;
 import org.voimala.jarzkachess.gamelogic.Gameboard;
-import org.voimala.jarzkachess.gamelogic.HalfMove;
+import org.voimala.jarzkachess.gamelogic.Move;
 import org.voimala.jarzkachess.gamelogic.Tile;
+import org.voimala.jarzkachess.programbody.ChessProgram;
 import org.voimala.jarzkaengine.gamelogic.GameplayObject;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * This class represents a piece in the gameboard.
@@ -19,7 +19,7 @@ import org.voimala.jarzkaengine.gamelogic.GameplayObject;
  * The piece also knows it's owner tile
  */
 public abstract class Piece extends GameplayObject implements Cloneable {
-    private PieceState stateCurrent = new PieceStateIdle(this);
+    private AbstractPieceState stateCurrent = new PieceStateIdle(this);
     private Tile ownerTile = null;
     private int ownerPlayer = 0; /** Should always be 1 or 2. */
      /** The target cell where this piece is moving. May be null if the piece is idling. */
@@ -39,7 +39,7 @@ public abstract class Piece extends GameplayObject implements Cloneable {
     }
     
     private void setupLogger() {
-        logger.setLevel(Level.OFF);
+        logger.setLevel(ChessProgram.LOG_LEVEL);
     }
 
     /** When the Piece is cloned, it has the same ownerTile as the source. */
@@ -51,7 +51,7 @@ public abstract class Piece extends GameplayObject implements Cloneable {
         return ownerTile.getOwnerGameboard();
     }
     
-    protected final void removeMovesThatWouldLeftKingInCheck(List<HalfMove> moves) {
+    protected final void removeMovesThatWouldLeftKingInCheck(List<Move> moves) {
         for (int i = 0; i < moves.size(); i++) {
             // Clone the current gameboard and perform the move.
             Gameboard gameboardClone = getOwnerGameboard().clone();
@@ -94,8 +94,8 @@ public abstract class Piece extends GameplayObject implements Cloneable {
         getOwnerTile().getOwnerGameboard().removePiece(this);
     }
     
-    public final void changeState(final PieceState newState) {
-        if (newState.getStateName() == PieceStateName.PIECE_STATE_IDLE) {
+    public final void changeState(final AbstractPieceState newState) {
+        if (newState.getStateName() == PieceStateName.IDLE) {
             target = null;
         }
         
@@ -103,7 +103,7 @@ public abstract class Piece extends GameplayObject implements Cloneable {
     }
     
     public final void moveAnimated(final Cell target) {
-        if (stateCurrent.getStateName() == PieceStateName.PIECE_STATE_IDLE) {
+        if (stateCurrent.getStateName() == PieceStateName.IDLE) {
             changeState(new PieceStateMove(this, ownerTile.getPosition(), target));
             this.target = target;
         }
@@ -118,7 +118,7 @@ public abstract class Piece extends GameplayObject implements Cloneable {
     }
     
     public final void moveImmediately(final Cell target) {
-        getOwnerGameboard().movePieceImmediately(new HalfMove(new Cell(getRow(), getColumn()), target));
+        getOwnerGameboard().movePieceImmediately(new Move(new Cell(getRow(), getColumn()), target));
     }
     
     public final int getOwnerPlayerNumber() {
@@ -170,11 +170,11 @@ public abstract class Piece extends GameplayObject implements Cloneable {
      * the piece's team's king in check
      * */
     public final List<Piece> findPiecesThatCanBeKilledByThisPiece(final boolean includeCheck) {
-        List<HalfMove> attackMoves = findPossibleMoves(includeCheck);
+        List<Move> attackMoves = findPossibleMoves(includeCheck);
         ArrayList<Piece> piecesThatCanBeKilled = new ArrayList<>();
         
         // Lets see if there exists enemy pieces in the target cells
-        for (HalfMove move : attackMoves) {
+        for (Move move : attackMoves) {
             Piece pieceInTargetTile = getOwnerTile().getOwnerGameboard().
                     getTileAtPosition(move.getTarget()).getPiece();
             
@@ -242,8 +242,8 @@ public abstract class Piece extends GameplayObject implements Cloneable {
 
     public abstract PieceName getName();
 
-    public final List<HalfMove> findPossibleMoves(final boolean includeCheck) {
-        ArrayList<HalfMove> moves = new ArrayList<>();
+    public final List<Move> findPossibleMoves(final boolean includeCheck) {
+        ArrayList<Move> moves = new ArrayList<>();
         moves.addAll(findPossibleRegularMoves());
         moves.addAll(findPossibleAttackMoves());
         // moves.addAll(findPossibleSpecialMoves());
@@ -265,39 +265,39 @@ public abstract class Piece extends GameplayObject implements Cloneable {
     }
     
     /** Returns an empty list if there are no moves available. */
-    protected abstract List<HalfMove> findPossibleRegularMoves();
+    protected abstract List<Move> findPossibleRegularMoves();
     /** Returns an empty list if there are no moves available. */
-    protected abstract List<HalfMove> findPossibleAttackMoves();
+    protected abstract List<Move> findPossibleAttackMoves();
     /** Returns an empty list if there are no moves available. */
-    protected abstract List<HalfMove> findPossibleSpecialMoves();
+    protected abstract List<Move> findPossibleSpecialMoves();
     /** Returns a value which represents how valuable this piece is. */
     public abstract int getFightingValue();
 
     protected Cell nextCellFromSource(final Direction direction, final int i) {
         Cell cell = null;
         switch (direction) {
-        case DIRECTION_DOWN_LEFT:
+        case DOWN_LEFT:
             cell = new Cell(getRow() + i, getColumn() - i);
             break;
-        case DIRECTION_DOWN_RIGHT:
+        case DOWN_RIGHT:
             cell = new Cell(getRow() + i, getColumn() + i);
             break;
-        case DIRECTION_UP_LEFT:
+        case UP_LEFT:
             cell = new Cell(getRow() - i, getColumn() - i);
             break;
-        case DIRECTION_UP_RIGHT:
+        case UP_RIGHT:
             cell = new Cell(getRow() - i , getColumn() + i);
             break;
-        case DIRECTION_LEFT:
+        case LEFT:
             cell = new Cell(getRow(), getColumn() - i);
             break;
-        case DIRECTION_UP:
+        case UP:
             cell = new Cell(getRow() - i, getColumn());
             break;
-        case DIRECTION_RIGHT:
+        case RIGHT:
             cell = new Cell(getRow(), getColumn() + i);
             break;
-        case DIRECTION_DOWN:
+        case DOWN:
             cell = new Cell(getRow() + i , getColumn());
             break;
         }

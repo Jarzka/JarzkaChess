@@ -1,17 +1,17 @@
 package org.voimala.jarzkachess.gamelogic.players.ai;
 
+import org.voimala.jarzkachess.exceptions.ChessException;
+import org.voimala.jarzkachess.gamelogic.Gameboard;
+import org.voimala.jarzkachess.gamelogic.Move;
+import org.voimala.jarzkachess.gamelogic.pieces.Piece;
+import org.voimala.jarzkachess.gamelogic.players.AbstractPlayer;
+import org.voimala.jarzkachess.programbody.ChessProgram;
+
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.voimala.jarzkachess.exceptions.ChessException;
-import org.voimala.jarzkachess.gamelogic.Gameboard;
-import org.voimala.jarzkachess.gamelogic.HalfMove;
-import org.voimala.jarzkachess.gamelogic.pieces.Piece;
-import org.voimala.jarzkachess.gamelogic.players.Player;
 
 /***
  * A simple definition of the AI:
@@ -26,33 +26,31 @@ import org.voimala.jarzkachess.gamelogic.players.Player;
 
 public class AIThread extends Thread {
     private Tree tree = null;
-    
-    private int playerNumber = 0;
+
     private Gameboard gameboard = null;
     private long timestampAIBegin = 0;
     
     private long treeDevelopmentTimeMaxInMs = 4000;
-    
+
+    private int playerNumber;
     private int turnNumber = 0;
+    private PlayerStatePlayAI player;
     
     private int treeDevelopmentTimes = 0; // How many times developTree added nodes to the tree.
     
-    private HalfMove answer = null;
-    
     private Logger logger = Logger.getLogger(this.getClass().getName());
-    
-    /** @param answer The place where to put the answer when we got it. It is assumed that the
-     * caller has created the object (and it is not set) and can check it's value later. */
-    public AIThread(final Gameboard gameboard, final HalfMove answer, final int playerNumber,
-            final int turnNumber) {
+
+    public AIThread(final Gameboard gameboard,
+                    final int turnNumber,
+                    PlayerStatePlayAI player) {
         super("AIThread");
         
         setPriority(Thread.MAX_PRIORITY);
-        
-        this.answer = answer;
-        this.playerNumber = playerNumber;
+
+        this.playerNumber = player.getOwnerPlayer().getNumber();
         this.gameboard = gameboard;
         this.turnNumber = turnNumber;
+        this.player = player;
         
         analyseTurnNumber();
         
@@ -63,12 +61,12 @@ public class AIThread extends Thread {
         if (turnNumber < 10) {
             treeDevelopmentTimeMaxInMs = 1000;
         } else {
-            treeDevelopmentTimeMaxInMs = 2000;
+            treeDevelopmentTimeMaxInMs = 4000;
         }
     }
 
     private void setupLogger() {
-        logger.setLevel(Level.OFF);
+        logger.setLevel(ChessProgram.LOG_LEVEL);
     }
     
     private void printFirstMovesOfTree() {
@@ -103,7 +101,6 @@ public class AIThread extends Thread {
                 output += printEvaluationPoints(ownMove, "    " + "    ");
                 output += "\n";
                 output += "\n";
-
             }
         }
         
@@ -144,23 +141,17 @@ public class AIThread extends Thread {
     @Override
     public final void run() {
         logger.info("AIThread logging started.");
-        HalfMove answer = runAI();
-        
-        this.answer.setSource(answer.getSource());
-        this.answer.setTarget(answer.getTarget());
-        this.answer.setPlayerNumber(2);
-        
+        Move answer = runAI();
+        answer.setPlayerNumber(player.getOwnerPlayer().getNumber());
+
+        player.setAnswer(answer);
+
         logger.info("Answer found from the three of" + " " + tree.getNumberOfNodes() + " " + "nodes" + ".");
 
-        /* For testing purposes only
-        if (logger.isLoggable(Level.ALL)) {
-            printFirstMovesOfTree();
-        } */
-        
-        this.answer.setSet(true);
+        printFirstMovesOfTree();
     }
 
-    public final HalfMove runAI() {
+    public final Move runAI() {
         timestampAIBegin = System.currentTimeMillis();
         
         constructTree();
@@ -211,7 +202,7 @@ public class AIThread extends Thread {
         logger.info("Current player's possible moves found.");
         
         // For every own move that we just found, find the opponent's possible counter-moves
-        int opponentNumber = Player.findOpponentForPlayer(playerNumber);
+        int opponentNumber = AbstractPlayer.findOpponentForPlayer(playerNumber);
         for (TreeNode ownMove : ownMoves) {
             logger.info("Finding opponent's possible counter-moves against our own move.");
             ArrayList<TreeNode> opponentMoves = (ArrayList<TreeNode>) findPossibleMovesForPlayer(ownMove, opponentNumber);
@@ -246,7 +237,7 @@ public class AIThread extends Thread {
         // Find every piece owned by this player
         for (Piece piece : parentNode.getGameboard().findPiecesOwnedByPlayer(playerNumber)) { 
              // Find every possible move for this piece
-            for (HalfMove move : piece.findPossibleMoves(true)) {
+            for (Move move : piece.findPossibleMoves(true)) {
                 // Clone the gameboard and perform the move
                 Gameboard newGameboard = parentNode.getGameboard().clone();
                 newGameboard.movePieceImmediately(move);
@@ -396,7 +387,7 @@ public class AIThread extends Thread {
      * node that we have found in the tree. The best node represents a position
      * that we want to achieve.
      */
-    public HalfMove createMoveTowardsNode(TreeNode node) {
+    public Move createMoveTowardsNode(TreeNode node) {
         if (node == tree.getFirstTopNode()) {
             throw new ChessException("The node can not be the top node.");
         }

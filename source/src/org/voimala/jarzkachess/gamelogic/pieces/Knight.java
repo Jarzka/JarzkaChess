@@ -1,13 +1,13 @@
 package org.voimala.jarzkachess.gamelogic.pieces;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.voimala.jarzkachess.gamelogic.Cell;
-import org.voimala.jarzkachess.gamelogic.HalfMove;
+import org.voimala.jarzkachess.gamelogic.Move;
 import org.voimala.jarzkachess.graphics.ChessSpriteContainer;
 import org.voimala.jarzkaengine.exceptions.SpriteNotFoundException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Knight extends Piece implements Cloneable {
     
@@ -36,12 +36,12 @@ public class Knight extends Piece implements Cloneable {
 
     @Override
     public final PieceName getName() {
-        return PieceName.PIECE_NAME_KNIGHT;
+        return PieceName.KNIGHT;
     }
 
     @Override
-    protected final List<HalfMove> findPossibleRegularMoves() {
-        ArrayList<HalfMove> moves = new ArrayList<>();
+    protected final List<Move> findPossibleRegularMoves() {
+        ArrayList<Move> moves = new ArrayList<>();
         
         moves.addAll(findPossibleRegularMove(-2, -1));
         moves.addAll(findPossibleRegularMove(-1, -2));
@@ -55,8 +55,8 @@ public class Knight extends Piece implements Cloneable {
         return moves;
     }
 
-    private List<HalfMove> findPossibleRegularMove(final int rowFromSource, final int columnFromSource) {
-        ArrayList<HalfMove> moves = new ArrayList<>();
+    private List<Move> findPossibleRegularMove(final int rowFromSource, final int columnFromSource) {
+        ArrayList<Move> moves = new ArrayList<>();
         if (getOwnerTile().getAdjacentTile(rowFromSource, columnFromSource) == null) {
             return moves;
         }
@@ -65,7 +65,7 @@ public class Knight extends Piece implements Cloneable {
             return moves;
         }
         
-        moves.add(new HalfMove(
+        moves.add(new Move(
                 new Cell(getOwnerTile().getPosition()),
                 new Cell(getOwnerTile().getRow() + rowFromSource, getOwnerTile().getColumn() + columnFromSource)));
         
@@ -73,8 +73,8 @@ public class Knight extends Piece implements Cloneable {
     }
 
     @Override
-    protected final List<HalfMove> findPossibleAttackMoves() {
-        ArrayList<HalfMove> moves = new ArrayList<>();
+    protected final List<Move> findPossibleAttackMoves() {
+        ArrayList<Move> moves = new ArrayList<>();
         
         moves.addAll(findPossibleAttackMove(-2, -1));
         moves.addAll(findPossibleAttackMove(-1, -2));
@@ -88,8 +88,8 @@ public class Knight extends Piece implements Cloneable {
         return moves;
     }
     
-    private List<HalfMove> findPossibleAttackMove(final int rowFromSource, final int columnFromSource) {
-        ArrayList<HalfMove> moves = new ArrayList<>();
+    private List<Move> findPossibleAttackMove(final int rowFromSource, final int columnFromSource) {
+        ArrayList<Move> moves = new ArrayList<>();
         if (getOwnerTile().getAdjacentTile(rowFromSource, columnFromSource) == null) {
             return moves;
         }
@@ -103,7 +103,7 @@ public class Knight extends Piece implements Cloneable {
             return moves;
         }
         
-        moves.add(new HalfMove(
+        moves.add(new Move(
                 new Cell(getOwnerTile().getPosition()),
                 new Cell(getOwnerTile().getRow() + rowFromSource, getOwnerTile().getColumn() + columnFromSource)));
         
@@ -111,7 +111,7 @@ public class Knight extends Piece implements Cloneable {
     }
 
     @Override
-    protected final List<HalfMove> findPossibleSpecialMoves() {
+    protected final List<Move> findPossibleSpecialMoves() {
         // This piece does not have any special moves
         return new ArrayList<>();
     }

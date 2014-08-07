@@ -1,13 +1,13 @@
 package org.voimala.jarzkachess.gamelogic.players;
 
-public abstract class PlayerStatePlay extends PlayerState {
+public abstract class PlayerStatePlay extends AbstractPlayerState {
 
-    public PlayerStatePlay(final Player owner) {
+    public PlayerStatePlay(final AbstractPlayer owner) {
         super(owner);
     }
 
     @Override
     public final PlayerStateName getStateName() {
-        return PlayerStateName.PLAYER_STATE_PLAY;
+        return PlayerStateName.PLAY;
     }
 }

@@ -2,7 +2,7 @@ package org.voimala.jarzkachess.gamelogic.players;
 
 import org.voimala.jarzkachess.gamelogic.Gameboard;
 
-public class HumanPlayerLocal extends Player {
+public class HumanPlayerLocal extends AbstractPlayer {
     public HumanPlayerLocal(final int playerNumber, final Gameboard gameboard) {
         super(playerNumber, gameboard);
     }

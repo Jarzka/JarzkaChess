@@ -2,7 +2,7 @@ package org.voimala.jarzkachess.gamelogic.pieces;
 
 import org.voimala.jarzkachess.gamelogic.Cell;
 
-public class PieceStateMove extends PieceState {
+public class PieceStateMove extends AbstractPieceState {
     private double moveProgressPercentage = 0;
     private Cell source = null;
     private Cell target = null;
@@ -36,7 +36,7 @@ public class PieceStateMove extends PieceState {
 
     @Override
     public final PieceStateName getStateName() {
-        return PieceStateName.PIECE_STATE_MOVE;
+        return PieceStateName.MOVING;
     }
     
     @Override

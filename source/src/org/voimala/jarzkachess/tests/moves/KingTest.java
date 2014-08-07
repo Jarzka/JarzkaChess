@@ -3,8 +3,8 @@ package org.voimala.jarzkachess.tests.moves;
 import org.junit.Before;
 import org.junit.Test;
 import org.voimala.jarzkachess.gamelogic.Gameboard;
-import org.voimala.jarzkachess.gamelogic.HalfMove;
-import org.voimala.jarzkachess.gamelogic.HalfMoveType;
+import org.voimala.jarzkachess.gamelogic.Move;
+import org.voimala.jarzkachess.gamelogic.MoveType;
 import org.voimala.jarzkachess.gamelogic.pieces.King;
 import org.voimala.jarzkachess.gamelogic.pieces.Pawn;
 import org.voimala.jarzkachess.gamelogic.pieces.Rook;
@@ -16,11 +16,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class KingTest {
-    @Before
-    public final void setUp() throws IOException {
-        ChessSpriteContainer.getInstance().loadAllSprites();
-    }
-    
+
     @Test
     /* 00000000
      * 00000000
@@ -477,8 +473,8 @@ public class KingTest {
 
     private int countCastlingMoves(King king) {
         int castlingMovesCount = 0;
-        for (HalfMove move : king.findPossibleMoves(true)) {
-            if (move.getType() == HalfMoveType.HALF_MOVE_TYPE_CASTLING) {
+        for (Move move : king.findPossibleMoves(true)) {
+            if (move.getType() == MoveType.SPECIAL_CASTLING) {
                 castlingMovesCount++;
             }
         }

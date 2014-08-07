@@ -1,17 +1,18 @@
 package org.voimala.jarzkachess.gamelogic;
 
-import java.util.List;
-
 import org.voimala.jarzkachess.exceptions.ChessException;
 import org.voimala.jarzkachess.exceptions.KingNotFoundException;
 import org.voimala.jarzkachess.gamelogic.pieces.King;
 import org.voimala.jarzkachess.gamelogic.pieces.Piece;
 import org.voimala.jarzkachess.gamelogic.pieces.PieceName;
-import org.voimala.jarzkachess.gamelogic.players.Player;
+import org.voimala.jarzkachess.gamelogic.players.AbstractPlayer;
 import org.voimala.jarzkachess.gamelogic.players.PlayerStateIdle;
 import org.voimala.jarzkachess.gamelogic.players.PlayerStateName;
 
+import java.util.List;
+
 public class GameSessionStatePlay extends GameSessionState {
+
     private String lastGameboardHash = "";
     
     public GameSessionStatePlay(final GameSession ownerGameSession) {
@@ -40,10 +41,10 @@ public class GameSessionStatePlay extends GameSessionState {
         try {
             // Find the king and check if it is in checkmate
             for (Piece piece : getOwnerGameSession().getGameboard().getPieces()) {
-                if (piece.getName() == PieceName.PIECE_NAME_KING) {
+                if (piece.getName() == PieceName.KING) {
                     King king = (King) piece;
                     if (king.isInCheckMate()) {
-                        getOwnerGameSession().changeState(new GameSessionStateEnd(getOwnerGameSession()));
+                        getOwnerGameSession().changeState(new GameSessionStateGameOver(getOwnerGameSession()));
                         if (king.getOwnerPlayerNumber() == 1) {
                             getOwnerGameSession().setWinner(2);
                         } else {
@@ -77,12 +78,12 @@ public class GameSessionStatePlay extends GameSessionState {
             }
         }
         
-        getOwnerGameSession().changeState(new GameSessionStateEnd(getOwnerGameSession()));
+        getOwnerGameSession().changeState(new GameSessionStateGameOver(getOwnerGameSession()));
         return true;
     }
     
-    private Player getCurrentlyPlayingPlayer() {
-        for (Player player : getOwnerGameSession().getPlayers()) {
+    private AbstractPlayer getCurrentlyPlayingPlayer() {
+        for (AbstractPlayer player : getOwnerGameSession().getPlayers()) {
             if (player.getNumber() == getOwnerGameSession().getTurnManager().getTurn()) {
                     return player;
             }
@@ -94,9 +95,9 @@ public class GameSessionStatePlay extends GameSessionState {
     /** Finds the current player and lets him/her play. */
     private void updatePlayers() {
         
-        for (Player player : getOwnerGameSession().getPlayers()) {
+        for (AbstractPlayer player : getOwnerGameSession().getPlayers()) {
             if (player.getNumber() == getOwnerGameSession().getTurnManager().getTurn()) {
-                if (player.getStateName() == PlayerStateName.PLAYER_STATE_IDLE) {
+                if (player.getStateName() == PlayerStateName.IDLE) {
                     player.changeStateToPlay();
                 }
                 
@@ -114,8 +115,8 @@ public class GameSessionStatePlay extends GameSessionState {
 
     /** If one player is in the final state, we can change a turn. */
     private void updateTurn() {
-        for (Player player : getOwnerGameSession().getPlayers()) {
-            if (player.getStateName() == PlayerStateName.PLAYER_STATE_FINAL) {
+        for (AbstractPlayer player : getOwnerGameSession().getPlayers()) {
+            if (player.getStateName() == PlayerStateName.FINAL) {
                 player.changeState(new PlayerStateIdle(player));
                 getOwnerGameSession().getTurnManager().nextTurn();
                 break;
@@ -125,6 +126,7 @@ public class GameSessionStatePlay extends GameSessionState {
 
     @Override
     public final GameSessionStateName getStateName() {
-        return GameSessionStateName.GAME_SESSION_STATE_NAME_PLAY;
+        return GameSessionStateName.PLAY;
     }
+
 }

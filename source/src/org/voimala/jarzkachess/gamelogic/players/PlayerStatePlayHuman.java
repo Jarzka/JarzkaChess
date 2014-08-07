@@ -1,12 +1,13 @@
 package org.voimala.jarzkachess.gamelogic.players;
 
-import org.voimala.jarzkachess.gamelogic.HalfMove;
+import org.voimala.jarzkachess.gamelogic.Move;
 import org.voimala.jarzkachess.gamelogic.Tile;
 import org.voimala.jarzkachess.gamelogic.pieces.Piece;
 import org.voimala.jarzkachess.inputdevices.ChessMouse;
 
 public class PlayerStatePlayHuman extends PlayerStatePlay {
-    public PlayerStatePlayHuman(final Player owner) {
+
+    public PlayerStatePlayHuman(final AbstractPlayer owner) {
         super(owner);
     }
     
@@ -41,7 +42,7 @@ public class PlayerStatePlayHuman extends PlayerStatePlay {
         
         for (Piece piece : getOwnerPlayer().getGameboard().findPiecesOwnedByPlayer(getOwnerPlayer().getNumber())) {
             if (piece.isSelected()) {
-                for (HalfMove move : piece.findPossibleMoves(true)) {
+                for (Move move : piece.findPossibleMoves(true)) {
                     Tile targetTile = getOwnerPlayer().getGameboard().getTileAtPosition(
                             move.getTargetRow(), move.getTargetColumn());
                     if (ChessMouse.getInstance().isOnTile(targetTile)) {
@@ -55,4 +56,5 @@ public class PlayerStatePlayHuman extends PlayerStatePlay {
         
         return true;
     }
+
 }

@@ -1,6 +1,6 @@
 package org.voimala.jarzkachess.gamelogic;
 
-import org.voimala.jarzkachess.gamelogic.players.Player;
+import org.voimala.jarzkachess.gamelogic.players.AbstractPlayer;
 import org.voimala.jarzkachess.gamelogic.players.PlayerStateIdle;
 import org.voimala.jarzkaengine.scenes.Scene;
 
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class GameSession {
     private Scene ownerScene = null;
     private Gameboard gameboard = new Gameboard(this);
-    private ArrayList<Player> players = new ArrayList<>();
+    private ArrayList<AbstractPlayer> players = new ArrayList<>();
     private TurnManager turnManager = new TurnManager();
     private GameSessionState stateCurrent = new GameSessionStatePlay(this);
     private int winner = 0; /** The player number who won this game session. */
@@ -26,11 +26,11 @@ public class GameSession {
         gameboard.resetGameboard();
     }
     
-    public final void addPlayer(Player player) {
+    public final void addPlayer(AbstractPlayer player) {
         players.add(player);
     }
     
-    public final ArrayList<Player> getPlayers() {
+    public final ArrayList<AbstractPlayer> getPlayers() {
         return players;
     }
     
@@ -69,7 +69,7 @@ public class GameSession {
 
     /** Can be set only if the gamesession is in the end state. */
     public final void setWinner(final int winner) {
-        if (stateCurrent.getStateName() == GameSessionStateName.GAME_SESSION_STATE_NAME_END) {
+        if (stateCurrent.getStateName() == GameSessionStateName.GAME_OVER) {
             this.winner = winner;
         }
     }
@@ -84,13 +84,13 @@ public class GameSession {
 
     /** Resets the turn manager to the first turn. */
     private void resetTurnManager() {
-        turnManager.setCurrentTurn(1);
+        turnManager.reset();
         
     }
 
     /** Resets all players to the idle state. */
     private void resetPlayers() {
-        for (Player player : players) {
+        for (AbstractPlayer player : players) {
             player.changeState(new PlayerStateIdle(player));
         }
     }

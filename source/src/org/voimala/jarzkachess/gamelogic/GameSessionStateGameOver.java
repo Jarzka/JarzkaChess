@@ -1,8 +1,8 @@
 package org.voimala.jarzkachess.gamelogic;
 
-public class GameSessionStateEnd extends GameSessionState {
+public class GameSessionStateGameOver extends GameSessionState {
 
-    public GameSessionStateEnd(final GameSession ownerGameSession) {
+    public GameSessionStateGameOver(final GameSession ownerGameSession) {
         super(ownerGameSession);
     }
 
@@ -13,7 +13,7 @@ public class GameSessionStateEnd extends GameSessionState {
 
     @Override
     public final GameSessionStateName getStateName() {
-        return GameSessionStateName.GAME_SESSION_STATE_NAME_END;
+        return GameSessionStateName.GAME_OVER;
     }
 
 }

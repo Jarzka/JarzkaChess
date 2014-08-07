@@ -12,10 +12,6 @@ import java.io.IOException;
 import static org.junit.Assert.assertEquals;
 
 public class RookTest {
-
-    @Before
-    public final void setUp() throws IOException {
-    }
     
     @Test
     /* 00000000

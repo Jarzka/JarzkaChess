@@ -4,12 +4,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.voimala.jarzkachess.gamelogic.Cell;
 import org.voimala.jarzkachess.gamelogic.Gameboard;
-import org.voimala.jarzkachess.gamelogic.HalfMove;
+import org.voimala.jarzkachess.gamelogic.Move;
 import org.voimala.jarzkachess.gamelogic.pieces.*;
+import org.voimala.jarzkachess.gamelogic.players.ai.AIPlayerLocal;
 import org.voimala.jarzkachess.gamelogic.players.ai.AIThread;
+import org.voimala.jarzkachess.gamelogic.players.ai.PlayerStatePlayAI;
+import org.voimala.jarzkachess.programbody.ChessProgram;
 
 import java.io.IOException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static org.junit.Assert.assertEquals;
@@ -20,16 +22,16 @@ public class AIMoveTest {
     
     @Before
     public final void setUp() throws IOException {
-        logger.setLevel(Level.OFF);
+        logger.setLevel(ChessProgram.LOG_LEVEL);
     }
     
-    public final void logAnswer(HalfMove answer) {
+    public final void logAnswer(Move answer) {
         logger.info("Source: " + answer.getSourceRow() + ","
                 + answer.getSourceColumn());
         logger.info("Target: " + answer.getTargetRow() + ","
                 + answer.getTargetColumn());
     }
-    
+
     @Test
     /* We assume that killing the pawn with the queen is the best move.
      * 00000000
@@ -41,26 +43,30 @@ public class AIMoveTest {
      * 00000000
      * 00000000
      */
-    public void testAIBestMove() {
+    public void testAIBestMove() throws InterruptedException {
         Gameboard gameboard = new Gameboard(null);
         gameboard.insertPieceToTile(new Queen(2), 5, 5);
         gameboard.insertPieceToTile(new Pawn(1), 4, 5);
-        
-        HalfMove answer = new HalfMove();
-        AIThread ai = new AIThread(gameboard, answer, 2, 50);
+
+        AIPlayerLocal playerAi = new AIPlayerLocal(2, gameboard);
+        PlayerStatePlayAI playerStatePlayAI = new PlayerStatePlayAI(playerAi);
+        AIThread ai = new AIThread(gameboard, 50, playerStatePlayAI);
         ai.start();
         
         /* Wait for the answer (unfortunately the loop does not break without doing anything in the loop
          * for some reason). */
-        while (!answer.isSet()) { logger.info("Waiting for the answer..."); }
+        while (!playerStatePlayAI.isAIAnswerFound()) {
+            logger.info("Waiting for the answer...");
+            Thread.sleep(1000);
+        }
         
-        assertEquals(answer.getSourceRow(), 5);
-        assertEquals(answer.getSourceColumn(), 5);
-        assertEquals(answer.getTargetRow(), 4);
-        assertEquals(answer.getTargetColumn(), 5);
+        assertEquals(playerStatePlayAI.getMove().getSourceRow(), 5);
+        assertEquals(playerStatePlayAI.getMove().getSourceColumn(), 5);
+        assertEquals(playerStatePlayAI.getMove().getTargetRow(), 4);
+        assertEquals(playerStatePlayAI.getMove().getTargetColumn(), 5);
     }
     
-    //@Test
+    @Test
     /* In this test we just assume that the AI finds some move
      * RNBQKB0R
      * PP00PPPP
@@ -71,7 +77,7 @@ public class AIMoveTest {
      * PPP00PPP
      * RNBQKBNR
      */
-    public void testAIFindsAnswer() {
+    public void testAIFindsAnswer() throws InterruptedException {
         Gameboard gameboard = new Gameboard();
         
         gameboard.insertPieceToTile(new Rook(2), 1, 1);
@@ -111,47 +117,56 @@ public class AIMoveTest {
         gameboard.insertPieceToTile(new Bishop(1), 8, 6);
         gameboard.insertPieceToTile(new Knight(1), 8, 7);
         gameboard.insertPieceToTile(new Rook(1), 8, 8);
-        
-        HalfMove answer = new HalfMove();
-        AIThread ai = new AIThread(gameboard, answer, 2, 30);
+
+        AIPlayerLocal playerAi = new AIPlayerLocal(2, gameboard);
+        PlayerStatePlayAI playerStatePlayAI = new PlayerStatePlayAI(playerAi);
+        AIThread ai = new AIThread(gameboard, 30, playerStatePlayAI);
         ai.start();
         
         /* Wait for the answer (unfortunately the loop does not break without doing anything in the loop
          * for some reason). */
-        while (!answer.isSet()) { logger.info("Waitign for the answer..."); }
+        while (!playerStatePlayAI.isAIAnswerFound()) {
+            logger.info("Waitign for the answer...");
+            Thread.sleep(1000);
+        }
         
         assertTrue(true); // Test passed
     }
     
-    //@Test
+    @Test
     /* Starting position + every horse has moved.
      * In this test we assume that the penalty from moving rook too early is big enough so
      * that the AI does not want to move it. */
-    public void testAIDoesNotMoveRook() {
+    public void testAIDoesNotMoveRook() throws InterruptedException {
         Gameboard gameboard = new Gameboard();
         
         gameboard.resetGameboard();
-        gameboard.movePieceImmediately(new HalfMove(
+        gameboard.movePieceImmediately(new Move(
                 new Cell(8, 7), new Cell(6, 6)));
-        gameboard.movePieceImmediately(new HalfMove(
+        gameboard.movePieceImmediately(new Move(
                 new Cell(1, 7), new Cell(3, 6)));
-        gameboard.movePieceImmediately(new HalfMove(
+        gameboard.movePieceImmediately(new Move(
                 new Cell(8, 2), new Cell(6, 3)));
-        gameboard.movePieceImmediately(new HalfMove(
+        gameboard.movePieceImmediately(new Move(
                 new Cell(1, 2), new Cell(3, 3)));
-        
-        HalfMove answer = new HalfMove();
-        AIThread ai = new AIThread(gameboard, answer, 2, 20);
+
+        AIPlayerLocal playerAi = new AIPlayerLocal(2, gameboard);
+        PlayerStatePlayAI playerStatePlayAI = new PlayerStatePlayAI(playerAi);
+        AIThread ai = new AIThread(gameboard, 20, playerStatePlayAI);
         ai.start();
         
         /* Wait for the answer (unfortunately the loop does not break without doing anything in the loop
          * for some reason). */
-        while (!answer.isSet()) { logger.info("Waitign for the answer..."); }
+        while (!playerStatePlayAI.isAIAnswerFound()) {
+            logger.info("Waitign for the answer...");
+            Thread.sleep(1000);
+        }
         
-        logAnswer(answer);
+        logAnswer(playerStatePlayAI.getMove());
 
-        assertTrue(answer.getSourceRow() != 1
-                && (answer.getSourceColumn() != 1
-                        || answer.getSourceColumn() != 8));
+        assertTrue((playerStatePlayAI.getMove().getSourceRow() != 1
+                && playerStatePlayAI.getMove().getSourceColumn() != 1)
+                && (playerStatePlayAI.getMove().getSourceRow() != 1
+                && playerStatePlayAI.getMove().getSourceColumn() != 8));
     }
 }

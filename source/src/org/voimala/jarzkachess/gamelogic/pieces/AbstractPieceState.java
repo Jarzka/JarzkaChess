@@ -1,10 +1,10 @@
 package org.voimala.jarzkachess.gamelogic.pieces;
 
 
-public abstract class PieceState {
+public abstract class AbstractPieceState {
     private Piece ownerPiece;
     
-    public PieceState(final Piece owner) {
+    public AbstractPieceState(final Piece owner) {
         this.ownerPiece = owner;
     }
     

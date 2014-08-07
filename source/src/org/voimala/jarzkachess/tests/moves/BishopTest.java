@@ -12,11 +12,6 @@ import static org.junit.Assert.assertEquals;
 
 public class BishopTest {
 
-    @Before
-    public final void setUp() throws IOException {
-        //ChessSpriteContainer.getInstance().loadAllSprites();
-    }
-    
     @Test
     /* 00000000
      * 0B000000

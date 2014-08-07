@@ -1,6 +1,7 @@
 package org.voimala.jarzkachess.gamelogic;
 
 public class TurnManager {
+
     private int turnCurrent = 1;
 
     public final int getTurn() {
@@ -16,7 +17,9 @@ public class TurnManager {
         }
     }
 
-    public final void setCurrentTurn(int turnNumber) {
-        turnCurrent = turnNumber; 
+    /** Sets the current turn number to 1. */
+    public final void reset() {
+        turnCurrent = 1;
     }
+
 }

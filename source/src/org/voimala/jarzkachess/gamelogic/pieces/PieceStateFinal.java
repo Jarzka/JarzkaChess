@@ -1,7 +1,7 @@
 package org.voimala.jarzkachess.gamelogic.pieces;
 
 /** The piece has reached it's target tile. */
-public class PieceStateFinal extends PieceState {
+public class PieceStateFinal extends AbstractPieceState {
     public PieceStateFinal(final Piece owner) {
         super(owner);
     }
@@ -13,6 +13,6 @@ public class PieceStateFinal extends PieceState {
 
     @Override
     public final PieceStateName getStateName() {
-        return PieceStateName.PIECE_STATE_FINAL;
+        return PieceStateName.MOVED;
     }
 }

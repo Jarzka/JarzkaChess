@@ -20,8 +20,8 @@ public class King extends Piece implements Cloneable {
     }
     
     @Override
-    protected final List<HalfMove> findPossibleRegularMoves() {
-        ArrayList<HalfMove> moves = new ArrayList<>();
+    protected final List<Move> findPossibleRegularMoves() {
+        ArrayList<Move> moves = new ArrayList<>();
         
         for (int row = -1; row <= 1; row++) {
             for (int column = -1; column <= 1; column++) {
@@ -31,7 +31,7 @@ public class King extends Piece implements Cloneable {
                 }
                 
                 if (!getOwnerTile().getOwnerGameboard().getTileAtPosition(possibleTarget).hasPiece()) {
-                    moves.add(new HalfMove(
+                    moves.add(new Move(
                             new Cell(getRow(), getColumn()),
                             new Cell(possibleTarget)));
                 }
@@ -42,8 +42,8 @@ public class King extends Piece implements Cloneable {
     }
 
     @Override
-    protected final List<HalfMove> findPossibleAttackMoves() {
-        ArrayList<HalfMove> moves = new ArrayList<>();
+    protected final List<Move> findPossibleAttackMoves() {
+        ArrayList<Move> moves = new ArrayList<>();
         
         for (int row = -1; row <= 1; row++) {
             for (int column = -1; column <= 1; column++) {
@@ -55,7 +55,7 @@ public class King extends Piece implements Cloneable {
                 Piece foundPiece = getOwnerTile().getOwnerGameboard().getTileAtPosition(possibleTarget).getPiece();
                 if (foundPiece != null) {
                     if (foundPiece.getOwnerPlayerNumber() != getOwnerPlayerNumber()) {
-                        moves.add(new HalfMove(
+                        moves.add(new Move(
                                 new Cell(getRow(), getColumn()),
                                 new Cell(possibleTarget)));
                     }
@@ -67,14 +67,14 @@ public class King extends Piece implements Cloneable {
     }
 
     @Override
-    protected final List<HalfMove> findPossibleSpecialMoves() {
+    protected final List<Move> findPossibleSpecialMoves() {
         /* Castling is possible, if:
          * - The king and the rook have not moved
          * - There are no pieces between the king and the rook
          * - The king's tile, the rook's tile or any tile between the two is not attackable by the enemy
          */
         
-        ArrayList<HalfMove> moves = new ArrayList<>();
+        ArrayList<Move> moves = new ArrayList<>();
 
         /* TODO Not yet implemented.
         moves.addAll(checkCastlingMoves(CastlingDirection.CASTLING_DIRECTION_LEFT));
@@ -84,8 +84,8 @@ public class King extends Piece implements Cloneable {
         return moves;
     }
 
-    private List<HalfMove> checkCastlingMoves(CastlingDirection direction) {
-        ArrayList<HalfMove> moves = new ArrayList<>();
+    private List<Move> checkCastlingMoves(CastlingDirection direction) {
+        ArrayList<Move> moves = new ArrayList<>();
         
         if (!isKingReadyForCastling()) {
             return moves;
@@ -109,11 +109,11 @@ public class King extends Piece implements Cloneable {
         }
         
         // The castling is possible, add the move
-        HalfMove castlingMove = new HalfMove(
+        Move castlingMove = new Move(
                 getPosition(),
                 new Cell(getOwnerTile().getRow(), rooksColumn),
                 getOwnerPlayerNumber(),
-                HalfMoveType.HALF_MOVE_TYPE_CASTLING);
+                MoveType.SPECIAL_CASTLING);
         moves.add(castlingMove);
         
         return moves;
@@ -127,8 +127,8 @@ public class King extends Piece implements Cloneable {
             // Are there any enemy piece that can move to this tile?
             ArrayList<Piece> opponentPieces = getOwnerTile().getOwnerGameboard().findPiecesOwnedByPlayer(findOpponentPlayerNumber());
             for (Piece opponentPiece : opponentPieces) {
-                ArrayList<HalfMove> opponentMoves = (ArrayList) opponentPiece.findPossibleMoves(false);
-                for (HalfMove opponentMove : opponentMoves) {
+                ArrayList<Move> opponentMoves = (ArrayList) opponentPiece.findPossibleMoves(false);
+                for (Move opponentMove : opponentMoves) {
                     if (opponentMove.getTarget().hasSameRowAndColumn(tile.getPosition())) {
                         return true;
                     }
@@ -176,7 +176,7 @@ public class King extends Piece implements Cloneable {
             throw new ChessException("Rook not found!");
         }
         
-        if (rooksTile.getPiece().getName() != PieceName.PIECE_NAME_ROOK) {
+        if (rooksTile.getPiece().getName() != PieceName.ROOK) {
             throw new ChessException("Rook not found!");
         }
         
@@ -231,24 +231,24 @@ public class King extends Piece implements Cloneable {
      * Checks the row, the column, diagonal directions, and possible pawn and knight attacks. */
     public final boolean isInCheck() {
         // If any of the following checks returns true, the king is in check
-        return checkCheckPossibleBishopAndQueenAttacks(Direction.DIRECTION_DOWN_LEFT)
-                || checkCheckPossibleBishopAndQueenAttacks(Direction.DIRECTION_DOWN_RIGHT)
-                || checkCheckPossibleBishopAndQueenAttacks(Direction.DIRECTION_UP_LEFT)
-                || checkCheckPossibleBishopAndQueenAttacks(Direction.DIRECTION_UP_RIGHT)
-                || checkCheckPossibleRookAndQueenAttacks(Direction.DIRECTION_UP)
-                || checkCheckPossibleRookAndQueenAttacks(Direction.DIRECTION_DOWN)
-                || checkCheckPossibleRookAndQueenAttacks(Direction.DIRECTION_LEFT)
-                || checkCheckPossibleRookAndQueenAttacks(Direction.DIRECTION_RIGHT)
+        return checkCheckPossibleBishopAndQueenAttacks(Direction.DOWN_LEFT)
+                || checkCheckPossibleBishopAndQueenAttacks(Direction.DOWN_RIGHT)
+                || checkCheckPossibleBishopAndQueenAttacks(Direction.UP_LEFT)
+                || checkCheckPossibleBishopAndQueenAttacks(Direction.UP_RIGHT)
+                || checkCheckPossibleRookAndQueenAttacks(Direction.UP)
+                || checkCheckPossibleRookAndQueenAttacks(Direction.DOWN)
+                || checkCheckPossibleRookAndQueenAttacks(Direction.LEFT)
+                || checkCheckPossibleRookAndQueenAttacks(Direction.RIGHT)
                 || checkCheckPossiblePawnAttacks()
                 || checkCheckPossibleKnightAttacks()
                 || checkCheckPossibleKingAttack();
     }
     
     private boolean checkCheckPossibleRookAndQueenAttacks(Direction direction) {
-        if (direction != Direction.DIRECTION_DOWN
-                && direction != Direction.DIRECTION_UP
-                && direction != Direction.DIRECTION_LEFT
-                && direction != Direction.DIRECTION_RIGHT) {
+        if (direction != Direction.DOWN
+                && direction != Direction.UP
+                && direction != Direction.LEFT
+                && direction != Direction.RIGHT) {
             throw new ChessException("Direction should be down, up, left or right.");
         }
         
@@ -267,7 +267,7 @@ public class King extends Piece implements Cloneable {
                 break;
             }
             
-            if (piece.getName() != PieceName.PIECE_NAME_QUEEN && piece.getName() != PieceName.PIECE_NAME_ROOK) {
+            if (piece.getName() != PieceName.QUEEN && piece.getName() != PieceName.ROOK) {
                 break;
             }
             
@@ -278,10 +278,10 @@ public class King extends Piece implements Cloneable {
     }
     
     private boolean checkCheckPossibleBishopAndQueenAttacks(Direction direction) {
-        if (direction != Direction.DIRECTION_DOWN_LEFT
-                && direction != Direction.DIRECTION_DOWN_RIGHT
-                && direction != Direction.DIRECTION_UP_LEFT
-                && direction != Direction.DIRECTION_UP_RIGHT) {
+        if (direction != Direction.DOWN_LEFT
+                && direction != Direction.DOWN_RIGHT
+                && direction != Direction.UP_LEFT
+                && direction != Direction.UP_RIGHT) {
             throw new ChessException("Direction should be down left, down right, up left or up right.");
         }
         
@@ -300,7 +300,7 @@ public class King extends Piece implements Cloneable {
                 break;
             }
             
-            if (piece.getName() != PieceName.PIECE_NAME_QUEEN && piece.getName() != PieceName.PIECE_NAME_BISHOP) {
+            if (piece.getName() != PieceName.QUEEN && piece.getName() != PieceName.BISHOP) {
                 break;
             }
             
@@ -322,7 +322,7 @@ public class King extends Piece implements Cloneable {
         if (getOwnerTile().getOwnerGameboard().getTileAtPosition(getRow() - 1, getColumn() - 1) != null) {
             Piece piece = getOwnerTile().getOwnerGameboard().getTileAtPosition(getRow() - 1, getColumn() - 1).getPiece();
             if (piece != null) {
-                if (piece.getOwnerPlayerNumber() != getOwnerPlayerNumber() && piece.getName() == PieceName.PIECE_NAME_PAWN) {
+                if (piece.getOwnerPlayerNumber() != getOwnerPlayerNumber() && piece.getName() == PieceName.PAWN) {
                         return true;
                 }
             }
@@ -331,7 +331,7 @@ public class King extends Piece implements Cloneable {
         if (getOwnerTile().getOwnerGameboard().getTileAtPosition(getRow() - 1, getColumn() + 1) != null) {
             Piece piece = getOwnerTile().getOwnerGameboard().getTileAtPosition(getRow() - 1, getColumn() + 1).getPiece();
             if (piece != null) {
-                if (piece.getOwnerPlayerNumber() != getOwnerPlayerNumber() && piece.getName() == PieceName.PIECE_NAME_PAWN) {
+                if (piece.getOwnerPlayerNumber() != getOwnerPlayerNumber() && piece.getName() == PieceName.PAWN) {
                         return true;
                 }
             }
@@ -344,7 +344,7 @@ public class King extends Piece implements Cloneable {
         if (getOwnerTile().getOwnerGameboard().getTileAtPosition(getRow() + 1, getColumn() + 1) != null) {
             Piece piece = getOwnerTile().getOwnerGameboard().getTileAtPosition(getRow() + 1, getColumn() + 1).getPiece();
             if (piece != null) {
-                if (piece.getOwnerPlayerNumber() != getOwnerPlayerNumber() && piece.getName() == PieceName.PIECE_NAME_PAWN) {
+                if (piece.getOwnerPlayerNumber() != getOwnerPlayerNumber() && piece.getName() == PieceName.PAWN) {
                         return true;
                 }
             }
@@ -353,7 +353,7 @@ public class King extends Piece implements Cloneable {
         if (getOwnerTile().getOwnerGameboard().getTileAtPosition(getRow() + 1, getColumn() - 1) != null) {
             Piece piece = getOwnerTile().getOwnerGameboard().getTileAtPosition(getRow() + 1, getColumn() - 1).getPiece();
             if (piece != null) {
-                if (piece.getOwnerPlayerNumber() != getOwnerPlayerNumber() && piece.getName() == PieceName.PIECE_NAME_PAWN) {
+                if (piece.getOwnerPlayerNumber() != getOwnerPlayerNumber() && piece.getName() == PieceName.PAWN) {
                         return true;
                 }
             }
@@ -383,7 +383,7 @@ public class King extends Piece implements Cloneable {
         }
         
         Piece piece = getOwnerTile().getAdjacentTile(rowFromSource, columnFromSource).getPiece();
-        if (piece.getName() != PieceName.PIECE_NAME_KNIGHT) {
+        if (piece.getName() != PieceName.KNIGHT) {
             return false;
         }
 
@@ -408,7 +408,7 @@ public class King extends Piece implements Cloneable {
                 }
                 
                 Piece piece = getOwnerTile().getOwnerGameboard().getTileAtPosition(i, j).getPiece();
-                if (piece.getName() != PieceName.PIECE_NAME_KING) {
+                if (piece.getName() != PieceName.KING) {
                     continue;
                 }
                 
@@ -430,7 +430,7 @@ public class King extends Piece implements Cloneable {
         
         // Is there any way the current player can block the attack.
         for (Piece piece : getOwnerTile().getOwnerGameboard().findPiecesOwnedByPlayer(getOwnerPlayerNumber())) {
-            for (HalfMove move : piece.findPossibleMoves(true)) {
+            for (Move move : piece.findPossibleMoves(true)) {
                 // Clone the current gameboard and perform the move.
                 Gameboard gameboardClone = getOwnerTile().getOwnerGameboard().clone();
                 gameboardClone.movePieceImmediately(move);
@@ -445,12 +445,12 @@ public class King extends Piece implements Cloneable {
 
     @Override
     public final PieceName getName() {
-        return PieceName.PIECE_NAME_KING;
+        return PieceName.KING;
     }
 
     @Override
     public int getFightingValue() {
-        if (getOwnerTile().getOwnerGameboard().getCurrentGamePhase() == GamePhase.GAME_PHASE_ENDGAME) {
+        if (getOwnerTile().getOwnerGameboard().getCurrentGamePhase() == GamePhase.ENDGAME) {
             return 4;
         } else {
             return 0;

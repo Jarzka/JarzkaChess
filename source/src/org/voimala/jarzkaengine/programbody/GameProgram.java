@@ -26,7 +26,6 @@ public abstract class GameProgram extends Program {
 
     protected final void initialize() throws IOException {
         initializeMainWindow();
-        initializeListeners();
         initializeResources();
         initializeMenuBar();
         initializeScenes();
@@ -35,8 +34,6 @@ public abstract class GameProgram extends Program {
     protected void initializeMainWindow() {
         mainWindow = new MainWindow(this);
     }
-    
-    protected void initializeListeners() {}
 
     /** Loads the external files that the game uses. */
     private void initializeResources() throws IOException {

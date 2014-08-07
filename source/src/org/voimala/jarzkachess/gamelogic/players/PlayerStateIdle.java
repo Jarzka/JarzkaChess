@@ -1,9 +1,9 @@
 package org.voimala.jarzkachess.gamelogic.players;
 
 /** The opponent his playing and this player waits. */
-public class PlayerStateIdle extends PlayerState {
+public class PlayerStateIdle extends AbstractPlayerState {
 
-    public PlayerStateIdle(final Player owner) {
+    public PlayerStateIdle(final AbstractPlayer owner) {
         super(owner);
     }
 
@@ -14,7 +14,7 @@ public class PlayerStateIdle extends PlayerState {
 
     @Override
     public final PlayerStateName getStateName() {
-        return PlayerStateName.PLAYER_STATE_IDLE;
+        return PlayerStateName.IDLE;
     }
 
 }
