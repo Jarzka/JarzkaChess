@@ -1,4 +1,6 @@
 - Linear searching is used a lot in this project. Changing some data structures might make the program faster.
+- Constructors invoking overridable methods need to be eliminated.
+- Some small classes must be changed to immutable.
 - Using Java 8's new features like lambda expressions, forEach and streams might make the code more flexible and easier to read.
 - Implementation of special moves.
 - Faster and smarter AI. :)
